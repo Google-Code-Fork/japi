@@ -8,6 +8,24 @@ namespace JBot
 {
     class Objects
     {
+        public struct World
+        {
+            public Objects.BList BList;
+            public Objects.Player Player;
+            public Objects.Minimap Minimap;
+            public Objects.GUI GUI;
+        }
+
+        public struct GUI
+        {
+            public int i;
+        }
+
+        public struct Minimap
+        {
+            public int i;
+        }
+
         public struct BList
         {
             public int Addr;

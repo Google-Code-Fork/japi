@@ -13,7 +13,6 @@ namespace JBot
 {
     public partial class Form1 : Form
     {
-        Process p;
         ReaderClass Read = new ReaderClass();
         ControlWindow Ctrl = new ControlWindow();
         public Form1()
@@ -21,7 +20,7 @@ namespace JBot
             InitializeComponent();
         }
 
-        public void setWindow(Process Tibia)
+        public void setTibia(Process Tibia)
         {
             Read.Tibia = Tibia;
             Ctrl.Tibia = Tibia;
@@ -29,13 +28,15 @@ namespace JBot
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            setWindow(Read.getFirstClient());
+            setTibia(Read.getFirstClient());
+            MessageBox.Show(Convert.ToString(Read.Cid()));
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            HealthLabel.Text = "HP: " + Convert.ToString(Read.Hp()) + "/" + Convert.ToString(Read.MaxHp());
-            ManaLabel.Text = "MP: " + Convert.ToString(Read.Mp()) + "/" + Convert.ToString(Read.MaxMp());
+            Objects.Player p = Read.GetPlayerInfo();
+            HealthLabel.Text = "HP: " + Convert.ToString(p.Hp) + "/" + Convert.ToString(p.HpMax);
+            ManaLabel.Text = "MP: " + Convert.ToString(p.Mp) + "/" + Convert.ToString(p.MpMax);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -57,13 +58,6 @@ namespace JBot
 
         private void button4_Click(object sender, EventArgs e)
         {
-            foreach (char c in textBox1.Text)
-            {
-                int charValue = c;
-                string hexValue = charValue.ToString("X");
-                IntPtr val = new IntPtr(c);
-                MessageBox.Show(Convert.ToString(val));
-            }
             Ctrl.SendKeys(textBox1.Text);
         }
 

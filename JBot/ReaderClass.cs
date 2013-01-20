@@ -104,6 +104,10 @@ namespace JBot
         {
             return ReadInt32(Addresses.ZPos + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
         }
+        public int Cid()
+        {
+            return ReadInt32(Addresses.Cid + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+        }
 
         public Objects.Player GetPlayerInfo()
         {
@@ -165,6 +169,7 @@ namespace JBot
 
     class Addresses
     {
+        public static UInt32 Cid = 0x51416c; // or 0x54C168
         public static UInt32 Xor = 0x3b6ef0;
         public static UInt32 Hp = 0x54c000;
         public static UInt32 MaxHp = 0x583e9c;
