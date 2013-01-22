@@ -30,6 +30,7 @@ namespace JBot
             Read.Tibia = Tibia;
             Read.BaseAddress = Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32());
             Ctrl.Tibia = Tibia;
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -154,7 +155,7 @@ namespace JBot
                 p = Read.GetPlayerInfo();
                 foreach (Objects.HealRule rule in rulelist)
                 {
-                    if (p.Hp < rule.MaxHp && p.Hp > rule.MinHp && rule.Mana > p.Mp)
+                    if (p.Hp < rule.MaxHp && p.Hp > rule.MinHp && rule.Mana <= p.Mp)
                     {
                         Ctrl.SendHotkey(rule.Hotkey);
                         Thread.Sleep(200);
