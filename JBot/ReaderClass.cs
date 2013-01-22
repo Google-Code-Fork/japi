@@ -16,6 +16,7 @@ namespace JBot
             [In, Out] byte[] buffer, UInt32 size, out IntPtr lpNumberOfBytesRead);
 
         public Process Tibia { get; set; }
+        public UInt32 BaseAddress { get; set; }
 
         public static UInt32 BLStart = 0x54C008;
         public static UInt32 BLStep = 0xB0;
@@ -49,7 +50,8 @@ namespace JBot
         public string ReadString(long Address)
         {
             string temp3 = ASCIIEncoding.Default.GetString(ReadBytes(Tibia.Handle, Address, 32));
-            return temp3;
+            string[] temp3str = temp3.Split('\0');
+            return temp3str[0];
         }
 
         // Getting client functions
@@ -78,43 +80,43 @@ namespace JBot
         // Reading self info
         public int Hp()
         {
-            return ReadInt32(Addresses.Hp + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32())) ^ ReadInt32(Addresses.Xor + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+            return ReadInt32(Addresses.Hp + BaseAddress) ^ ReadInt32(Addresses.Xor + BaseAddress);
         }
         public int MaxHp()
         {
-            return ReadInt32(Addresses.MaxHp + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32())) ^ ReadInt32(Addresses.Xor + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+            return ReadInt32(Addresses.MaxHp + BaseAddress) ^ ReadInt32(Addresses.Xor + BaseAddress);
         }
         public int Mp()
         {
-            return ReadInt32(Addresses.Mp + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32())) ^ ReadInt32(Addresses.Xor + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+            return ReadInt32(Addresses.Mp + BaseAddress) ^ ReadInt32(Addresses.Xor + BaseAddress);
         }
         public int MaxMp()
         {
-            return ReadInt32(Addresses.MaxMp + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32())) ^ ReadInt32(Addresses.Xor + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+            return ReadInt32(Addresses.MaxMp + BaseAddress) ^ ReadInt32(Addresses.Xor + BaseAddress);
         }
         public int Soul()
         {
-            return ReadInt32(Addresses.Soul + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32())) ^ ReadInt32(Addresses.Xor + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+            return ReadInt32(Addresses.Soul + BaseAddress) ^ ReadInt32(Addresses.Xor + BaseAddress);
         }
         public int X()
         {
-            return ReadInt32(Addresses.XPos + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+            return ReadInt32(Addresses.XPos + BaseAddress);
         }
         public int Y()
         {
-            return ReadInt32(Addresses.YPos + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+            return ReadInt32(Addresses.YPos + BaseAddress);
         }
         public int Z()
         {
-            return ReadInt32(Addresses.ZPos + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+            return ReadInt32(Addresses.ZPos + BaseAddress);
         }
         public int Cid()
         {
-            return ReadInt32(Addresses.Cid + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+            return ReadInt32(Addresses.Cid + BaseAddress);
         }
         public int Exp()
         {
-            return ReadInt32(Addresses.Exp + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+            return ReadInt32(Addresses.Exp + BaseAddress);
         }
         public Objects.Player GetPlayerInfo()
         {
@@ -155,36 +157,36 @@ namespace JBot
                 UInt32 CreatureOffset = Convert.ToUInt32(i) * BLStep;
                 Objects.BList batt = new Objects.BList();
                 batt.Addr = i;
-                batt.Id = ReadInt32(BLStart + BListAdresses.IdOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+                batt.Id = ReadInt32(BLStart + BListAdresses.IdOffset + CreatureOffset + BaseAddress);
                 if (batt.Id != 0 && idname != false)
                 {
-                    batt.Type = ReadByte(BLStart + BListAdresses.TypeOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                    batt.Name = ReadString(BLStart + BListAdresses.NameOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                    batt.Z = ReadInt32(BLStart + BListAdresses.ZOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                    batt.Y = ReadInt32(BLStart + BListAdresses.YOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                    batt.X = ReadInt32(BLStart + BListAdresses.XOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                    batt.TimeLastMoved = ReadInt32(BLStart + BListAdresses.TimeLastMovedOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                    batt.Walking = ReadInt32(BLStart + BListAdresses.WalkingOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                    batt.Direction = ReadInt32(BLStart + BListAdresses.DirectionOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                    batt.Previous = ReadInt32(BLStart + BListAdresses.PreviousOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                    batt.Next = ReadInt32(BLStart + BListAdresses.NextOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                    batt.Outfit = ReadInt32(BLStart + BListAdresses.OutfitOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                    batt.MountId = ReadInt32(BLStart + BListAdresses.MountIdOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+                    batt.Type = ReadByte(BLStart + BListAdresses.TypeOffset + CreatureOffset + BaseAddress);
+                    batt.Name = ReadString(BLStart + BListAdresses.NameOffset + CreatureOffset + BaseAddress);
+                    batt.Z = ReadInt32(BLStart + BListAdresses.ZOffset + CreatureOffset + BaseAddress);
+                    batt.Y = ReadInt32(BLStart + BListAdresses.YOffset + CreatureOffset + BaseAddress);
+                    batt.X = ReadInt32(BLStart + BListAdresses.XOffset + CreatureOffset + BaseAddress);
+                    batt.TimeLastMoved = ReadInt32(BLStart + BListAdresses.TimeLastMovedOffset + CreatureOffset + BaseAddress);
+                    batt.Walking = ReadInt32(BLStart + BListAdresses.WalkingOffset + CreatureOffset + BaseAddress);
+                    batt.Direction = ReadInt32(BLStart + BListAdresses.DirectionOffset + CreatureOffset + BaseAddress);
+                    batt.Previous = ReadInt32(BLStart + BListAdresses.PreviousOffset + CreatureOffset + BaseAddress);
+                    batt.Next = ReadInt32(BLStart + BListAdresses.NextOffset + CreatureOffset + BaseAddress);
+                    batt.Outfit = ReadInt32(BLStart + BListAdresses.OutfitOffset + CreatureOffset + BaseAddress);
+                    batt.MountId = ReadInt32(BLStart + BListAdresses.MountIdOffset + CreatureOffset + BaseAddress);
 
-                    batt.BlackSquare = ReadInt32(BLStart + BListAdresses.BlackSquareOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                    batt.Hppc = ReadInt32(BLStart + BListAdresses.HppcOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                    batt.Speed = ReadInt32(BLStart + BListAdresses.SpeedOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+                    batt.BlackSquare = ReadInt32(BLStart + BListAdresses.BlackSquareOffset + CreatureOffset + BaseAddress);
+                    batt.Hppc = ReadInt32(BLStart + BListAdresses.HppcOffset + CreatureOffset + BaseAddress);
+                    batt.Speed = ReadInt32(BLStart + BListAdresses.SpeedOffset + CreatureOffset + BaseAddress);
 
-                    batt.SkullType = ReadInt32(BLStart + BListAdresses.SkullOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                    batt.Party = ReadInt32(BLStart + BListAdresses.PartyOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                    batt.WarIcon = ReadInt32(BLStart + BListAdresses.WarOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                    batt.Visible = ReadByte(BLStart + BListAdresses.VisibleOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+                    batt.SkullType = ReadInt32(BLStart + BListAdresses.SkullOffset + CreatureOffset + BaseAddress);
+                    batt.Party = ReadInt32(BLStart + BListAdresses.PartyOffset + CreatureOffset + BaseAddress);
+                    batt.WarIcon = ReadInt32(BLStart + BListAdresses.WarOffset + CreatureOffset + BaseAddress);
+                    batt.Visible = ReadByte(BLStart + BListAdresses.VisibleOffset + CreatureOffset + BaseAddress);
                     bat[i] = batt;
                 }
                 else if (batt.Id != 0 && idname == true)
                 {
-                    batt.Id = ReadInt32(BLStart + BListAdresses.IdOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                    batt.Name = ReadString(BLStart + BListAdresses.NameOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+                    batt.Id = ReadInt32(BLStart + BListAdresses.IdOffset + CreatureOffset + BaseAddress);
+                    batt.Name = ReadString(BLStart + BListAdresses.NameOffset + CreatureOffset + BaseAddress);
                 }
             }
 

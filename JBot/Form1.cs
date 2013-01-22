@@ -28,6 +28,7 @@ namespace JBot
         public void setTibia(Process Tibia)
         {
             Read.Tibia = Tibia;
+            Read.BaseAddress = Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32());
             Ctrl.Tibia = Tibia;
         }
 
