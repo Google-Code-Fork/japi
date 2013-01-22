@@ -129,6 +129,13 @@ namespace JBot
                     rulelist[i].Hotkey = rules[3];
                     i++;
                 }
+                string mybananas = "";
+                foreach (Objects.HealRule rule in rulelist)
+                //{
+                    //mybananas = mybananas + "HK: " + rule.Hotkey + ", Mana: " + Convert.ToString(rule.Mana) + ", MinHealth: " + Convert.ToString(rule.MinHp) + ", MaxHealth" + Convert.ToString(rule.MaxHp) + "\n";
+                //}
+
+                MessageBox.Show(mybananas);
                 healtick = new Thread(Healer);
                 healtick.IsBackground = true;
                 healtick.Start();
