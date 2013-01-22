@@ -20,6 +20,8 @@ namespace JBot
         Thread healtick;
         Objects.HealRule[] rulelist;
         Objects.Player p;
+        Objects.BList[] myBlist;
+
         public Form1()
         {
             InitializeComponent();
@@ -30,7 +32,6 @@ namespace JBot
             Read.Tibia = Tibia;
             Read.BaseAddress = Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32());
             Ctrl.Tibia = Tibia;
-            
         }
 
         public void setDefaultValues()
@@ -59,7 +60,8 @@ namespace JBot
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Objects.BList[] myBlist = Read.BlGet(true);
+            blview.Rows.Clear();
+            myBlist = Read.BlGet(true);
             foreach (Objects.BList creature in myBlist)
             {
                 if (creature.Id != 0 && creature.Visible == 1)
@@ -81,6 +83,7 @@ namespace JBot
                 Objects.Player p = Read.GetPlayerInfo();
                 HealthLabel.Text = "HP: " + Convert.ToString(p.Hp) + "/" + Convert.ToString(p.HpMax);
                 ManaLabel.Text = "MP: " + Convert.ToString(p.Mp) + "/" + Convert.ToString(p.MpMax);
+                Thread.Sleep(1000);
             }
         }
 
