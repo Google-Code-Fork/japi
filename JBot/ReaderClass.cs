@@ -139,7 +139,7 @@ namespace JBot
             batt = BlGet(true);
             foreach (Objects.BList crit in batt)
             {
-                if (crit.Id == GetPlayerInfo().Cid)
+                if (crit.Id == Cid())
                 {
                     return crit.Name;
                 }
