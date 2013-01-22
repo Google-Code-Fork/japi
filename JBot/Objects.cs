@@ -68,6 +68,14 @@ namespace JBot
             public int Y;
             public int Z;
         }
+
+        public struct HealRule
+        {
+            public int MinHp;
+            public int MaxHp;
+            public int Mana;
+            public string Hotkey;
+        }
     }
     public class Timer : System.ComponentModel.Component
     {
