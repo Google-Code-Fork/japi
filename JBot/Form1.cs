@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Threading;
 
 namespace JBot
 {
@@ -15,6 +16,7 @@ namespace JBot
     {
         ReaderClass Read = new ReaderClass();
         ControlWindow Ctrl = new ControlWindow();
+        Thread ticker;
         public Form1()
         {
             InitializeComponent();
@@ -29,7 +31,10 @@ namespace JBot
         private void Form1_Load(object sender, EventArgs e)
         {
             setTibia(Read.getFirstClient());
-            MessageBox.Show(Convert.ToString(Read.Cid()));
+            this.Text = Read.getMyName();
+            ticker = new Thread(UpdateStats);
+            ticker.IsBackground = true;
+            ticker.Start();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -46,7 +51,7 @@ namespace JBot
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Objects.BList[] myBlist = Read.BlGet();
+            Objects.BList[] myBlist = Read.BlGet(true);
             foreach (Objects.BList creature in myBlist)
             {
                 if (creature.Id != 0 && creature.Visible == 1)
@@ -59,6 +64,36 @@ namespace JBot
         private void button4_Click(object sender, EventArgs e)
         {
             Ctrl.SendKeys(textBox1.Text);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Thread ticker = new Thread(UpdateStats);
+            ticker.Start();
+        }
+
+        public void UpdateStats()
+        {
+            while (true)
+            {
+                Objects.Player p = Read.GetPlayerInfo();
+                HealthLabel.Text = "HP: " + Convert.ToString(p.Hp) + "/" + Convert.ToString(p.HpMax);
+                ManaLabel.Text = "MP: " + Convert.ToString(p.Mp) + "/" + Convert.ToString(p.MpMax);
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.CheckState == CheckState.Unchecked)
+            {
+                ticker.Abort();
+            }
+            else
+            {
+                ticker = new Thread(UpdateStats);
+                ticker.IsBackground = true;
+                ticker.Start();
+            }
         }
 
     }

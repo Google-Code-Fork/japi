@@ -10,6 +10,7 @@ namespace JBot
 {
     class ReaderClass
     {
+        #region vars
         [DllImport("kernel32.dll")]
         public static extern Int32 ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress,
             [In, Out] byte[] buffer, UInt32 size, out IntPtr lpNumberOfBytesRead);
@@ -19,6 +20,7 @@ namespace JBot
         public static UInt32 BLStart = 0x54C008;
         public static UInt32 BLStep = 0xB0;
         public static int BLMax = 1300;
+        #endregion
 
         // Reading Memory Functions
         public byte[] ReadBytes(IntPtr Handle, Int64 Address, uint BytesToRead)
@@ -49,6 +51,7 @@ namespace JBot
             string temp3 = ASCIIEncoding.Default.GetString(ReadBytes(Tibia.Handle, Address, 32));
             return temp3;
         }
+
         // Getting client functions
         public Process[] getClients()
         {
@@ -72,6 +75,7 @@ namespace JBot
             return null;
         }
 
+        // Reading self info
         public int Hp()
         {
             return ReadInt32(Addresses.Hp + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32())) ^ ReadInt32(Addresses.Xor + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
@@ -108,7 +112,6 @@ namespace JBot
         {
             return ReadInt32(Addresses.Cid + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
         }
-
         public Objects.Player GetPlayerInfo()
         {
             Objects.Player p = new Objects.Player();
@@ -120,10 +123,25 @@ namespace JBot
             p.X = X();
             p.Y = Y();
             p.Z = Z();
+            p.Cid = Cid();
             return p;
         }
+        public string getMyName()
+        {
+            Objects.BList[] batt = new Objects.BList[BLMax];
+            batt = BlGet(true);
+            foreach (Objects.BList crit in batt)
+            {
+                if (crit.Id == GetPlayerInfo().Cid)
+                {
+                    return crit.Name;
+                }
+            }
+            return "";
+        }
 
-        public Objects.BList[] BlGet()
+        // Reading array info
+        public Objects.BList[] BlGet(bool idname = false)
         {
             int max = Convert.ToInt32(BLStep) * BLMax;
             Objects.BList[] bat = new Objects.BList[BLMax];
@@ -133,7 +151,7 @@ namespace JBot
                 Objects.BList batt = new Objects.BList();
                 batt.Addr = i;
                 batt.Id = ReadInt32(BLStart + BListAdresses.IdOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
-                if (batt.Id != 0)
+                if (batt.Id != 0 && idname != false)
                 {
                     batt.Type = ReadByte(BLStart + BListAdresses.TypeOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
                     batt.Name = ReadString(BLStart + BListAdresses.NameOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
@@ -158,6 +176,11 @@ namespace JBot
                     batt.Visible = ReadByte(BLStart + BListAdresses.VisibleOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
                     bat[i] = batt;
                 }
+                else if (batt.Id != 0 && idname == true)
+                {
+                    batt.Id = ReadInt32(BLStart + BListAdresses.IdOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+                    batt.Name = ReadString(BLStart + BListAdresses.NameOffset + CreatureOffset + Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32()));
+                }
             }
             
             return bat;
@@ -169,7 +192,7 @@ namespace JBot
 
     class Addresses
     {
-        public static UInt32 Cid = 0x51416c; // or 0x54C168
+        public static UInt32 Cid = 0x583EA4; // or 0x54C168
         public static UInt32 Xor = 0x3b6ef0;
         public static UInt32 Hp = 0x54c000;
         public static UInt32 MaxHp = 0x583e9c;
@@ -203,6 +226,10 @@ namespace JBot
         public static UInt32 PartyOffset = 0x9C;
         public static UInt32 WarOffset = 0xA8;
         public static UInt32 VisibleOffset = 0xAC;
-       
+    }
+
+    class MapAddresses
+    {
+        //public static UInt32 NorthEastAddress 0x5DA5C4;
     }
 }
