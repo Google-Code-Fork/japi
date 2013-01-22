@@ -53,24 +53,24 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.MinHealLabel = new System.Windows.Forms.Label();
-            this.MaxHealLabel = new System.Windows.Forms.Label();
-            this.MinManaLabel = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button8 = new System.Windows.Forms.Button();
-            this.HotkeyLabel = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button9 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.HotkeyLabel = new System.Windows.Forms.Label();
+            this.button8 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.MinManaLabel = new System.Windows.Forms.Label();
+            this.MaxHealLabel = new System.Windows.Forms.Label();
+            this.MinHealLabel = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LocationDisplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blview)).BeginInit();
@@ -303,6 +303,19 @@
             this.tabPage3.Text = "Extras";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.button7);
+            this.groupBox1.Controls.Add(this.button5);
+            this.groupBox1.Controls.Add(this.button6);
+            this.groupBox1.Location = new System.Drawing.Point(3, 30);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(181, 100);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Walker";
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(50, 19);
@@ -312,6 +325,16 @@
             this.button1.Text = "^";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(88, 39);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(32, 23);
+            this.button7.TabIndex = 13;
+            this.button7.Text = ">";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button5
             // 
@@ -332,29 +355,6 @@
             this.button6.Text = "<";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(88, 39);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(32, 23);
-            this.button7.TabIndex = 13;
-            this.button7.Text = ">";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.button7);
-            this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Controls.Add(this.button6);
-            this.groupBox1.Location = new System.Drawing.Point(3, 30);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(181, 100);
-            this.groupBox1.TabIndex = 12;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Walker";
             // 
             // tabPage4
             // 
@@ -377,64 +377,45 @@
             this.tabPage4.Text = "Healer";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // listBox1
+            // button9
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(0, 0);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(178, 134);
-            this.listBox1.TabIndex = 0;
+            this.button9.Location = new System.Drawing.Point(230, 136);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(100, 23);
+            this.button9.TabIndex = 12;
+            this.button9.Text = "Remove Rule";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
-            // MinHealLabel
+            // checkBox1
             // 
-            this.MinHealLabel.AutoSize = true;
-            this.MinHealLabel.Location = new System.Drawing.Point(182, 4);
-            this.MinHealLabel.Name = "MinHealLabel";
-            this.MinHealLabel.Size = new System.Drawing.Size(39, 13);
-            this.MinHealLabel.TabIndex = 1;
-            this.MinHealLabel.Text = "MinHP";
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(3, 140);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(65, 17);
+            this.checkBox1.TabIndex = 11;
+            this.checkBox1.Text = "Enabled";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // MaxHealLabel
+            // HotkeyLabel
             // 
-            this.MaxHealLabel.AutoSize = true;
-            this.MaxHealLabel.Location = new System.Drawing.Point(182, 30);
-            this.MaxHealLabel.Name = "MaxHealLabel";
-            this.MaxHealLabel.Size = new System.Drawing.Size(42, 13);
-            this.MaxHealLabel.TabIndex = 2;
-            this.MaxHealLabel.Text = "MaxHP";
+            this.HotkeyLabel.AutoSize = true;
+            this.HotkeyLabel.Location = new System.Drawing.Point(182, 83);
+            this.HotkeyLabel.Name = "HotkeyLabel";
+            this.HotkeyLabel.Size = new System.Drawing.Size(41, 13);
+            this.HotkeyLabel.TabIndex = 10;
+            this.HotkeyLabel.Text = "Hotkey";
             // 
-            // MinManaLabel
+            // button8
             // 
-            this.MinManaLabel.AutoSize = true;
-            this.MinManaLabel.Location = new System.Drawing.Point(182, 56);
-            this.MinManaLabel.Name = "MinManaLabel";
-            this.MinManaLabel.Size = new System.Drawing.Size(40, 13);
-            this.MinManaLabel.TabIndex = 4;
-            this.MinManaLabel.Text = "MinMP";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(230, 1);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 5;
-            this.textBox2.Text = "0";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(230, 27);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 6;
-            this.textBox3.Text = "1000";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(230, 53);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 7;
-            this.textBox4.Text = "40";
+            this.button8.Location = new System.Drawing.Point(230, 107);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(100, 23);
+            this.button8.TabIndex = 9;
+            this.button8.Text = "Add Rule";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // comboBox1
             // 
@@ -457,46 +438,69 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(100, 21);
             this.comboBox1.TabIndex = 8;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // button8
+            // textBox4
             // 
-            this.button8.Location = new System.Drawing.Point(230, 107);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(100, 23);
-            this.button8.TabIndex = 9;
-            this.button8.Text = "Add Rule";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.textBox4.Location = new System.Drawing.Point(230, 53);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 7;
+            this.textBox4.Text = "40";
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
-            // HotkeyLabel
+            // textBox3
             // 
-            this.HotkeyLabel.AutoSize = true;
-            this.HotkeyLabel.Location = new System.Drawing.Point(182, 83);
-            this.HotkeyLabel.Name = "HotkeyLabel";
-            this.HotkeyLabel.Size = new System.Drawing.Size(41, 13);
-            this.HotkeyLabel.TabIndex = 10;
-            this.HotkeyLabel.Text = "Hotkey";
+            this.textBox3.Location = new System.Drawing.Point(230, 27);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 6;
+            this.textBox3.Text = "1000";
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
-            // checkBox1
+            // textBox2
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(3, 140);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(65, 17);
-            this.checkBox1.TabIndex = 11;
-            this.checkBox1.Text = "Enabled";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.textBox2.Location = new System.Drawing.Point(230, 1);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 5;
+            this.textBox2.Text = "0";
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // button9
+            // MinManaLabel
             // 
-            this.button9.Location = new System.Drawing.Point(230, 136);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(100, 23);
-            this.button9.TabIndex = 12;
-            this.button9.Text = "Remove Rule";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.MinManaLabel.AutoSize = true;
+            this.MinManaLabel.Location = new System.Drawing.Point(182, 56);
+            this.MinManaLabel.Name = "MinManaLabel";
+            this.MinManaLabel.Size = new System.Drawing.Size(40, 13);
+            this.MinManaLabel.TabIndex = 4;
+            this.MinManaLabel.Text = "MinMP";
+            // 
+            // MaxHealLabel
+            // 
+            this.MaxHealLabel.AutoSize = true;
+            this.MaxHealLabel.Location = new System.Drawing.Point(182, 30);
+            this.MaxHealLabel.Name = "MaxHealLabel";
+            this.MaxHealLabel.Size = new System.Drawing.Size(42, 13);
+            this.MaxHealLabel.TabIndex = 2;
+            this.MaxHealLabel.Text = "MaxHP";
+            // 
+            // MinHealLabel
+            // 
+            this.MinHealLabel.AutoSize = true;
+            this.MinHealLabel.Location = new System.Drawing.Point(182, 4);
+            this.MinHealLabel.Name = "MinHealLabel";
+            this.MinHealLabel.Size = new System.Drawing.Size(39, 13);
+            this.MinHealLabel.TabIndex = 1;
+            this.MinHealLabel.Text = "MinHP";
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(0, 0);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(178, 134);
+            this.listBox1.TabIndex = 0;
             // 
             // Form1
             // 
@@ -505,8 +509,9 @@
             this.ClientSize = new System.Drawing.Size(551, 343);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "JAPI";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

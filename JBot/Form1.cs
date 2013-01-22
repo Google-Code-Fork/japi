@@ -33,8 +33,17 @@ namespace JBot
             
         }
 
+        public void setDefaultValues()
+        {
+            textBox2.Text = Properties.Settings.Default.MinHp;
+            textBox3.Text = Properties.Settings.Default.MaxHp;
+            textBox4.Text = Properties.Settings.Default.MinMp;
+            comboBox1.SelectedItem = Properties.Settings.Default.Hotkey;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            setDefaultValues();
             setTibia(Read.getFirstClient());
             this.Text = Read.getMyName();
             ticker = new Thread(UpdateStats);
@@ -131,13 +140,6 @@ namespace JBot
                     rulelist[i].Hotkey = rules[3];
                     i++;
                 }
-                string mybananas = "";
-                foreach (Objects.HealRule rule in rulelist)
-                //{
-                    //mybananas = mybananas + "HK: " + rule.Hotkey + ", Mana: " + Convert.ToString(rule.Mana) + ", MinHealth: " + Convert.ToString(rule.MinHp) + ", MaxHealth" + Convert.ToString(rule.MaxHp) + "\n";
-                //}
-
-                MessageBox.Show(mybananas);
                 healtick = new Thread(Healer);
                 healtick.IsBackground = true;
                 healtick.Start();
@@ -158,7 +160,7 @@ namespace JBot
                     if (p.Hp < rule.MaxHp && p.Hp > rule.MinHp && rule.Mana <= p.Mp)
                     {
                         Ctrl.SendHotkey(rule.Hotkey);
-                        Thread.Sleep(200);
+                        Thread.Sleep(500);
                     }
                 }
             }
@@ -172,6 +174,30 @@ namespace JBot
                 listBox1.SelectedItem = null;
                 listBox1.Items.RemoveAt(i);
             }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.MinHp = textBox2.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.MaxHp = textBox3.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.MinMp = textBox4.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Hotkey = comboBox1.SelectedItem.ToString();
+            Properties.Settings.Default.Save();
         }
     }
 }
