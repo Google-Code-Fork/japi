@@ -93,6 +93,7 @@ namespace JBot
             if (ticker.ThreadState == System.Threading.ThreadState.Background)
             {
                 ticker.Abort();
+                ticker.Join();
             }
             else
             {

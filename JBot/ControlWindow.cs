@@ -20,6 +20,7 @@ namespace JBot
         [DllImport("User32.DLL")]
         public static extern int SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
 
+        // Key code preparation.
         [Flags]
         enum MouseEventFlag : uint
         {
@@ -36,7 +37,6 @@ namespace JBot
             VirtualDesk = 0x4000,
             Absolute = 0x8000
         }
-
         enum KeyboardControls : uint
         {
             F1 = 0x70,
@@ -52,7 +52,6 @@ namespace JBot
             F11 = 0x7A,
             F12 = 0x7B
         }
-
         enum ArrowKeys : uint
         {
             left = 0x25,
@@ -67,6 +66,7 @@ namespace JBot
         [DllImport("user32.dll")]
         static extern void mouse_event(MouseEventFlag flags, int dx, int dy, uint data, UIntPtr extraInfo);
 
+        // Mouse Tricks
         public bool LeftClick(int dx, int dy)
         {
             SetCursorPos(dx, dy);
@@ -82,18 +82,7 @@ namespace JBot
             return true;
         }
 
-        public void SendKeys(String message)
-        {
-            IntPtr wParam = new IntPtr(0);
-            IntPtr lParam = new IntPtr(0);
-            foreach (char c in message)
-            {
-                int charValue = c;
-                IntPtr val = new IntPtr((Int32)c);
-                SendMessage(Tibia.MainWindowHandle, WM_CHAR, val, lParam);
-            }
-        }
-
+        // Get key codes ready for sending
         public UInt32 getHotKey(string Key)
         {
             switch (Key)
@@ -141,6 +130,18 @@ namespace JBot
             return new UInt32();
         }
 
+        // Send key codes
+        public void SendKeys(String message)
+        {
+            IntPtr wParam = new IntPtr(0);
+            IntPtr lParam = new IntPtr(0);
+            foreach (char c in message)
+            {
+                int charValue = c;
+                IntPtr val = new IntPtr((Int32)c);
+                SendMessage(Tibia.MainWindowHandle, WM_CHAR, val, lParam);
+            }
+        }
         public void SendArrow(string Key)
         {
             IntPtr wParam = new IntPtr(getArrowKey(Key));
@@ -148,7 +149,6 @@ namespace JBot
             SendMessage(Tibia.MainWindowHandle, WM_KEYDOWN, wParam, lParam);
             SendMessage(Tibia.MainWindowHandle, WM_KEYUP, wParam, lParam);
         }
-
         public void SendHotkey(string Key)
         {
             IntPtr wParam = new IntPtr(getHotKey(Key));

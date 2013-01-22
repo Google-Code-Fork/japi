@@ -173,7 +173,7 @@ namespace JBot
                     batt.Outfit = ReadInt32(BLStart + BListAdresses.OutfitOffset + CreatureOffset + BaseAddress);
                     batt.MountId = ReadInt32(BLStart + BListAdresses.MountIdOffset + CreatureOffset + BaseAddress);
 
-                    batt.BlackSquare = ReadInt32(BLStart + BListAdresses.BlackSquareOffset + CreatureOffset + BaseAddress);
+                    batt.BlackSquare = ReadInt32(BLStart + BListAdresses.BlackSquareOffset + CreatureOffset + BaseAddress); // This address might have been removed - needs testing.
                     batt.Hppc = ReadInt32(BLStart + BListAdresses.HppcOffset + CreatureOffset + BaseAddress);
                     batt.Speed = ReadInt32(BLStart + BListAdresses.SpeedOffset + CreatureOffset + BaseAddress);
 
