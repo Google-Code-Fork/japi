@@ -50,15 +50,13 @@ namespace JBot
             F9 = 0x78,
             F10 = 0x79,
             F11 = 0x7A,
-            F12 = 0x7B
-        }
-        enum ArrowKeys : uint
-        {
+            F12 = 0x7B,
             left = 0x25,
             up = 0x26,
             right = 0x27,
             down = 0x28
         }
+
 
         [DllImport("user32.dll")]
         static extern bool SetCursorPos(int X, int Y);
@@ -83,49 +81,12 @@ namespace JBot
         }
 
         // Get key codes ready for sending
-        public UInt32 getHotKey(string Key)
+        public UInt32 getKeyCode(string Key)
         {
-            switch (Key)
+            KeyboardControls keynum;
+            if (Enum.TryParse(Key, out keynum))
             {
-                case "F1":
-                    return Convert.ToUInt32(KeyboardControls.F1);
-                case "F2":
-                    return Convert.ToUInt32(KeyboardControls.F2);
-                case "F3":
-                    return Convert.ToUInt32(KeyboardControls.F3);
-                case "F4":
-                    return Convert.ToUInt32(KeyboardControls.F4);
-                case "F5":
-                    return Convert.ToUInt32(KeyboardControls.F5);
-                case "F6":
-                    return Convert.ToUInt32(KeyboardControls.F6);
-                case "F7":
-                    return Convert.ToUInt32(KeyboardControls.F7);
-                case "F8":
-                    return Convert.ToUInt32(KeyboardControls.F8);
-                case "F9":
-                    return Convert.ToUInt32(KeyboardControls.F9);
-                case "F10":
-                    return Convert.ToUInt32(KeyboardControls.F10);
-                case "F11":
-                    return Convert.ToUInt32(KeyboardControls.F11);
-                case "F12":
-                    return Convert.ToUInt32(KeyboardControls.F12);
-            }
-            return new UInt32();
-        }
-        public UInt32 getArrowKey(string Key)
-        {
-            switch (Key)
-            {
-                case ("left"):
-                    return Convert.ToUInt32(ArrowKeys.left);
-                case ("right"):
-                    return Convert.ToUInt32(ArrowKeys.right);
-                case ("up"):
-                    return Convert.ToUInt32(ArrowKeys.up);
-                case ("down"):
-                    return Convert.ToUInt32(ArrowKeys.down);
+                return (UInt32)keynum;
             }
             return new UInt32();
         }
@@ -133,28 +94,24 @@ namespace JBot
         // Send key codes
         public void SendKeys(String message)
         {
-            IntPtr wParam = new IntPtr(0);
-            IntPtr lParam = new IntPtr(0);
             foreach (char c in message)
             {
                 int charValue = c;
                 IntPtr val = new IntPtr((Int32)c);
-                SendMessage(Tibia.MainWindowHandle, WM_CHAR, val, lParam);
+                SendMessage(Tibia.MainWindowHandle, WM_CHAR, val, IntPtr.Zero;
             }
         }
         public void SendArrow(string Key)
         {
-            IntPtr wParam = new IntPtr(getArrowKey(Key));
-            IntPtr lParam = new IntPtr();
-            SendMessage(Tibia.MainWindowHandle, WM_KEYDOWN, wParam, lParam);
-            SendMessage(Tibia.MainWindowHandle, WM_KEYUP, wParam, lParam);
+            IntPtr wParam = new IntPtr(getKeyCode(Key));
+            SendMessage(Tibia.MainWindowHandle, WM_KEYDOWN, wParam, IntPtr.Zero);
+            SendMessage(Tibia.MainWindowHandle, WM_KEYUP, wParam, IntPtr.Zero);
         }
         public void SendHotkey(string Key)
         {
-            IntPtr wParam = new IntPtr(getHotKey(Key));
-            IntPtr lParam = new IntPtr();
-            SendMessage(Tibia.MainWindowHandle, WM_KEYDOWN, wParam, lParam);
-            SendMessage(Tibia.MainWindowHandle, WM_KEYUP, wParam, lParam);
+            IntPtr wParam = new IntPtr(getKeyCode(Key));
+            SendMessage(Tibia.MainWindowHandle, WM_KEYDOWN, wParam, IntPtr.Zero);
+            SendMessage(Tibia.MainWindowHandle, WM_KEYUP, wParam, IntPtr.Zero);
         }
     }
 }
