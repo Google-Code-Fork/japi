@@ -74,14 +74,14 @@
             this.panel1.Size = new System.Drawing.Size(284, 262);
             this.panel1.TabIndex = 3;
             // 
-            // Form2
+            // ClientChooser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Controls.Add(this.panel1);
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.Name = "ClientChooser";
+            this.Text = "ClientChooser";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

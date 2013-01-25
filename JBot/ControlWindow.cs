@@ -84,11 +84,14 @@ namespace JBot
         public UInt32 getKeyCode(string Key)
         {
             KeyboardControls keynum;
-            if (Enum.TryParse(Key, out keynum))
+            if (Enum.TryParse<KeyboardControls>(Key, true, out keynum))
             {
                 return (UInt32)keynum;
             }
-            return new UInt32();
+            else
+            {
+                return new UInt32();
+            }
         }
 
         // Send key codes

@@ -15,6 +15,7 @@ namespace JBot
     {
         Process Client;
         ReaderClass Readar = new ReaderClass();
+        public event System.EventHandler CChange;
         public ClientChooser()
         {
             InitializeComponent();
@@ -44,6 +45,8 @@ namespace JBot
         private void button2_Click(object sender, EventArgs e)
         {
             Client = selectClient();
+            
+            this.Dispose();
         }
 
         private Process selectClient()
@@ -52,7 +55,6 @@ namespace JBot
             {
                 Readar.Tibia = p;
                 Readar.BaseAddress = Convert.ToUInt32(p.MainModule.BaseAddress.ToInt32());
-                listBox1.Items.Add(Readar.getMyName());
                 if (listBox1.SelectedItem.ToString() == Readar.getMyName())
                 {
                     return p;
@@ -60,5 +62,7 @@ namespace JBot
             }
             return null;
         }
+
+        
     }
 }
