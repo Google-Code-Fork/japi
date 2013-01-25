@@ -86,8 +86,7 @@ namespace JBot
                 Thread.Sleep(1000);
             }
         }
-
-
+        
         private void toolStripDropDownButton1_ButtonClick(object sender, EventArgs e)
         {
             if (ticker.ThreadState == System.Threading.ThreadState.Background)
