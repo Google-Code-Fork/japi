@@ -1,9 +1,0 @@
-c:\users\josh\documents\visual studio 2012\Projects\JBot\JBot\bin\Debug\JBot.exe.config
-c:\users\josh\documents\visual studio 2012\Projects\JBot\JBot\bin\Debug\JBot.exe
-c:\users\josh\documents\visual studio 2012\Projects\JBot\JBot\bin\Debug\JBot.pdb
-c:\users\josh\documents\visual studio 2012\Projects\JBot\JBot\obj\Debug\JBot.csprojResolveAssemblyReference.cache
-c:\users\josh\documents\visual studio 2012\Projects\JBot\JBot\obj\Debug\JBot.Form1.resources
-c:\users\josh\documents\visual studio 2012\Projects\JBot\JBot\obj\Debug\JBot.Properties.Resources.resources
-c:\users\josh\documents\visual studio 2012\Projects\JBot\JBot\obj\Debug\JBot.csproj.GenerateResource.Cache
-c:\users\josh\documents\visual studio 2012\Projects\JBot\JBot\obj\Debug\JBot.exe
-c:\users\josh\documents\visual studio 2012\Projects\JBot\JBot\obj\Debug\JBot.pdb
