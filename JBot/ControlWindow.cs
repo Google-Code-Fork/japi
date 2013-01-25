@@ -98,7 +98,7 @@ namespace JBot
             {
                 int charValue = c;
                 IntPtr val = new IntPtr((Int32)c);
-                SendMessage(Tibia.MainWindowHandle, WM_CHAR, val, IntPtr.Zero;
+                SendMessage(Tibia.MainWindowHandle, WM_CHAR, val, IntPtr.Zero);
             }
         }
         public void SendArrow(string Key)
