@@ -15,7 +15,6 @@ namespace JBot
     {
         Process Client;
         ReaderClass Readar = new ReaderClass();
-        public event System.EventHandler CChange;
         public ClientChooser()
         {
             InitializeComponent();

@@ -9,7 +9,7 @@ namespace JBot
 {
     class Objects
     {
-        public struct World
+        /*public struct World
         {
             public Objects.BList BList;
             public Objects.Player Player;
@@ -25,7 +25,7 @@ namespace JBot
         public struct Minimap
         {
             public int i;
-        }
+        }*/
 
         public struct BList
         {
