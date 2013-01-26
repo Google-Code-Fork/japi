@@ -25,8 +25,8 @@ namespace JBot
         {
             foreach (Process p in Readar.getClients())
             {
-                Readar.Tibia = p;
-                Readar.BaseAddress = Convert.ToUInt32(p.MainModule.BaseAddress.ToInt32());
+                Util.Tibia = p;
+                Util.Base = Convert.ToUInt32(p.MainModule.BaseAddress.ToInt32());
                 listBox1.Items.Add(Readar.getMyName());
             }
         }
@@ -36,8 +36,8 @@ namespace JBot
             listBox1.Items.Clear();
             foreach (Process p in Readar.getClients())
             {
-                Readar.Tibia = p;
-                Readar.BaseAddress = Convert.ToUInt32(p.MainModule.BaseAddress.ToInt32());
+                Util.Tibia = p;
+                Util.Base = Convert.ToUInt32(p.MainModule.BaseAddress.ToInt32());
                 listBox1.Items.Add(Readar.getMyName());
             }
         }
@@ -53,8 +53,8 @@ namespace JBot
         {
             foreach (Process p in Readar.getClients())
             {
-                Readar.Tibia = p;
-                Readar.BaseAddress = Convert.ToUInt32(p.MainModule.BaseAddress.ToInt32());
+                Util.Tibia = p;
+                Util.Base = Convert.ToUInt32(p.MainModule.BaseAddress.ToInt32());
                 if (listBox1.SelectedItem.ToString() == Readar.getMyName())
                 {
                     return p;

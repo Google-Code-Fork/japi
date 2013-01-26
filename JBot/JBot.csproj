@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Addresses.cs" />
     <Compile Include="ControlWindow.cs" />
+    <Compile Include="Util.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -10,8 +10,6 @@ namespace JBot
 {
     class ControlWindow
     {
-        public Process Tibia { get; set; }
-
         public const Int32 WM_CHAR = 0x0102;
         public const Int32 WM_KEYDOWN = 0x0100;
         public const Int32 WM_KEYUP = 0x0101;
@@ -95,26 +93,21 @@ namespace JBot
         }
 
         // Send key codes
-        public void SendKeys(String message)
+        public void SendKeys(string message)
         {
             foreach (char c in message)
             {
                 int charValue = c;
                 IntPtr val = new IntPtr((Int32)c);
-                SendMessage(Tibia.MainWindowHandle, WM_CHAR, val, IntPtr.Zero);
+                SendMessage(Util.Handle, WM_CHAR, val, new IntPtr(0));
             }
         }
-        public void SendArrow(string Key)
+
+        public void SendButton(string Key)
         {
             IntPtr wParam = new IntPtr(getKeyCode(Key));
-            SendMessage(Tibia.MainWindowHandle, WM_KEYDOWN, wParam, IntPtr.Zero);
-            SendMessage(Tibia.MainWindowHandle, WM_KEYUP, wParam, IntPtr.Zero);
-        }
-        public void SendHotkey(string Key)
-        {
-            IntPtr wParam = new IntPtr(getKeyCode(Key));
-            SendMessage(Tibia.MainWindowHandle, WM_KEYDOWN, wParam, IntPtr.Zero);
-            SendMessage(Tibia.MainWindowHandle, WM_KEYUP, wParam, IntPtr.Zero);
+            SendMessage(Util.Handle, WM_KEYDOWN, wParam, new IntPtr(0));
+            SendMessage(Util.Handle, WM_KEYUP, wParam, new IntPtr(0));
         }
     }
 }

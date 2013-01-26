@@ -29,9 +29,7 @@ namespace JBot
 
         public void setTibia(Process Tibia)
         {
-            Read.Tibia = Tibia;
-            Read.BaseAddress = Convert.ToUInt32(Tibia.MainModule.BaseAddress.ToInt32());
-            Ctrl.Tibia = Tibia;
+            Util.Tibia = Tibia;
         }
 
         public void setDefaultValues()
@@ -104,22 +102,22 @@ namespace JBot
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Ctrl.SendArrow("up");
+            Ctrl.SendButton("up");
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            Ctrl.SendArrow("right");
+            Ctrl.SendButton("right");
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Ctrl.SendArrow("down");
+            Ctrl.SendButton("down");
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Ctrl.SendArrow("left");
+            Ctrl.SendButton("left");
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -162,7 +160,7 @@ namespace JBot
                 {
                     if (p.Hp < rule.MaxHp && p.Hp > rule.MinHp && rule.Mana <= p.Mp)
                     {
-                        Ctrl.SendHotkey(rule.Hotkey);
+                        Ctrl.SendButton(rule.Hotkey);
                         Thread.Sleep(500);
                     }
                 }
