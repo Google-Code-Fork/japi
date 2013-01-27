@@ -105,10 +105,9 @@ namespace JBot
 
         public void SendButton(string Key)
         {
-            IntPtr lParam = new IntPtr(0);
             IntPtr wParam = new IntPtr(getKeyCode(Key));
-            SendMessage(Util.Handle, WM_KEYDOWN, wParam, lParam);
-            SendMessage(Util.Handle, WM_KEYUP, wParam, lParam);
+            SendMessage(Util.Handle, WM_KEYDOWN, wParam, new IntPtr(0));
+            SendMessage(Util.Handle, WM_KEYUP, wParam, new IntPtr(0));
         }
     }
 }

@@ -32,7 +32,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.HealthLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ManaLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripDropDownsendUpWalkBtn = new System.Windows.Forms.ToolStripSplitButton();
+            this.toolStripStopStartUpdate = new System.Windows.Forms.ToolStripSplitButton();
             this.addLocationButton = new System.Windows.Forms.Button();
             this.LocationDisplay = new System.Windows.Forms.DataGridView();
             this.XPos = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,7 +72,6 @@
             this.MaxHealLabel = new System.Windows.Forms.Label();
             this.MinHealLabel = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LocationDisplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blview)).BeginInit();
@@ -89,7 +88,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.HealthLabel,
             this.ManaLabel,
-            this.toolStripDropDownsendUpWalkBtn});
+            this.toolStripStopStartUpdate});
             this.statusStrip1.Location = new System.Drawing.Point(0, 321);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(551, 22);
@@ -108,16 +107,16 @@
             this.ManaLabel.Size = new System.Drawing.Size(48, 17);
             this.ManaLabel.Text = "MP: 0/0";
             // 
-            // toolStripDropDownsendUpWalkBtn
+            // toolStripStopStartUpdate
             // 
-            this.toolStripDropDownsendUpWalkBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownsendUpWalkBtn.DropDownButtonWidth = 0;
-            this.toolStripDropDownsendUpWalkBtn.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownsendUpWalkBtn.Image")));
-            this.toolStripDropDownsendUpWalkBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownsendUpWalkBtn.Name = "toolStripDropDownsendUpWalkBtn";
-            this.toolStripDropDownsendUpWalkBtn.Size = new System.Drawing.Size(21, 20);
-            this.toolStripDropDownsendUpWalkBtn.Text = "toolStripDropDownsendUpWalkBtn";
-            this.toolStripDropDownsendUpWalkBtn.ButtonClick += new System.EventHandler(this.toolStripDropDownsendUpWalkBtn_ButtonClick);
+            this.toolStripStopStartUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripStopStartUpdate.DropDownButtonWidth = 0;
+            this.toolStripStopStartUpdate.Image = ((System.Drawing.Image)(resources.GetObject("toolStripStopStartUpdate.Image")));
+            this.toolStripStopStartUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripStopStartUpdate.Name = "toolStripStopStartUpdate";
+            this.toolStripStopStartUpdate.Size = new System.Drawing.Size(21, 20);
+            this.toolStripStopStartUpdate.Text = "toolStripDropDownsendUpWalkBtn";
+            this.toolStripStopStartUpdate.ButtonClick += new System.EventHandler(this.toolStripStopStartUpdate_Click);
             // 
             // addLocationButton
             // 
@@ -318,7 +317,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.sendUpWalkBtn);
             this.groupBox1.Controls.Add(this.sendRightWalkBtn);
             this.groupBox1.Controls.Add(this.sendDownWalkBtn);
@@ -452,6 +450,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(100, 21);
             this.comboBox1.TabIndex = 8;
+            this.comboBox1.Text = "F1";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // textBox4
@@ -516,16 +515,6 @@
             this.listBox1.Size = new System.Drawing.Size(178, 134);
             this.listBox1.TabIndex = 0;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(88, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -579,7 +568,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.ToolStripSplitButton toolStripDropDownsendUpWalkBtn;
+        private System.Windows.Forms.ToolStripSplitButton toolStripStopStartUpdate;
         private System.Windows.Forms.Button sendRightWalkBtn;
         private System.Windows.Forms.Button sendLeftWalkBtn;
         private System.Windows.Forms.Button sendDownWalkBtn;
@@ -599,7 +588,6 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button removeHealRuleBtn;
         private System.Windows.Forms.Button selectClientBtn;
-        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -28,9 +28,13 @@ namespace JBot
                 Util.Base = Convert.ToUInt32(p.MainModule.BaseAddress.ToInt32());
                 listBox1.Items.Add(Readar.getMyName());
             }
+            if (listBox1.Items.Count >= 1)
+            {
+                listBox1.SelectedIndex = 0;
+            }
         }
 
-        private void sendUpWalkBtn_Click(object sender, EventArgs e)
+        private void updateBtn_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
             foreach (Process p in Readar.getClients())
@@ -39,9 +43,13 @@ namespace JBot
                 Util.Base = Convert.ToUInt32(p.MainModule.BaseAddress.ToInt32());
                 listBox1.Items.Add(Readar.getMyName());
             }
+            if (listBox1.Items.Count >= 1)
+            {
+                listBox1.SelectedIndex = 0;
+            }
         }
 
-        private void addLocationButton_Click(object sender, EventArgs e)
+        private void cancelBtn_Click(object sender, EventArgs e)
         {
             Client = selectClient();
             Util._Tibia = Client;
@@ -60,6 +68,11 @@ namespace JBot
                 }
             }
             return null;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
 
         

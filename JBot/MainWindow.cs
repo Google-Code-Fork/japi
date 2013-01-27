@@ -80,11 +80,15 @@ namespace JBot
                 Objects.Player p = Read.GetPlayerInfo();
                 HealthLabel.Text = "HP: " + Convert.ToString(p.Hp) + "/" + Convert.ToString(p.HpMax);
                 ManaLabel.Text = "MP: " + Convert.ToString(p.Mp) + "/" + Convert.ToString(p.MpMax);
+                this.Invoke((MethodInvoker)delegate
+                {
+                    this.Text = Read.getMyName();
+                });
                 Thread.Sleep(1000);
             }
         }
         
-        private void toolStripDropDownsendUpWalkBtn_ButtonClick(object sender, EventArgs e)
+        private void toolStripStopStartUpdate_Click(object sender, EventArgs e)
         {
             if (ticker.ThreadState == System.Threading.ThreadState.Background)
             {
@@ -204,13 +208,6 @@ namespace JBot
         {
             ClientChooser myform = new ClientChooser();
             myform.Show();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Ctrl.SendButton("up");
-            IntPtr wParam = new IntPtr(Ctrl.getKeyCode("up"));
-            MessageBox.Show(Convert.ToString(wParam));
         }
     }
 }
