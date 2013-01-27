@@ -41,22 +41,21 @@ namespace JBot
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
+        {            
             setDefaultValues();
             setTibia(Read.getFirstClient());
             this.Text = Read.getMyName();
             ticker = new Thread(UpdateStats);
             ticker.IsBackground = true;
             ticker.Start();
-            comboBox1.SelectedIndex = 0;
         }
         
-        private void button2_Click(object sender, EventArgs e)
+        private void addLocationButton_Click(object sender, EventArgs e)
         {
             LocationDisplay.Rows.Add(Convert.ToString(Read.X()), Convert.ToString(Read.Y()), Convert.ToString(Read.Z()));
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void updateBlistBtn_Click(object sender, EventArgs e)
         {
             blview.Rows.Clear();
             myBlist = Read.BlGet(true);
@@ -69,7 +68,7 @@ namespace JBot
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void sendStringBtn_Click(object sender, EventArgs e)
         {
             Ctrl.SendKeys(textBox1.Text);
         }
@@ -85,7 +84,7 @@ namespace JBot
             }
         }
         
-        private void toolStripDropDownButton1_ButtonClick(object sender, EventArgs e)
+        private void toolStripDropDownsendUpWalkBtn_ButtonClick(object sender, EventArgs e)
         {
             if (ticker.ThreadState == System.Threading.ThreadState.Background)
             {
@@ -100,27 +99,27 @@ namespace JBot
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void sendUpWalkBtn_Click(object sender, EventArgs e)
         {
             Ctrl.SendButton("up");
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void sendRightWalkBtn_Click(object sender, EventArgs e)
         {
             Ctrl.SendButton("right");
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void sendDownWalkBtn_Click(object sender, EventArgs e)
         {
             Ctrl.SendButton("down");
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void sendLeftWalkBtn_Click(object sender, EventArgs e)
         {
             Ctrl.SendButton("left");
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void addHealRuleBtn_Click(object sender, EventArgs e)
         {
             listBox1.Items.Add(textBox2.Text + "," + textBox3.Text + "," + textBox4.Text + "," + comboBox1.SelectedItem.ToString());
 
@@ -167,7 +166,7 @@ namespace JBot
             }
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void removeHealRuleBtn_Click(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndex != -1)
             {
@@ -201,10 +200,17 @@ namespace JBot
             Properties.Settings.Default.Save();
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        private void selectClientBtn_Click(object sender, EventArgs e)
         {
             ClientChooser myform = new ClientChooser();
             myform.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Ctrl.SendButton("up");
+            IntPtr wParam = new IntPtr(Ctrl.getKeyCode("up"));
+            MessageBox.Show(Convert.ToString(wParam));
         }
     }
 }

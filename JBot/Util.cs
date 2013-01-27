@@ -16,9 +16,9 @@ namespace JBot
         {
             get { return _Tibia; }
             set {
-                _Tibia = value; _BaseAddress = Convert.ToUInt32(value.MainModule.BaseAddress.ToInt32());
-                Base = Convert.ToUInt32(value.MainModule.BaseAddress.ToInt32());
-                Handle = _Tibia.Handle;
+                _Tibia = value;
+                _BaseAddress = Convert.ToUInt32(value.MainModule.BaseAddress.ToInt32());
+                _Handle = value.MainWindowHandle;
             }
         }
         public static UInt32 Base

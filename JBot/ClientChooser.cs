@@ -30,7 +30,7 @@ namespace JBot
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void sendUpWalkBtn_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
             foreach (Process p in Readar.getClients())
@@ -41,10 +41,10 @@ namespace JBot
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void addLocationButton_Click(object sender, EventArgs e)
         {
             Client = selectClient();
-            
+            Util._Tibia = Client;
             this.Dispose();
         }
 

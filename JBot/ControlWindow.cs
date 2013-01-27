@@ -16,7 +16,7 @@ namespace JBot
         public const Int32 VK_RETURN = 0x0D;
 
         [DllImport("User32.DLL")]
-        public static extern int SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
+        public static extern int SendMessage(IntPtr hWnd, Int32 Msg, IntPtr wParam, IntPtr lParam);
 
         // Key code preparation.
         [Flags]
@@ -84,7 +84,7 @@ namespace JBot
             KeyboardControls keynum;
             if (Enum.TryParse<KeyboardControls>(Key, true, out keynum))
             {
-                return (UInt32)keynum;
+                return (UInt32)(keynum);
             }
             else
             {
@@ -105,9 +105,10 @@ namespace JBot
 
         public void SendButton(string Key)
         {
+            IntPtr lParam = new IntPtr(0);
             IntPtr wParam = new IntPtr(getKeyCode(Key));
-            SendMessage(Util.Handle, WM_KEYDOWN, wParam, new IntPtr(0));
-            SendMessage(Util.Handle, WM_KEYUP, wParam, new IntPtr(0));
+            SendMessage(Util.Handle, WM_KEYDOWN, wParam, lParam);
+            SendMessage(Util.Handle, WM_KEYUP, wParam, lParam);
         }
     }
 }

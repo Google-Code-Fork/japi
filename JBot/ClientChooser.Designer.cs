@@ -28,32 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.sendUpWalkBtn = new System.Windows.Forms.Button();
+            this.addLocationButton = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // sendUpWalkBtn
             // 
-            this.button1.Location = new System.Drawing.Point(0, 239);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Update";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.sendUpWalkBtn.Location = new System.Drawing.Point(0, 239);
+            this.sendUpWalkBtn.Name = "sendUpWalkBtn";
+            this.sendUpWalkBtn.Size = new System.Drawing.Size(75, 23);
+            this.sendUpWalkBtn.TabIndex = 0;
+            this.sendUpWalkBtn.Text = "Update";
+            this.sendUpWalkBtn.UseVisualStyleBackColor = true;
+            this.sendUpWalkBtn.Click += new System.EventHandler(this.sendUpWalkBtn_Click);
             // 
-            // button2
+            // addLocationButton
             // 
-            this.button2.Location = new System.Drawing.Point(209, 239);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Select";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.addLocationButton.Location = new System.Drawing.Point(209, 239);
+            this.addLocationButton.Name = "addLocationButton";
+            this.addLocationButton.Size = new System.Drawing.Size(75, 23);
+            this.addLocationButton.TabIndex = 1;
+            this.addLocationButton.Text = "Select";
+            this.addLocationButton.UseVisualStyleBackColor = true;
+            this.addLocationButton.Click += new System.EventHandler(this.addLocationButton_Click);
             // 
             // listBox1
             // 
@@ -66,8 +66,8 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.listBox1);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.sendUpWalkBtn);
+            this.panel1.Controls.Add(this.addLocationButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -90,8 +90,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button sendUpWalkBtn;
+        private System.Windows.Forms.Button addLocationButton;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Panel panel1;
     }

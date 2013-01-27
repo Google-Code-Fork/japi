@@ -32,8 +32,8 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.HealthLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ManaLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripSplitButton();
-            this.button2 = new System.Windows.Forms.Button();
+            this.toolStripDropDownsendUpWalkBtn = new System.Windows.Forms.ToolStripSplitButton();
+            this.addLocationButton = new System.Windows.Forms.Button();
             this.LocationDisplay = new System.Windows.Forms.DataGridView();
             this.XPos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.YPos = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,24 +46,24 @@
             this.YDisplayBl = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ZDisplayBl = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeDisplayBl = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.updateBlistBtn = new System.Windows.Forms.Button();
+            this.sendStringBtn = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.button10 = new System.Windows.Forms.Button();
+            this.selectClientBtn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.sendUpWalkBtn = new System.Windows.Forms.Button();
+            this.sendRightWalkBtn = new System.Windows.Forms.Button();
+            this.sendDownWalkBtn = new System.Windows.Forms.Button();
+            this.sendLeftWalkBtn = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.button9 = new System.Windows.Forms.Button();
+            this.removeHealRuleBtn = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.HotkeyLabel = new System.Windows.Forms.Label();
-            this.button8 = new System.Windows.Forms.Button();
+            this.addHealRuleBtn = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -72,6 +72,7 @@
             this.MaxHealLabel = new System.Windows.Forms.Label();
             this.MinHealLabel = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LocationDisplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blview)).BeginInit();
@@ -88,7 +89,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.HealthLabel,
             this.ManaLabel,
-            this.toolStripDropDownButton1});
+            this.toolStripDropDownsendUpWalkBtn});
             this.statusStrip1.Location = new System.Drawing.Point(0, 321);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(551, 22);
@@ -107,26 +108,26 @@
             this.ManaLabel.Size = new System.Drawing.Size(48, 17);
             this.ManaLabel.Text = "MP: 0/0";
             // 
-            // toolStripDropDownButton1
+            // toolStripDropDownsendUpWalkBtn
             // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton1.DropDownButtonWidth = 0;
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(21, 20);
-            this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.ButtonClick += new System.EventHandler(this.toolStripDropDownButton1_ButtonClick);
+            this.toolStripDropDownsendUpWalkBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownsendUpWalkBtn.DropDownButtonWidth = 0;
+            this.toolStripDropDownsendUpWalkBtn.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownsendUpWalkBtn.Image")));
+            this.toolStripDropDownsendUpWalkBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownsendUpWalkBtn.Name = "toolStripDropDownsendUpWalkBtn";
+            this.toolStripDropDownsendUpWalkBtn.Size = new System.Drawing.Size(21, 20);
+            this.toolStripDropDownsendUpWalkBtn.Text = "toolStripDropDownsendUpWalkBtn";
+            this.toolStripDropDownsendUpWalkBtn.ButtonClick += new System.EventHandler(this.toolStripDropDownsendUpWalkBtn_ButtonClick);
             // 
-            // button2
+            // addLocationButton
             // 
-            this.button2.Location = new System.Drawing.Point(0, 256);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Location";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.addLocationButton.Location = new System.Drawing.Point(0, 256);
+            this.addLocationButton.Name = "addLocationButton";
+            this.addLocationButton.Size = new System.Drawing.Size(75, 23);
+            this.addLocationButton.TabIndex = 4;
+            this.addLocationButton.Text = "Location";
+            this.addLocationButton.UseVisualStyleBackColor = true;
+            this.addLocationButton.Click += new System.EventHandler(this.addLocationButton_Click);
             // 
             // LocationDisplay
             // 
@@ -226,26 +227,26 @@
             this.TypeDisplayBl.Name = "TypeDisplayBl";
             this.TypeDisplayBl.Width = 50;
             // 
-            // button3
+            // updateBlistBtn
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button3.Location = new System.Drawing.Point(0, 272);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Update";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.updateBlistBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.updateBlistBtn.Location = new System.Drawing.Point(0, 272);
+            this.updateBlistBtn.Name = "updateBlistBtn";
+            this.updateBlistBtn.Size = new System.Drawing.Size(75, 23);
+            this.updateBlistBtn.TabIndex = 7;
+            this.updateBlistBtn.Text = "Update";
+            this.updateBlistBtn.UseVisualStyleBackColor = true;
+            this.updateBlistBtn.Click += new System.EventHandler(this.updateBlistBtn_Click);
             // 
-            // button4
+            // sendStringBtn
             // 
-            this.button4.Location = new System.Drawing.Point(109, 1);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "Send";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.sendStringBtn.Location = new System.Drawing.Point(109, 1);
+            this.sendStringBtn.Name = "sendStringBtn";
+            this.sendStringBtn.Size = new System.Drawing.Size(75, 23);
+            this.sendStringBtn.TabIndex = 8;
+            this.sendStringBtn.Text = "Send";
+            this.sendStringBtn.UseVisualStyleBackColor = true;
+            this.sendStringBtn.Click += new System.EventHandler(this.sendStringBtn_Click);
             // 
             // textBox1
             // 
@@ -271,7 +272,7 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.blview);
-            this.tabPage1.Controls.Add(this.button3);
+            this.tabPage1.Controls.Add(this.updateBlistBtn);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -283,7 +284,7 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.LocationDisplay);
-            this.tabPage2.Controls.Add(this.button2);
+            this.tabPage2.Controls.Add(this.addLocationButton);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -294,10 +295,10 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.button10);
+            this.tabPage3.Controls.Add(this.selectClientBtn);
             this.tabPage3.Controls.Add(this.groupBox1);
             this.tabPage3.Controls.Add(this.textBox1);
-            this.tabPage3.Controls.Add(this.button4);
+            this.tabPage3.Controls.Add(this.sendStringBtn);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(543, 295);
@@ -305,22 +306,23 @@
             this.tabPage3.Text = "Extras";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // button10
+            // selectClientBtn
             // 
-            this.button10.Location = new System.Drawing.Point(468, 0);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(75, 23);
-            this.button10.TabIndex = 13;
-            this.button10.Text = "Client";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.selectClientBtn.Location = new System.Drawing.Point(468, 0);
+            this.selectClientBtn.Name = "selectClientBtn";
+            this.selectClientBtn.Size = new System.Drawing.Size(75, 23);
+            this.selectClientBtn.TabIndex = 13;
+            this.selectClientBtn.Text = "Client";
+            this.selectClientBtn.UseVisualStyleBackColor = true;
+            this.selectClientBtn.Click += new System.EventHandler(this.selectClientBtn_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.button7);
-            this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Controls.Add(this.button6);
+            this.groupBox1.Controls.Add(this.sendUpWalkBtn);
+            this.groupBox1.Controls.Add(this.sendRightWalkBtn);
+            this.groupBox1.Controls.Add(this.sendDownWalkBtn);
+            this.groupBox1.Controls.Add(this.sendLeftWalkBtn);
             this.groupBox1.Location = new System.Drawing.Point(3, 30);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(181, 100);
@@ -328,52 +330,52 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Walker";
             // 
-            // button1
+            // sendUpWalkBtn
             // 
-            this.button1.Location = new System.Drawing.Point(50, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(32, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "^";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.sendUpWalkBtn.Location = new System.Drawing.Point(50, 19);
+            this.sendUpWalkBtn.Name = "sendUpWalkBtn";
+            this.sendUpWalkBtn.Size = new System.Drawing.Size(32, 23);
+            this.sendUpWalkBtn.TabIndex = 10;
+            this.sendUpWalkBtn.Text = "^";
+            this.sendUpWalkBtn.UseVisualStyleBackColor = true;
+            this.sendUpWalkBtn.Click += new System.EventHandler(this.sendUpWalkBtn_Click);
             // 
-            // button7
+            // sendRightWalkBtn
             // 
-            this.button7.Location = new System.Drawing.Point(88, 39);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(32, 23);
-            this.button7.TabIndex = 13;
-            this.button7.Text = ">";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.sendRightWalkBtn.Location = new System.Drawing.Point(88, 39);
+            this.sendRightWalkBtn.Name = "sendRightWalkBtn";
+            this.sendRightWalkBtn.Size = new System.Drawing.Size(32, 23);
+            this.sendRightWalkBtn.TabIndex = 13;
+            this.sendRightWalkBtn.Text = ">";
+            this.sendRightWalkBtn.UseVisualStyleBackColor = true;
+            this.sendRightWalkBtn.Click += new System.EventHandler(this.sendRightWalkBtn_Click);
             // 
-            // button5
+            // sendDownWalkBtn
             // 
-            this.button5.Location = new System.Drawing.Point(50, 58);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(32, 23);
-            this.button5.TabIndex = 11;
-            this.button5.Text = "v";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.sendDownWalkBtn.Location = new System.Drawing.Point(50, 58);
+            this.sendDownWalkBtn.Name = "sendDownWalkBtn";
+            this.sendDownWalkBtn.Size = new System.Drawing.Size(32, 23);
+            this.sendDownWalkBtn.TabIndex = 11;
+            this.sendDownWalkBtn.Text = "v";
+            this.sendDownWalkBtn.UseVisualStyleBackColor = true;
+            this.sendDownWalkBtn.Click += new System.EventHandler(this.sendDownWalkBtn_Click);
             // 
-            // button6
+            // sendLeftWalkBtn
             // 
-            this.button6.Location = new System.Drawing.Point(12, 39);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(32, 23);
-            this.button6.TabIndex = 12;
-            this.button6.Text = "<";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.sendLeftWalkBtn.Location = new System.Drawing.Point(12, 39);
+            this.sendLeftWalkBtn.Name = "sendLeftWalkBtn";
+            this.sendLeftWalkBtn.Size = new System.Drawing.Size(32, 23);
+            this.sendLeftWalkBtn.TabIndex = 12;
+            this.sendLeftWalkBtn.Text = "<";
+            this.sendLeftWalkBtn.UseVisualStyleBackColor = true;
+            this.sendLeftWalkBtn.Click += new System.EventHandler(this.sendLeftWalkBtn_Click);
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.button9);
+            this.tabPage4.Controls.Add(this.removeHealRuleBtn);
             this.tabPage4.Controls.Add(this.checkBox1);
             this.tabPage4.Controls.Add(this.HotkeyLabel);
-            this.tabPage4.Controls.Add(this.button8);
+            this.tabPage4.Controls.Add(this.addHealRuleBtn);
             this.tabPage4.Controls.Add(this.comboBox1);
             this.tabPage4.Controls.Add(this.textBox4);
             this.tabPage4.Controls.Add(this.textBox3);
@@ -389,15 +391,15 @@
             this.tabPage4.Text = "Healer";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // button9
+            // removeHealRuleBtn
             // 
-            this.button9.Location = new System.Drawing.Point(230, 136);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(100, 23);
-            this.button9.TabIndex = 12;
-            this.button9.Text = "Remove Rule";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.removeHealRuleBtn.Location = new System.Drawing.Point(230, 136);
+            this.removeHealRuleBtn.Name = "removeHealRuleBtn";
+            this.removeHealRuleBtn.Size = new System.Drawing.Size(100, 23);
+            this.removeHealRuleBtn.TabIndex = 12;
+            this.removeHealRuleBtn.Text = "Remove Rule";
+            this.removeHealRuleBtn.UseVisualStyleBackColor = true;
+            this.removeHealRuleBtn.Click += new System.EventHandler(this.removeHealRuleBtn_Click);
             // 
             // checkBox1
             // 
@@ -419,15 +421,15 @@
             this.HotkeyLabel.TabIndex = 10;
             this.HotkeyLabel.Text = "Hotkey";
             // 
-            // button8
+            // addHealRuleBtn
             // 
-            this.button8.Location = new System.Drawing.Point(230, 107);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(100, 23);
-            this.button8.TabIndex = 9;
-            this.button8.Text = "Add Rule";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.addHealRuleBtn.Location = new System.Drawing.Point(230, 107);
+            this.addHealRuleBtn.Name = "addHealRuleBtn";
+            this.addHealRuleBtn.Size = new System.Drawing.Size(100, 23);
+            this.addHealRuleBtn.TabIndex = 9;
+            this.addHealRuleBtn.Text = "Add Rule";
+            this.addHealRuleBtn.UseVisualStyleBackColor = true;
+            this.addHealRuleBtn.Click += new System.EventHandler(this.addHealRuleBtn_Click);
             // 
             // comboBox1
             // 
@@ -514,6 +516,16 @@
             this.listBox1.Size = new System.Drawing.Size(178, 134);
             this.listBox1.TabIndex = 0;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(88, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -547,13 +559,13 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel HealthLabel;
         private System.Windows.Forms.ToolStripStatusLabel ManaLabel;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button addLocationButton;
         private System.Windows.Forms.DataGridView LocationDisplay;
         private System.Windows.Forms.DataGridViewTextBoxColumn XPos;
         private System.Windows.Forms.DataGridViewTextBoxColumn YPos;
         private System.Windows.Forms.DataGridViewTextBoxColumn ZPos;
         private System.Windows.Forms.DataGridView blview;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button updateBlistBtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameDisplayBl;
         private System.Windows.Forms.DataGridViewTextBoxColumn VisibleDisplayBl;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDDisplayBl;
@@ -561,17 +573,17 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn YDisplayBl;
         private System.Windows.Forms.DataGridViewTextBoxColumn ZDisplayBl;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeDisplayBl;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button sendStringBtn;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.ToolStripSplitButton toolStripDropDownButton1;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripSplitButton toolStripDropDownsendUpWalkBtn;
+        private System.Windows.Forms.Button sendRightWalkBtn;
+        private System.Windows.Forms.Button sendLeftWalkBtn;
+        private System.Windows.Forms.Button sendDownWalkBtn;
+        private System.Windows.Forms.Button sendUpWalkBtn;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TextBox textBox4;
@@ -583,10 +595,11 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label HotkeyLabel;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button addHealRuleBtn;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button removeHealRuleBtn;
+        private System.Windows.Forms.Button selectClientBtn;
+        private System.Windows.Forms.Button button1;
     }
 }
 
