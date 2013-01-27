@@ -15,6 +15,7 @@ namespace JBot
     {
         Process Client;
         ReaderClass Readar = new ReaderClass();
+        ClientChooser clch = new ClientChooser();
         public ClientChooser()
         {
             InitializeComponent();
@@ -58,15 +59,16 @@ namespace JBot
 
         private Process selectClient()
         {
+            Process Old = Util.Tibia;
             foreach (Process p in Readar.getClients())
             {
                 Util.Tibia = p;
-                Util.Base = Convert.ToUInt32(p.MainModule.BaseAddress.ToInt32());
                 if (listBox1.SelectedItem.ToString() == Readar.getMyName())
                 {
                     return p;
                 }
             }
+            Util.Tibia = Old;
             return null;
         }
 

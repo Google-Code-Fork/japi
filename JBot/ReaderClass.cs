@@ -10,13 +10,10 @@ namespace JBot
 {
     class ReaderClass
     {
-        #region vars
         [DllImport("kernel32.dll")]
         public static extern Int32 ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress,
             [In, Out] byte[] buffer, UInt32 size, out IntPtr lpNumberOfBytesRead);
-
-        #endregion
-
+        
         // Reading Memory Functions
         public byte[] ReadBytes(IntPtr Handle, Int64 Address, uint BytesToRead)
         {
