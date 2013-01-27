@@ -15,9 +15,6 @@ namespace JBot
         public static extern Int32 ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress,
             [In, Out] byte[] buffer, UInt32 size, out IntPtr lpNumberOfBytesRead);
 
-        public static UInt32 BLStart = 0x54C008;
-        public static UInt32 BLStep = 0xB0;
-        public static int BLMax = 1300;
         #endregion
 
         // Reading Memory Functions
@@ -132,7 +129,7 @@ namespace JBot
         }
         public string getMyName()
         {
-            Objects.BList[] batt = new Objects.BList[BLMax];
+            Objects.BList[] batt = new Objects.BList[BListAdresses.Max];
             batt = BlGet(true);
             foreach (Objects.BList crit in batt)
             {
@@ -147,43 +144,43 @@ namespace JBot
         // Reading array info
         public Objects.BList[] BlGet(bool idname = false)
         {
-            int max = Convert.ToInt32(BLStep) * BLMax;
-            Objects.BList[] bat = new Objects.BList[BLMax];
-            for (int i = 0; i < BLMax; i++)
+            int max = Convert.ToInt32(BListAdresses.Step) * BListAdresses.Max;
+            Objects.BList[] bat = new Objects.BList[BListAdresses.Max];
+            for (int i = 0; i < BListAdresses.Max; i++)
             {
-                UInt32 CreatureOffset = Convert.ToUInt32(i) * BLStep;
+                UInt32 CreatureOffset = Convert.ToUInt32(i) * BListAdresses.Step;
                 Objects.BList batt = new Objects.BList();
                 batt.Addr = i;
-                batt.Id = ReadInt32(BLStart + BListAdresses.IdOffset + CreatureOffset + Util.Base);
+                batt.Id = ReadInt32(BListAdresses.Start + BListAdresses.IdOffset + CreatureOffset + Util.Base);
                 if (batt.Id != 0 && idname != false)
                 {
-                    batt.Type = ReadByte(BLStart + BListAdresses.TypeOffset + CreatureOffset + Util.Base);
-                    batt.Name = ReadString(BLStart + BListAdresses.NameOffset + CreatureOffset + Util.Base);
-                    batt.Z = ReadInt32(BLStart + BListAdresses.ZOffset + CreatureOffset + Util.Base);
-                    batt.Y = ReadInt32(BLStart + BListAdresses.YOffset + CreatureOffset + Util.Base);
-                    batt.X = ReadInt32(BLStart + BListAdresses.XOffset + CreatureOffset + Util.Base);
-                    batt.TimeLastMoved = ReadInt32(BLStart + BListAdresses.TimeLastMovedOffset + CreatureOffset + Util.Base);
-                    batt.Walking = ReadInt32(BLStart + BListAdresses.WalkingOffset + CreatureOffset + Util.Base);
-                    batt.Direction = ReadInt32(BLStart + BListAdresses.DirectionOffset + CreatureOffset + Util.Base);
-                    batt.Previous = ReadInt32(BLStart + BListAdresses.PreviousOffset + CreatureOffset + Util.Base);
-                    batt.Next = ReadInt32(BLStart + BListAdresses.NextOffset + CreatureOffset + Util.Base);
-                    batt.Outfit = ReadInt32(BLStart + BListAdresses.OutfitOffset + CreatureOffset + Util.Base);
-                    batt.MountId = ReadInt32(BLStart + BListAdresses.MountIdOffset + CreatureOffset + Util.Base);
+                    batt.Type = ReadByte(BListAdresses.Start + BListAdresses.TypeOffset + CreatureOffset + Util.Base);
+                    batt.Name = ReadString(BListAdresses.Start + BListAdresses.NameOffset + CreatureOffset + Util.Base);
+                    batt.Z = ReadInt32(BListAdresses.Start + BListAdresses.ZOffset + CreatureOffset + Util.Base);
+                    batt.Y = ReadInt32(BListAdresses.Start + BListAdresses.YOffset + CreatureOffset + Util.Base);
+                    batt.X = ReadInt32(BListAdresses.Start + BListAdresses.XOffset + CreatureOffset + Util.Base);
+                    batt.TimeLastMoved = ReadInt32(BListAdresses.Start + BListAdresses.TimeLastMovedOffset + CreatureOffset + Util.Base);
+                    batt.Walking = ReadInt32(BListAdresses.Start + BListAdresses.WalkingOffset + CreatureOffset + Util.Base);
+                    batt.Direction = ReadInt32(BListAdresses.Start + BListAdresses.DirectionOffset + CreatureOffset + Util.Base);
+                    batt.Previous = ReadInt32(BListAdresses.Start + BListAdresses.PreviousOffset + CreatureOffset + Util.Base);
+                    batt.Next = ReadInt32(BListAdresses.Start + BListAdresses.NextOffset + CreatureOffset + Util.Base);
+                    batt.Outfit = ReadInt32(BListAdresses.Start + BListAdresses.OutfitOffset + CreatureOffset + Util.Base);
+                    batt.MountId = ReadInt32(BListAdresses.Start + BListAdresses.MountIdOffset + CreatureOffset + Util.Base);
 
-                    batt.BlackSquare = ReadInt32(BLStart + BListAdresses.BlackSquareOffset + CreatureOffset + Util.Base); // This address might have been removed - needs testing.
-                    batt.Hppc = ReadInt32(BLStart + BListAdresses.HppcOffset + CreatureOffset + Util.Base);
-                    batt.Speed = ReadInt32(BLStart + BListAdresses.SpeedOffset + CreatureOffset + Util.Base);
+                    batt.BlackSquare = ReadInt32(BListAdresses.Start + BListAdresses.BlackSquareOffset + CreatureOffset + Util.Base); // This address might have been removed - needs testing.
+                    batt.Hppc = ReadInt32(BListAdresses.Start + BListAdresses.HppcOffset + CreatureOffset + Util.Base);
+                    batt.Speed = ReadInt32(BListAdresses.Start + BListAdresses.SpeedOffset + CreatureOffset + Util.Base);
 
-                    batt.SkullType = ReadInt32(BLStart + BListAdresses.SkullOffset + CreatureOffset + Util.Base);
-                    batt.Party = ReadInt32(BLStart + BListAdresses.PartyOffset + CreatureOffset + Util.Base);
-                    batt.WarIcon = ReadInt32(BLStart + BListAdresses.WarOffset + CreatureOffset + Util.Base);
-                    batt.Visible = ReadByte(BLStart + BListAdresses.VisibleOffset + CreatureOffset + Util.Base);
+                    batt.SkullType = ReadInt32(BListAdresses.Start + BListAdresses.SkullOffset + CreatureOffset + Util.Base);
+                    batt.Party = ReadInt32(BListAdresses.Start + BListAdresses.PartyOffset + CreatureOffset + Util.Base);
+                    batt.WarIcon = ReadInt32(BListAdresses.Start + BListAdresses.WarOffset + CreatureOffset + Util.Base);
+                    batt.Visible = ReadByte(BListAdresses.Start + BListAdresses.VisibleOffset + CreatureOffset + Util.Base);
                     bat[i] = batt;
                 }
                 else if (batt.Id != 0 && idname == true)
                 {
-                    batt.Id = ReadInt32(BLStart + BListAdresses.IdOffset + CreatureOffset + Util.Base);
-                    batt.Name = ReadString(BLStart + BListAdresses.NameOffset + CreatureOffset + Util.Base);
+                    batt.Id = ReadInt32(BListAdresses.Start + BListAdresses.IdOffset + CreatureOffset + Util.Base);
+                    batt.Name = ReadString(BListAdresses.Start + BListAdresses.NameOffset + CreatureOffset + Util.Base);
                 }
             }
 

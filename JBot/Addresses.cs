@@ -8,7 +8,7 @@ namespace JBot
 {
     class Addresses
     {
-        public static UInt32 Cid = 0x583EA4; // or 0x54C168
+        public static UInt32 Cid = 0x583EA4;
         public static UInt32 Xor = 0x3b6ef0;
         public static UInt32 Hp = 0x54c000;
         public static UInt32 MaxHp = 0x583e9c;
@@ -23,6 +23,9 @@ namespace JBot
 
     class BListAdresses
     {
+        public static UInt32 Start = 0x54C008;
+        public static UInt32 Step = 0xB0;
+        public static int Max = 1300;
         public static UInt32 IdOffset = 0x0;
         public static UInt32 TypeOffset = 0x3;
         public static UInt32 NameOffset = 0x4;
