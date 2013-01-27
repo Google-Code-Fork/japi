@@ -80,10 +80,9 @@ namespace JBot
                 Objects.Player p = Read.GetPlayerInfo();
                 HealthLabel.Text = "HP: " + Convert.ToString(p.Hp) + "/" + Convert.ToString(p.HpMax);
                 ManaLabel.Text = "MP: " + Convert.ToString(p.Mp) + "/" + Convert.ToString(p.MpMax);
-                this.Invoke((MethodInvoker)delegate
-                {
+                /*this.Invoke((MethodInvoker)delegate {
                     this.Text = Read.getMyName();
-                });
+                });*/ // Removed until I've found a way of checking the mainwindow status to make sure this property can be set.
                 Thread.Sleep(1000);
             }
         }
