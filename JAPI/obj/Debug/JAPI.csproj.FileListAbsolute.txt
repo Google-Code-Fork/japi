@@ -1,0 +1,6 @@
+c:\users\josh\documents\Projects\JAPI Library\JAPI\bin\Debug\JAPI.dll
+c:\users\josh\documents\Projects\JAPI Library\JAPI\bin\Debug\JAPI.pdb
+c:\users\josh\documents\Projects\JAPI Library\JAPI\obj\Debug\JAPI.ClientChooser.resources
+c:\users\josh\documents\Projects\JAPI Library\JAPI\obj\Debug\JAPI.csproj.GenerateResource.Cache
+c:\users\josh\documents\Projects\JAPI Library\JAPI\obj\Debug\JAPI.dll
+c:\users\josh\documents\Projects\JAPI Library\JAPI\obj\Debug\JAPI.pdb

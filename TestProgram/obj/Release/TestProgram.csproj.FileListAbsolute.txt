@@ -1,0 +1,15 @@
+C:\Users\Josh\documents\Projects\JAPI Library\TestProgram\bin\Release\TestProgram.exe.config
+C:\Users\Josh\documents\Projects\JAPI Library\TestProgram\bin\Release\TestProgram.exe
+C:\Users\Josh\documents\Projects\JAPI Library\TestProgram\bin\Release\TestProgram.pdb
+C:\Users\Josh\documents\Projects\JAPI Library\TestProgram\bin\Release\JAPI.dll
+C:\Users\Josh\documents\Projects\JAPI Library\TestProgram\bin\Release\JAPI.pdb
+C:\Users\Josh\documents\Projects\JAPI Library\TestProgram\obj\Release\TestProgram.csprojResolveAssemblyReference.cache
+C:\Users\Josh\documents\Projects\JAPI Library\TestProgram\obj\Release\MainWindow.baml
+C:\Users\Josh\documents\Projects\JAPI Library\TestProgram\obj\Release\MainWindow.g.cs
+C:\Users\Josh\documents\Projects\JAPI Library\TestProgram\obj\Release\App.g.cs
+C:\Users\Josh\documents\Projects\JAPI Library\TestProgram\obj\Release\TestProgram_MarkupCompile.cache
+C:\Users\Josh\documents\Projects\JAPI Library\TestProgram\obj\Release\TestProgram.g.resources
+C:\Users\Josh\documents\Projects\JAPI Library\TestProgram\obj\Release\TestProgram.Properties.Resources.resources
+C:\Users\Josh\documents\Projects\JAPI Library\TestProgram\obj\Release\TestProgram.csproj.GenerateResource.Cache
+C:\Users\Josh\documents\Projects\JAPI Library\TestProgram\obj\Release\TestProgram.exe
+C:\Users\Josh\documents\Projects\JAPI Library\TestProgram\obj\Release\TestProgram.pdb
