@@ -48,8 +48,35 @@ namespace JAPI
         public static UInt32 VisibleOffset = 0xAC;
     }
 
+    class ContainerAddresses
+    {
+        public static UInt32 ContainerStart = 0x4063E0; // 4219872
+        public static UInt32 ContainerMaxSlots = 36;
+        public static UInt32 Max = 16;
+        public static UInt32 MaxStack = 100;
+        public static UInt32 Step = 0x1EC; // 192
+
+        public static int ContLength = 0xFC; // Container is 60 bytes long plus items, each item is 12 bytes, and max containers is 16, so 252 bytes per container.
+
+        public static UInt32 HasParentOffset = 0;
+        public static UInt32 IdOffset = 0xC;
+        public static UInt32 AmountOffset = 0x2C;
+        public static UInt32 IsOpenOffset = 0x34;
+        public static UInt32 VolumeOffset = 0x30;
+        public static UInt32 NameOffset = 0x10;
+
+        /*public uint HasParent;
+        private fixed byte unknown[8];
+        public uint Id;
+        public fixed byte name[32];
+        public uint Amount;
+        public uint IsOpen;
+        public uint Volume;*/
+    }
+
     class MapAddresses
     {
-        //public static UInt32 NorthEastAddress 0x5DA5C4;
+        public static UInt32 MapStart = 0x5DA5C4;
+        public static UInt32 MaxTiles = 2016;
     }
 }

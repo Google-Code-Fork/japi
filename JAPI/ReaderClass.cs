@@ -26,6 +26,10 @@ namespace JAPI
         {
             return ReadBytes(Util.Tibia.Handle, Address, 1)[0];
         }
+        public int ReadBool(Int64 Address)
+        {
+            return ReadBytes(Util.Tibia.Handle, Address, 1)[0];
+        }
         public int ReadInt32(long Address, uint length = 4)
         {
             return BitConverter.ToInt32(ReadBytes(Util.Tibia.Handle, Address, length), 0);
@@ -183,6 +187,50 @@ namespace JAPI
             }
 
             return bat;
+        }
+
+        public Objects.Container[] getContainers()
+        {
+            /*public struct Container
+            {
+                public uint HasParent;
+                public uint Id;
+                public uint Amount;
+                public uint IsOpen;
+                public uint Volume;
+            }*/
+            UInt32 max = ContainerAddresses.Step * ContainerAddresses.Max;
+            Objects.Container[] cont = new Objects.Container[ContainerAddresses.Max];
+            int totcons = 0;
+            for (int i = 0; i < ContainerAddresses.Max; i++)
+            {
+                UInt32 ContainerOffset = Convert.ToUInt32(i) * (UInt32)ContainerAddresses.Step;
+                UInt32 ThisReadOffset = (Convert.ToUInt32(i) * (UInt32)ContainerAddresses.Step) + ContainerAddresses.ContainerStart + Util.Base;
+                Objects.Container con = new Objects.Container();
+                if (ReadInt32(ContainerAddresses.IdOffset + ThisReadOffset) != 0)
+                {
+                    con.Id = ReadInt32(ContainerAddresses.IdOffset + ThisReadOffset);
+                    con.Volume = ReadInt32(ContainerAddresses.VolumeOffset + ThisReadOffset);
+                    con.Name = ReadString(ContainerAddresses.NameOffset + ThisReadOffset);
+                    con.IsOpen = ReadBool(ContainerAddresses.IsOpenOffset + ThisReadOffset);
+                    cont[i] = con;
+                    totcons++;
+                }
+            }
+
+            int ind = 0;
+
+            Objects.Container[] contz = new Objects.Container[totcons];
+            foreach (Objects.Container cn in cont)
+            {
+                if (cn.Id != 0)
+                {
+                    contz[ind] = cn;
+                    ind++;
+                }
+            }
+
+            return contz;
         }
 
     }

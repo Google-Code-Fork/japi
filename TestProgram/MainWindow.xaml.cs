@@ -129,5 +129,15 @@ namespace TestProgram
         {
             Ctrl.SendButton("down");
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            ContainerList.Items.Clear();
+            Objects.Container[] conts = Read.getContainers();
+            foreach (Objects.Container container in conts)
+            {
+                ContainerList.Items.Add("Container ID: " + Convert.ToString(container.Id) + " Open: " + Convert.ToString(container.IsOpen) + ". Container Name: " + container.Name);
+            }
+        }
     }
 }

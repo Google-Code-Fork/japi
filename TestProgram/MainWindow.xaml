@@ -53,7 +53,10 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Info">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <ListBox x:Name="ContainerList" HorizontalAlignment="Left" Height="288" VerticalAlignment="Top" Width="482" Margin="10,10,0,0"/>
+                    <Button Content="Read" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="497,276,0,0" Click="Button_Click_2"/>
+                </Grid>
             </TabItem>
         </TabControl>
         <StatusBar Height="30" VerticalAlignment="Bottom" >

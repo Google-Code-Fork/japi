@@ -27,6 +27,16 @@ namespace JAPI
             public int i;
         }*/
 
+        public struct Container
+        {
+            public int HasParent;
+            public int Id;
+            public string Name;
+            public int Amount;
+            public int IsOpen;
+            public int Volume;
+        }
+
         public struct BList
         {
             public int Addr;
