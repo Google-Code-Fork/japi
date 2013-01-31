@@ -24,7 +24,7 @@ namespace TestProgram
     public partial class MainWindow : Window
     {
         ReaderClass Read = new ReaderClass();
-        Control Ctrl = new Control();
+        ControlWindow Ctrl = new ControlWindow();
         Thread Updater;
         Thread Healer;
         Objects.HealRule[] rulelist;
@@ -111,6 +111,23 @@ namespace TestProgram
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             listBox2.Items.Add("Stand: " + Convert.ToString(Read.X()) + ", " + Convert.ToString(Read.Y()) + ", " + (Convert.ToString(Read.Z())));
+        }
+
+        private void LeftBtnClick(object sender, RoutedEventArgs e)
+        {
+            Ctrl.SendButton("left");
+        }
+        private void RightBtnClick(object sender, RoutedEventArgs e)
+        {
+            Ctrl.SendButton("right");
+        }
+        private void UpBtnClick(object sender, RoutedEventArgs e)
+        {
+            Ctrl.SendButton("up");
+        }
+        private void DownBtnClick(object sender, RoutedEventArgs e)
+        {
+            Ctrl.SendButton("down");
         }
     }
 }

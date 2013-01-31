@@ -45,7 +45,12 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Tools">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Button Content="↑" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Margin="102,37,0,0" Click="UpBtnClick"/>
+                    <Button Content="→" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Margin="132,64,0,0" Click="RightBtnClick"/>
+                    <Button Content="←" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Margin="72,64,0,0" Click="LeftBtnClick"/>
+                    <Button Content="↓" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Margin="102,91,0,0" Click="DownBtnClick"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Info">
                 <Grid Background="#FFE5E5E5"/>

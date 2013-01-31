@@ -4,3 +4,4 @@ C:\Users\Josh\documents\Projects\JAPI Library\JAPI\obj\Release\JAPI.ClientChoose
 C:\Users\Josh\documents\Projects\JAPI Library\JAPI\obj\Release\JAPI.csproj.GenerateResource.Cache
 C:\Users\Josh\documents\Projects\JAPI Library\JAPI\obj\Release\JAPI.dll
 C:\Users\Josh\documents\Projects\JAPI Library\JAPI\obj\Release\JAPI.pdb
+C:\Users\Josh\Documents\Projects\JAPI Library\JAPI\obj\Release\JAPI.csprojResolveAssemblyReference.cache
