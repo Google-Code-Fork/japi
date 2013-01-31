@@ -143,7 +143,7 @@ namespace JAPI
         }
 
         // Reading array info
-        public Objects.BList[] BlGet(bool idname = false)
+        public Objects.BList[] BlGet(bool idname = false, bool returnall = true)
         {
             int max = Convert.ToInt32(BListAdresses.Step) * BListAdresses.Max;
             Objects.BList[] bat = new Objects.BList[BListAdresses.Max];
@@ -185,6 +185,29 @@ namespace JAPI
                     batt.Name = ReadString(BListAdresses.Start + BListAdresses.NameOffset + CreatureOffset + Util.Base);
                     bat[i] = batt;
                 }
+            }
+
+            if (!returnall)
+            {
+                int validcount = 0;
+                foreach (Objects.BList crit in bat)
+                {
+                    if (crit.Id != 0 && crit.Visible != 0)
+                    {
+                        validcount ++;
+                    }
+                }
+                Objects.BList[] batt = new Objects.BList[validcount];
+                int index = 0;
+                foreach (Objects.BList crit in bat)
+                {
+                    if (crit.Id != 0 && crit.Visible != 0)
+                    {
+                        batt[index] = crit;
+                        index++;
+                    }
+                }
+                return batt;
             }
 
             return bat;
