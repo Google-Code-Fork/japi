@@ -65,14 +65,6 @@ namespace JAPI
         public static UInt32 VolumeOffset = 0x38;
         public static UInt32 NameOffset = 0x10;
         public static UInt32 ItemsOffset = 0x38;
-
-        /*public uint HasParent;
-        private fixed byte unknown[8];
-        public uint Id;
-        public fixed byte name[32];
-        public uint Amount;
-        public uint IsOpen;
-        public uint Volume;*/
     }
 
     class MapAddresses
