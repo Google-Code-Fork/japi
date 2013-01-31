@@ -140,7 +140,10 @@ namespace TestProgram
                 ContainerList.Items.Add("Container ID: " + Convert.ToString(container.Id) + " Open: " + Convert.ToString(container.IsOpen) + ". Container Name: " + container.Name + ". Volume: " + container.Volume);
                 foreach (Objects.Item item in container.Items)
                 {
-                    ItemList.Items.Add(Convert.ToString(item.Id));
+                    if (item.Id != 0)
+                    {
+                        ItemList.Items.Add(Convert.ToString(item.Id) + ", " + Convert.ToString(item.StackCount));
+                    }
                 }
             }
         }
