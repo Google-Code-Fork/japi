@@ -215,14 +215,6 @@ namespace JAPI
 
         public Objects.Container[] getContainers()
         {
-            /*public struct Container
-            {
-                public uint HasParent;
-                public uint Id;
-                public uint Amount;
-                public uint IsOpen;
-                public uint Volume;
-            }*/
             UInt32 max = ContainerAddresses.Step * ContainerAddresses.Max;
             Objects.Container[] cont = new Objects.Container[ContainerAddresses.Max];
             int totcons = 0;
