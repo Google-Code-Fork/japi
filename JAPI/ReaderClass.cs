@@ -153,7 +153,7 @@ namespace JAPI
                 Objects.BList batt = new Objects.BList();
                 batt.Addr = i;
                 batt.Id = ReadInt32(BListAdresses.Start + BListAdresses.IdOffset + CreatureOffset + Util.Base);
-                if (batt.Id != 0 && idname != false)
+                if (batt.Id != 0 && idname != true)
                 {
                     UInt32 currentMem = BListAdresses.Start + CreatureOffset + Util.Base;
                     batt.Type = ReadByte(BListAdresses.TypeOffset + currentMem);
@@ -183,6 +183,7 @@ namespace JAPI
                 {
                     batt.Id = ReadInt32(BListAdresses.Start + BListAdresses.IdOffset + CreatureOffset + Util.Base);
                     batt.Name = ReadString(BListAdresses.Start + BListAdresses.NameOffset + CreatureOffset + Util.Base);
+                    bat[i] = batt;
                 }
             }
 

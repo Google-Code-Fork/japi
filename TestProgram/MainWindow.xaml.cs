@@ -147,5 +147,18 @@ namespace TestProgram
                 }
             }
         }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            BListView.Items.Clear();
+            Objects.BList[] Battles = Read.BlGet();
+            foreach (Objects.BList Battle in Battles)
+            {
+                if (Battle.Id != 0)
+                {
+                    BListView.Items.Add("Name: " + Battle.Name + ". CID: " + Battle.Id + ". Pos: " + Convert.ToString(Battle.X) + ", " + Convert.ToString(Battle.Y) + ", " + Convert.ToString(Battle.Z));
+                }
+            }
+        }
     }
 }
