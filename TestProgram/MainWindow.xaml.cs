@@ -133,10 +133,15 @@ namespace TestProgram
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             ContainerList.Items.Clear();
+            ItemList.Items.Clear();
             Objects.Container[] conts = Read.getContainers();
             foreach (Objects.Container container in conts)
             {
-                ContainerList.Items.Add("Container ID: " + Convert.ToString(container.Id) + " Open: " + Convert.ToString(container.IsOpen) + ". Container Name: " + container.Name);
+                ContainerList.Items.Add("Container ID: " + Convert.ToString(container.Id) + " Open: " + Convert.ToString(container.IsOpen) + ". Container Name: " + container.Name + ". Volume: " + container.Volume);
+                foreach (Objects.Item item in container.Items)
+                {
+                    ItemList.Items.Add(Convert.ToString(item.Id));
+                }
             }
         }
     }

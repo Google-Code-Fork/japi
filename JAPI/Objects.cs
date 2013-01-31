@@ -27,6 +27,13 @@ namespace JAPI
             public int i;
         }*/
 
+        public struct Item
+        {
+            public int Id;
+            public int Unknown2;
+            public int StackCount;
+        }
+
         public struct Container
         {
             public int HasParent;
@@ -35,6 +42,7 @@ namespace JAPI
             public int Amount;
             public int IsOpen;
             public int Volume;
+            public Item[] Items;
         }
 
         public struct BList

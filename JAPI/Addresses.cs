@@ -62,8 +62,9 @@ namespace JAPI
         public static UInt32 IdOffset = 0xC;
         public static UInt32 AmountOffset = 0x2C;
         public static UInt32 IsOpenOffset = 0x34;
-        public static UInt32 VolumeOffset = 0x30;
+        public static UInt32 VolumeOffset = 0x38;
         public static UInt32 NameOffset = 0x10;
+        public static UInt32 ItemsOffset = 0x38;
 
         /*public uint HasParent;
         private fixed byte unknown[8];
@@ -78,5 +79,13 @@ namespace JAPI
     {
         public static UInt32 MapStart = 0x5DA5C4;
         public static UInt32 MaxTiles = 2016;
+    }
+
+    class ItemAddresses
+    {
+        public static UInt32 Step = 0xC;
+        public static UInt32 Id = 0;
+        public static UInt32 Unknown2 = 0x4;
+        public static UInt32 Count = 0x8;
     }
 }

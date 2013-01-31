@@ -204,7 +204,6 @@ namespace JAPI
             int totcons = 0;
             for (int i = 0; i < ContainerAddresses.Max; i++)
             {
-                UInt32 ContainerOffset = Convert.ToUInt32(i) * (UInt32)ContainerAddresses.Step;
                 UInt32 ThisReadOffset = (Convert.ToUInt32(i) * (UInt32)ContainerAddresses.Step) + ContainerAddresses.ContainerStart + Util.Base;
                 Objects.Container con = new Objects.Container();
                 if (ReadInt32(ContainerAddresses.IdOffset + ThisReadOffset) != 0)
@@ -213,6 +212,7 @@ namespace JAPI
                     con.Volume = ReadInt32(ContainerAddresses.VolumeOffset + ThisReadOffset);
                     con.Name = ReadString(ContainerAddresses.NameOffset + ThisReadOffset);
                     con.IsOpen = ReadBool(ContainerAddresses.IsOpenOffset + ThisReadOffset);
+                    con.Items = getItems(con, ThisReadOffset + ContainerAddresses.ItemsOffset);
                     cont[i] = con;
                     totcons++;
                 }
@@ -231,6 +231,21 @@ namespace JAPI
             }
 
             return contz;
+        }
+
+        public Objects.Item[] getItems(Objects.Container container, UInt32 AdrStart)
+        {
+            Objects.Item[] Itenz = new Objects.Item[container.Volume];
+            for (int i = 0; i < container.Volume; i++)
+            {
+                UInt32 ThisReadOffset = AdrStart + ((UInt32)i * ItemAddresses.Step);
+                Objects.Item iten = new Objects.Item();
+                iten.StackCount = ReadInt32(ThisReadOffset + ItemAddresses.Count);
+                iten.Id = ReadInt32(ThisReadOffset + ItemAddresses.Id);
+                iten.Unknown2 = ReadInt32(ThisReadOffset + ItemAddresses.Unknown2);
+                Itenz[i] = iten;
+            }
+            return Itenz;
         }
 
     }
