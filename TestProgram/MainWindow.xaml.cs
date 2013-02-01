@@ -157,5 +157,19 @@ namespace TestProgram
                 BListView.Items.Add("Name: " + Battle.Name + ". CID: " + Battle.Id + ". Pos: " + Convert.ToString(Battle.X) + ", " + Convert.ToString(Battle.Y) + ", " + Convert.ToString(Battle.Z));
             }
         }
+
+        private void ReadMap(object sender, RoutedEventArgs e)
+        {
+            MapView.Items.Clear();
+            Objects.MapTile[] MapTiles = Read.getMap();
+            foreach (Objects.MapTile Tile in MapTiles)
+            {
+                foreach (Objects.Item Item in Tile.Items)
+                {
+                    MapView.Items.Add(Convert.ToString(Item.Id));
+                }
+                
+            }
+        }
     }
 }

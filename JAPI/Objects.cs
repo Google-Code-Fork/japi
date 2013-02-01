@@ -27,6 +27,20 @@ namespace JAPI
             public int i;
         }*/
 
+        public struct MapTile
+        {
+            public int count;
+            public int[] StackOrder; // Not entirely sure what this is, but suspect it's something to do with where the tile is?
+            public Item[] Items; // 10 items, each with 12 bytes using item structure
+            public int Effect;
+            /*
+            public uint count;
+            public fixed uint stackOrder[10];
+            public fixed uint items[10 * 3];
+            public uint effect;
+             */
+        }
+
         public struct Item
         {
             public int Id;

@@ -70,7 +70,13 @@ namespace JAPI
     class MapAddresses
     {
         public static UInt32 MapStart = 0x5DA5C4;
-        public static UInt32 MaxTiles = 2016;
+        public static UInt32 MaxTiles = 0x7E0;
+        public static UInt32 Step = 0xA8;
+        public static UInt32 CountOffset = 0x0;
+        public static UInt32 StackOrderOffset = 0x4;
+        public static UInt32 ItemOffset = 0x2C;
+        public static UInt32 EffectOffset = 0xA4;
+
     }
 
     class ItemAddresses

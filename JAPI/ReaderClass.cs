@@ -228,7 +228,7 @@ namespace JAPI
                     con.Volume = ReadInt32(ContainerAddresses.VolumeOffset + ThisReadOffset);
                     con.Name = ReadString(ContainerAddresses.NameOffset + ThisReadOffset);
                     con.IsOpen = ReadBool(ContainerAddresses.IsOpenOffset + ThisReadOffset);
-                    con.Items = getItems(con, ThisReadOffset + ContainerAddresses.ItemsOffset);
+                    con.Items = getItems(con.Volume, ThisReadOffset + ContainerAddresses.ItemsOffset);
                     cont[i] = con;
                     totcons++;
                 }
@@ -249,10 +249,10 @@ namespace JAPI
             return contz;
         }
 
-        public Objects.Item[] getItems(Objects.Container container, UInt32 AdrStart)
+        public Objects.Item[] getItems(int Volume, UInt32 AdrStart)
         {
-            Objects.Item[] Itenz = new Objects.Item[container.Volume];
-            for (int i = 0; i < container.Volume; i++)
+            Objects.Item[] Itenz = new Objects.Item[Volume];
+            for (int i = 0; i < Volume; i++)
             {
                 UInt32 ThisReadOffset = AdrStart + ((UInt32)i * ItemAddresses.Step);
                 Objects.Item iten = new Objects.Item();
@@ -262,6 +262,21 @@ namespace JAPI
                 Itenz[i] = iten;
             }
             return Itenz;
+        }
+
+        public Objects.MapTile[] getMap()
+        {
+            Objects.MapTile[] Tiles = new Objects.MapTile[MapAddresses.MaxTiles];
+            for (UInt32 i = 0; i < MapAddresses.MaxTiles; i++)
+            {
+                Objects.MapTile Tile = new Objects.MapTile();
+                UInt32 ThisReadOffset = MapAddresses.MapStart + (i * MapAddresses.Step);
+                Tile.count = ReadInt32(ThisReadOffset + MapAddresses.CountOffset);
+                Tile.Items = getItems(10, ThisReadOffset + MapAddresses.ItemOffset);
+                Tile.Effect = ReadInt32(ThisReadOffset + MapAddresses.EffectOffset);
+                Tiles[i] = Tile;
+            }
+            return Tiles;
         }
 
     }
