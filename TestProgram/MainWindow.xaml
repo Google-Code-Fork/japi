@@ -29,7 +29,7 @@
             <TabItem Header="Healer">
                 <Grid Background="#FFE5E5E5">
                     <ListBox x:Name="HealRuleList" HorizontalAlignment="Left" Height="308" VerticalAlignment="Top" Width="210"/>
-                    <Button Content="Remove" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="290,276,0,0"/>
+                    <Button Content="Remove" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="290,276,0,0" Click="Button_Click_5"/>
                     <Button Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="290,249,0,0" Click="Button_Click_4"/>
                     <TextBox x:Name="MaxHpBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="3000" VerticalAlignment="Top" Width="75" Margin="290,221,0,0"/>
                     <TextBox x:Name="ManaBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="40" VerticalAlignment="Top" Width="75" Margin="290,165,0,0"/>
@@ -53,7 +53,7 @@
                         <ComboBoxItem>F11</ComboBoxItem>
                         <ComboBoxItem>F12</ComboBoxItem>
                     </ComboBox>
-                    <CheckBox x:Name="checkBox1" Content="Enabled" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,110,0,0" Checked="CheckBox_Checked_1"/>
+                    <CheckBox x:Name="checkBox1" Content="Enabled" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,110,0,0" Checked="CheckBox_Checked_1" Unchecked="CheckBox_UnChecked_1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Tools">

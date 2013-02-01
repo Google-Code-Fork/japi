@@ -56,6 +56,7 @@ namespace TestProgram
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Updater.Abort();
+            Healer.Abort();
         }
 
         private void UpdateTick()
@@ -86,8 +87,6 @@ namespace TestProgram
 
         private void CheckBox_Checked_1(object sender, RoutedEventArgs e)
         {
-            if (checkBox1.IsChecked == true)
-            {
                 int i = 0;
                 rulelist = new Objects.HealRule[HealRuleList.Items.Count];
                 foreach (string healrule in HealRuleList.Items)
@@ -102,11 +101,12 @@ namespace TestProgram
                 Healer = new Thread(HealTick);
                 Healer.IsBackground = true;
                 Healer.Start();
-            }
-            else
-            {
-                Healer.Abort();
-            }
+
+        }
+
+        private void CheckBox_UnChecked_1(object sender, RoutedEventArgs e)
+        {
+            Healer.Abort();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -176,6 +176,29 @@ namespace TestProgram
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             HealRuleList.Items.Add(MinHpBox.Text + "," + MaxHpBox.Text + "," + ManaBox.Text + "," + HotkeyBox.Text);
+            if (checkBox1.IsChecked == true)
+            {
+                Healer.Abort();
+                int i = 0;
+                rulelist = new Objects.HealRule[HealRuleList.Items.Count];
+                foreach (string healrule in HealRuleList.Items)
+                {
+                    string[] rules = healrule.Split(',');
+                    rulelist[i].MinHp = Convert.ToInt32(rules[0]);
+                    rulelist[i].MaxHp = Convert.ToInt32(rules[1]);
+                    rulelist[i].Mana = Convert.ToInt32(rules[2]);
+                    rulelist[i].Hotkey = rules[3];
+                    i++;
+                }
+                Healer = new Thread(HealTick);
+                Healer.IsBackground = true;
+                Healer.Start();
+            }
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            HealRuleList.Items.RemoveAt(HealRuleList.SelectedIndex);
         }
     }
 }
