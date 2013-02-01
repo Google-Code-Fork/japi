@@ -69,7 +69,8 @@ namespace TestProgram
 
         private void HealTick()
         {
-            /*while (true)
+            Objects.Player p;
+            while (true)
             {
                 p = Read.GetPlayerInfo();
                 foreach (Objects.HealRule rule in rulelist)
@@ -80,7 +81,7 @@ namespace TestProgram
                         Thread.Sleep(500);
                     }
                 }
-            }*/
+            }
         }
 
         private void CheckBox_Checked_1(object sender, RoutedEventArgs e)
@@ -88,8 +89,8 @@ namespace TestProgram
             if (checkBox1.IsChecked == true)
             {
                 int i = 0;
-                rulelist = new Objects.HealRule[listBox1.Items.Count];
-                foreach (string healrule in listBox1.Items)
+                rulelist = new Objects.HealRule[HealRuleList.Items.Count];
+                foreach (string healrule in HealRuleList.Items)
                 {
                     string[] rules = healrule.Split(',');
                     rulelist[i].MinHp = Convert.ToInt32(rules[0]);
@@ -170,6 +171,11 @@ namespace TestProgram
                 }
                 
             }
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            HealRuleList.Items.Add(MinHpBox.Text + "," + MaxHpBox.Text + "," + ManaBox.Text + "," + HotkeyBox.Text);
         }
     }
 }

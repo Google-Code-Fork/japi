@@ -28,18 +28,18 @@
             </TabItem>
             <TabItem Header="Healer">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="308" VerticalAlignment="Top" Width="210"/>
+                    <ListBox x:Name="HealRuleList" HorizontalAlignment="Left" Height="308" VerticalAlignment="Top" Width="210"/>
                     <Button Content="Remove" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="290,276,0,0"/>
-                    <Button Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="290,249,0,0"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="3000" VerticalAlignment="Top" Width="75" Margin="290,221,0,0"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="40" VerticalAlignment="Top" Width="75" Margin="290,165,0,0"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="2000" VerticalAlignment="Top" Width="75" Margin="290,193,0,0"/>
+                    <Button Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="290,249,0,0" Click="Button_Click_4"/>
+                    <TextBox x:Name="MaxHpBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="3000" VerticalAlignment="Top" Width="75" Margin="290,221,0,0"/>
+                    <TextBox x:Name="ManaBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="40" VerticalAlignment="Top" Width="75" Margin="290,165,0,0"/>
+                    <TextBox x:Name="MinHpBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="2000" VerticalAlignment="Top" Width="75" Margin="290,193,0,0"/>
                     <Separator HorizontalAlignment="Left" Height="100" Margin="552,86,-70,0" VerticalAlignment="Top" Width="100"/>
                     <Label Content="Mana" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,163,0,0"/>
                     <Label Content="MinHP" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,191,0,0"/>
                     <Label Content="MaxHP" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,219,0,0"/>
                     <Label Content="Hotkey" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="215,137,0,0"/>
-                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="290,137,0,0">
+                    <ComboBox x:Name="HotkeyBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="290,137,0,0">
                         <ComboBoxItem IsSelected="True">F1</ComboBoxItem>
                         <ComboBoxItem>F2</ComboBoxItem>
                         <ComboBoxItem>F3</ComboBoxItem>

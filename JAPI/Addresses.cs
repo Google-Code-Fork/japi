@@ -56,7 +56,7 @@ namespace JAPI
         public static UInt32 MaxStack = 100;
         public static UInt32 Step = 0x1EC; // 192
 
-        public static int ContLength = 0xFC; // Container is 60 bytes long plus items, each item is 12 bytes, and max containers is 16, so 252 bytes per container.
+        //public static int ContLength = 0xFC; // Container is 60 bytes long plus items, each item is 12 bytes, and max containers is 16, so 252 bytes per container.
 
         public static UInt32 HasParentOffset = 0;
         public static UInt32 IdOffset = 0xC;
@@ -72,6 +72,7 @@ namespace JAPI
         public static UInt32 MapStart = 0x5DA5C4;
         public static UInt32 MaxTiles = 0x7E0;
         public static UInt32 Step = 0xA8;
+
         public static UInt32 CountOffset = 0x0;
         public static UInt32 StackOrderOffset = 0x4;
         public static UInt32 ItemOffset = 0x2C;
