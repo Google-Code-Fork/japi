@@ -5,7 +5,9 @@
     <Grid>
         <TabControl Margin="0,0,0,30">
             <TabItem Header="General">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    
+                </Grid>
             </TabItem>
             <TabItem Header="BattleList">
                 <Grid Background="#FFE5E5E5">
@@ -13,7 +15,7 @@
                     <Button Content="Update" Margin="0,0,10,10" Click="Button_Click_3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Map">
+            <TabItem Header="Map Graphical">
                 <Grid Background="#FFE5E5E5">
                     <ListBox x:Name="MapView" HorizontalAlignment="Left" Height="256" VerticalAlignment="Top" Width="75" Margin="10,10,0,0"/>
                     <Button Content="Update" Margin="0,0,561,0" Click="ReadMap" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75"/>
@@ -21,6 +23,13 @@
                     <TextBox x:Name="fileName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="%AppData%\Tibia\Automap\12612807.map" VerticalAlignment="Top" Width="466" Margin="170,275,0,0"></TextBox>
                     <Image x:Name="Image1" HorizontalAlignment="Left" Height="256" VerticalAlignment="Top" Width="256" Margin="90,10,0,0"/>
                     <Image x:Name="Image2" HorizontalAlignment="Left" Height="256" VerticalAlignment="Top" Width="256" Margin="351,10,-25,0"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Map Data">
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="getTilesBtn" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,10,0,0" Click="getTilesBtn_Click"/>
+                    <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="298" VerticalAlignment="Top" Width="546" Margin="90,0,0,0"/>
+                    <Button x:Name="getMyTilesBtn" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,37,0,0" Click="getMyTilesBtn_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Walker">

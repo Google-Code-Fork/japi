@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Addresses.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Control.cs" />
     <Compile Include="ClientChooser.cs">
       <SubType>Form</SubType>

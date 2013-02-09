@@ -130,5 +130,48 @@ namespace JAPI
             }
             return bmp;
         }
+
+        public static Objects.MiniMapTile[] getMapTiles(string fileName)
+        {
+            string[] PathSplit = fileName.Split('\\');
+            string fName = PathSplit[PathSplit.Length - 1];
+            char[] NameInChar = fName.ToCharArray();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(NameInChar[0] + NameInChar[1] + NameInChar[2]);
+            int spotx = Convert.ToInt32(sb.ToString()) * 256;
+            sb.Clear();
+            sb.Append(NameInChar[3] + NameInChar[4] + NameInChar[5]);
+            int spoty = Convert.ToInt32(sb.ToString()) * 256; // LOL SPOTY!
+            sb.Clear();
+            sb.Append(NameInChar[6] + NameInChar[7]);
+            int spotz = Convert.ToInt32(sb.ToString()); // LOL SPOTZ!
+            sb.Clear();
+            byte[] fileContents = ReadFile(Environment.ExpandEnvironmentVariables(fileName));
+            int index = 0;
+            Objects.MiniMapTile[] Tiles = new Objects.MiniMapTile[65536];
+            for (int x = 0; x < 256; x++)
+            {
+                for (int y = 0; y < 256; y++)
+                {
+                    Tiles[index].color = fileContents[index];
+                    Tiles[index].speed = fileContents[index + 65536];
+                    Tiles[index].x = spotx + x;
+                    Tiles[index].y = spoty + y;
+                    Tiles[index].z = spotz;
+                    Tiles[index].walkable = false;
+                    if (fileContents[index + 65536] != 255)
+                    {
+                        Tiles[index].walkable = true;
+                    }
+                    Tiles[index].fishable = false;
+                    if (fileContents[index] == 40)
+                    {
+                        Tiles[index].fishable = true;
+                    }
+                    index++;
+                }
+            }
+            return Tiles;
+        }
     }
 }

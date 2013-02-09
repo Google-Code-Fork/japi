@@ -217,5 +217,36 @@ namespace TestProgram
             return System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(source.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty,
                 System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
         }
+
+        private void getTilesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            listBox1.Items.Clear();
+            Objects.MiniMapTile[] MapTiles = MapReading.getMapTiles(fileName.Text);
+            foreach (Objects.MiniMapTile tile in MapTiles)
+            {
+                listBox1.Items.Add(Convert.ToString(tile.speed) + ", " + Convert.ToString(tile.color));
+            }
+        }
+
+        private void getMyTilesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("%APPDATA%\\Tibia\\Automap\\");
+            sb.Append(Convert.ToString(Read.X() / 256));
+            sb.Append(Convert.ToString(Read.Y() / 256));
+            if (Read.Z() < 10)
+            {
+                sb.Append("0");
+            }
+            sb.Append(Convert.ToString(Read.Z()));
+            sb.Append(".map");
+            MessageBox.Show(sb.ToString());
+            listBox1.Items.Clear();
+            Objects.MiniMapTile[] MapTiles = MapReading.getMapTiles(fileName.Text);
+            foreach (Objects.MiniMapTile tile in MapTiles)
+            {
+                listBox1.Items.Add(Convert.ToString(tile.speed) + ", " + Convert.ToString(tile.color) + " | Pos: " + Convert.ToString(tile.x) + ", " + Convert.ToString(tile.y) + ", " + Convert.ToString(tile.z) + ".");
+            }
+        }
     }
 }
