@@ -54,6 +54,7 @@
     <Compile Include="ClientChooser.Designer.cs">
       <DependentUpon>ClientChooser.cs</DependentUpon>
     </Compile>
+    <Compile Include="MapReading.cs" />
     <Compile Include="Objects.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

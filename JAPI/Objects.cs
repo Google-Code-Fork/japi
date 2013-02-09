@@ -108,5 +108,17 @@ namespace JAPI
             public int Mana;
             public string Hotkey;
         }
+
+        public struct Colour
+        {
+            public int r;
+            public int g;
+            public int b;
+        }
+
+        public struct ColourCount
+        {
+            
+        }
     }
 }

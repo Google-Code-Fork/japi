@@ -15,8 +15,11 @@
             </TabItem>
             <TabItem Header="Map">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="MapView" HorizontalAlignment="Left" Height="288" VerticalAlignment="Top" Width="482" Margin="10,10,0,0"/>
-                    <Button Content="Update" Margin="0,0,10,10" Click="ReadMap" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75"/>
+                    <ListBox x:Name="MapView" HorizontalAlignment="Left" Height="261" VerticalAlignment="Top" Width="75" Margin="10,10,0,0"/>
+                    <Button Content="Update" Margin="0,0,497,10" Click="ReadMap" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75"/>
+                    <Button x:Name="readMapFile" Content="Read" Margin="0,0,417,10" Click="ReadMapImage" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75"/>
+                    <TextBox x:Name="fileName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="%AppData%\Tibia\Automap\12412207.map" VerticalAlignment="Top" Width="120" Margin="170,275,0,0"></TextBox>
+                    <Image x:Name="Image1" HorizontalAlignment="Left" Height="256" VerticalAlignment="Top" Width="256" Margin="90,10,0,0"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Walker">

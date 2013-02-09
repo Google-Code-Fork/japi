@@ -13,8 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 using JAPI;
+using System.IO;
 
 namespace TestProgram
 {
@@ -47,16 +50,19 @@ namespace TestProgram
 
         private void Startup(object sender, RoutedEventArgs e)
         {
-            Util.Tibia = Read.getFirstClient();
-            UpdateStatus();
-            Updater = new Thread(UpdateTick);
-            Updater.Start();
+            if (Read.getClients().Length >= 1)
+            {
+                Util.Tibia = Read.getFirstClient();
+                UpdateStatus();
+                Updater = new Thread(UpdateTick);
+                Updater.IsBackground = true;
+                Updater.Start();
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Updater.Abort();
-            Healer.Abort();
         }
 
         private void UpdateTick()
@@ -64,7 +70,7 @@ namespace TestProgram
             while (true)
             {
                 UpdateStatus();
-                Thread.Sleep(500);
+                Thread.Sleep(1000);
             }
         }
 
@@ -87,21 +93,20 @@ namespace TestProgram
 
         private void CheckBox_Checked_1(object sender, RoutedEventArgs e)
         {
-                int i = 0;
-                rulelist = new Objects.HealRule[HealRuleList.Items.Count];
-                foreach (string healrule in HealRuleList.Items)
-                {
-                    string[] rules = healrule.Split(',');
-                    rulelist[i].MinHp = Convert.ToInt32(rules[0]);
-                    rulelist[i].MaxHp = Convert.ToInt32(rules[1]);
-                    rulelist[i].Mana = Convert.ToInt32(rules[2]);
-                    rulelist[i].Hotkey = rules[3];
-                    i++;
-                }
-                Healer = new Thread(HealTick);
-                Healer.IsBackground = true;
-                Healer.Start();
-
+            int i = 0;
+            rulelist = new Objects.HealRule[HealRuleList.Items.Count];
+            foreach (string healrule in HealRuleList.Items)
+            {
+                string[] rules = healrule.Split(',');
+                rulelist[i].MinHp = Convert.ToInt32(rules[0]);
+                rulelist[i].MaxHp = Convert.ToInt32(rules[1]);
+                rulelist[i].Mana = Convert.ToInt32(rules[2]);
+                rulelist[i].Hotkey = rules[3];
+                i++;
+            }
+            Healer = new Thread(HealTick);
+            Healer.IsBackground = true;
+            Healer.Start();
         }
 
         private void CheckBox_UnChecked_1(object sender, RoutedEventArgs e)
@@ -199,6 +204,17 @@ namespace TestProgram
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
             HealRuleList.Items.RemoveAt(HealRuleList.SelectedIndex);
+        }
+
+        private void ReadMapImage(object sender, RoutedEventArgs e)
+        {
+            Image1.Source = loadBitmap(MapReading.getMapFile(fileName.Text));
+        }
+
+        public static BitmapSource loadBitmap(System.Drawing.Bitmap source)
+        {
+            return System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(source.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty,
+                System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
         }
     }
 }
