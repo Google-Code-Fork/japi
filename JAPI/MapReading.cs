@@ -67,13 +67,44 @@ namespace JAPI
             Bitmap bmp = new Bitmap(256, 256, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             byte[] fileContents = ReadFile(Environment.ExpandEnvironmentVariables(fileName));
             int index = 0;
+            Rectangle rect = new Rectangle();
+            rect.Height = 256;
+            rect.Width = 256;
+            rect.X = 0;
+            rect.Y = 0;
+            int blackcount = 0;
+            int bluecount = 0;
+            foreach (byte macolor in fileContents)
+            {
+                if (macolor == 0)
+                {
+                    blackcount++;
+                }
+                else if (macolor == 40)
+                {
+                    bluecount++;
+                }
+            }
+            Objects.Colour color = new Objects.Colour();
+            if (blackcount > bluecount)
+            {
+                color = MapReading.colourlist[0];
+            }
+            else
+            {
+                color = MapReading.colourlist[40];
+            }
+            Graphics.FromImage(bmp).FillRectangle(new SolidBrush(Color.FromArgb(color.r, color.g, color.b)), rect);
             for (int x = 0; x < 256; x++)
             {
                 for (int y = 0; y < 256; y++)
                 {
                     Objects.Colour clr = new Objects.Colour();
                     clr = MapReading.colourlist[fileContents[index]];
-                    bmp.SetPixel(x, y, System.Drawing.Color.FromArgb((byte)255, (byte)clr.r, (byte)clr.g, (byte)clr.b));
+                    if (clr.r != color.r || clr.b != color.b || clr.g != color.g)
+                    {
+                        bmp.SetPixel(x, y, System.Drawing.Color.FromArgb((byte)255, (byte)clr.r, (byte)clr.g, (byte)clr.b));
+                    }
                     index++;
                 }
             }
