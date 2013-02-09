@@ -72,28 +72,8 @@ namespace JAPI
             rect.Width = 256;
             rect.X = 0;
             rect.Y = 0;
-            int blackcount = 0;
-            int bluecount = 0;
-            foreach (byte macolor in fileContents)
-            {
-                if (macolor == 0)
-                {
-                    blackcount++;
-                }
-                else if (macolor == 40)
-                {
-                    bluecount++;
-                }
-            }
             Objects.Colour color = new Objects.Colour();
-            if (blackcount > bluecount)
-            {
-                color = MapReading.colourlist[0];
-            }
-            else
-            {
-                color = MapReading.colourlist[40];
-            }
+            color = MapReading.colourlist[0];
             Graphics.FromImage(bmp).FillRectangle(new SolidBrush(Color.FromArgb(color.r, color.g, color.b)), rect);
             for (int x = 0; x < 256; x++)
             {
@@ -101,7 +81,7 @@ namespace JAPI
                 {
                     Objects.Colour clr = new Objects.Colour();
                     clr = MapReading.colourlist[fileContents[index]];
-                    if (clr.r != color.r || clr.b != color.b || clr.g != color.g)
+                    if (clr.r != 0 && clr.b != 0 && clr.g != 0)
                     {
                         bmp.SetPixel(x, y, System.Drawing.Color.FromArgb((byte)255, (byte)clr.r, (byte)clr.g, (byte)clr.b));
                     }
