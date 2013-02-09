@@ -209,6 +209,7 @@ namespace TestProgram
         private void ReadMapImage(object sender, RoutedEventArgs e)
         {
             Image1.Source = loadBitmap(MapReading.getMapFile(fileName.Text));
+            Image2.Source = loadBitmap(MapReading.getMapSpeedFile(fileName.Text));
         }
 
         public static BitmapSource loadBitmap(System.Drawing.Bitmap source)

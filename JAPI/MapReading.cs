@@ -14,7 +14,7 @@ namespace JAPI
     public class MapReading
     {
         public static Objects.Colour[] colourlist;
-
+        public static Objects.Colour[] speedcolourlist;
         public static void fillColourList()
         {
             colourlist = new Objects.Colour[256];
@@ -34,6 +34,16 @@ namespace JAPI
             colourlist[210] = MapReading.getClr(255, 255, 0); // portal (or stairs etc)
             colourlist[215] = MapReading.getClr(255, 255, 255); // snow
             colourlist[255] = MapReading.getClr(150, 0, 255); // unknown but appeared once apparently
+        }
+
+        public static void fillSpeedColourList()
+        {
+            speedcolourlist = new Objects.Colour[256];
+            for (int i = 0; i < 256; i++)
+            {
+                speedcolourlist[i] = getClr(i, i, i);
+            }
+
         }
 
         public static Objects.Colour getClr(int r, int g, int b)
@@ -81,6 +91,36 @@ namespace JAPI
                 {
                     Objects.Colour clr;
                     clr = MapReading.colourlist[fileContents[index]];
+                    if (!(clr.r == color.r && clr.g == color.g && clr.b == color.b))
+                    {
+                        bmp.SetPixel(x, y, System.Drawing.Color.FromArgb((byte)255, (byte)clr.r, (byte)clr.g, (byte)clr.b));
+                    }
+                    index++;
+                }
+            }
+            return bmp;
+        }
+
+        public static Bitmap getMapSpeedFile(string fileName)
+        {
+            fillSpeedColourList();
+            Bitmap bmp = new Bitmap(256, 256, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            byte[] fileContents = ReadFile(Environment.ExpandEnvironmentVariables(fileName));
+            int index = 256 * 256;
+            Rectangle rect = new Rectangle();
+            rect.Height = 256;
+            rect.Width = 256;
+            rect.X = 0;
+            rect.Y = 0;
+            Objects.Colour color = new Objects.Colour();
+            color = colourlist[0];
+            Graphics.FromImage(bmp).FillRectangle(new SolidBrush(Color.FromArgb(color.r, color.g, color.b)), rect);
+            for (int x = 0; x < 256; x++)
+            {
+                for (int y = 0; y < 256; y++)
+                {
+                    Objects.Colour clr;
+                    clr = speedcolourlist[fileContents[index]];
                     if (!(clr.r == color.r && clr.g == color.g && clr.b == color.b))
                     {
                         bmp.SetPixel(x, y, System.Drawing.Color.FromArgb((byte)255, (byte)clr.r, (byte)clr.g, (byte)clr.b));
