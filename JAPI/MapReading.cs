@@ -73,15 +73,15 @@ namespace JAPI
             rect.X = 0;
             rect.Y = 0;
             Objects.Colour color = new Objects.Colour();
-            color = MapReading.colourlist[0];
+            color = colourlist[0];
             Graphics.FromImage(bmp).FillRectangle(new SolidBrush(Color.FromArgb(color.r, color.g, color.b)), rect);
             for (int x = 0; x < 256; x++)
             {
                 for (int y = 0; y < 256; y++)
                 {
-                    Objects.Colour clr = new Objects.Colour();
+                    Objects.Colour clr;
                     clr = MapReading.colourlist[fileContents[index]];
-                    if (clr.r != 0 && clr.b != 0 && clr.g != 0)
+                    if (!(clr.r == color.r && clr.g == color.g && clr.b == color.b))
                     {
                         bmp.SetPixel(x, y, System.Drawing.Color.FromArgb((byte)255, (byte)clr.r, (byte)clr.g, (byte)clr.b));
                     }

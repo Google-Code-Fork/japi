@@ -24,7 +24,7 @@ namespace JAPI
 
         public struct MiniMapFile
         {
-           MiniMapTile[] Tiles = new MiniMapTile[256 * 256];
+           //MiniMapTile[] Tiles = new MiniMapTile[256 * 256];
             // I will add shit here later for dealing with the markers on minimap
         }
 
