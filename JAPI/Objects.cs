@@ -128,5 +128,12 @@ namespace JAPI
             public int g; // GREEN
             public int b; // BLUE
         }                 // FUUUUUUUUUUUUUUUUUUUUUU
+
+        public struct Location // A struct for locations (x, y, z coordinates.)
+        {
+            public int x;
+            public int y;
+            public int z;
+        }
     }
 }

@@ -131,21 +131,33 @@ namespace JAPI
             return bmp;
         }
 
-        public static Objects.MiniMapTile[] getMapTiles(string fileName)
+        public static Objects.Location getFileCoordinates(string fileName)
         {
+            Objects.Location pos = new Objects.Location();
             string[] PathSplit = fileName.Split('\\');
             string fName = PathSplit[PathSplit.Length - 1];
             char[] NameInChar = fName.ToCharArray();
             StringBuilder sb = new StringBuilder();
-            sb.Append(NameInChar[0] + NameInChar[1] + NameInChar[2]);
-            int spotx = Convert.ToInt32(sb.ToString()) * 256;
+            sb.Append(NameInChar[0]);
+            sb.Append(NameInChar[1]);
+            sb.Append(NameInChar[2]);
+            pos.x = Convert.ToInt32(sb.ToString()) * 256;
             sb.Clear();
-            sb.Append(NameInChar[3] + NameInChar[4] + NameInChar[5]);
-            int spoty = Convert.ToInt32(sb.ToString()) * 256; // LOL SPOTY!
+            sb.Append(NameInChar[3]);
+            sb.Append(NameInChar[4]);
+            sb.Append(NameInChar[5]);
+            pos.y = Convert.ToInt32(sb.ToString()) * 256; // LOL SPOTY!
             sb.Clear();
-            sb.Append(NameInChar[6] + NameInChar[7]);
-            int spotz = Convert.ToInt32(sb.ToString()); // LOL SPOTZ!
+            sb.Append(NameInChar[6]);
+            sb.Append(NameInChar[7]);
+            pos.z = Convert.ToInt32(sb.ToString()); // LOL SPOTZ!
             sb.Clear();
+            return pos;
+        }
+
+        public static Objects.MiniMapTile[] getMapTiles(string fileName)
+        {
+            Objects.Location pos = getFileCoordinates(fileName);
             byte[] fileContents = ReadFile(Environment.ExpandEnvironmentVariables(fileName));
             int index = 0;
             Objects.MiniMapTile[] Tiles = new Objects.MiniMapTile[65536];
@@ -155,9 +167,9 @@ namespace JAPI
                 {
                     Tiles[index].color = fileContents[index];
                     Tiles[index].speed = fileContents[index + 65536];
-                    Tiles[index].x = spotx + x;
-                    Tiles[index].y = spoty + y;
-                    Tiles[index].z = spotz;
+                    Tiles[index].x = pos.x + x;
+                    Tiles[index].y = pos.y + y;
+                    Tiles[index].z = pos.z;
                     Tiles[index].walkable = false;
                     if (fileContents[index + 65536] != 255)
                     {

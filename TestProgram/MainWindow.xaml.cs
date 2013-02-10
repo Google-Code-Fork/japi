@@ -208,8 +208,19 @@ namespace TestProgram
 
         private void ReadMapImage(object sender, RoutedEventArgs e)
         {
-            Image1.Source = loadBitmap(MapReading.getMapFile(fileName.Text));
-            Image2.Source = loadBitmap(MapReading.getMapSpeedFile(fileName.Text));
+            StringBuilder sb = new StringBuilder();
+            sb.Append("%APPDATA%\\Tibia\\Automap\\");
+            sb.Append(Convert.ToString(Read.X() / 256));
+            sb.Append(Convert.ToString(Read.Y() / 256));
+            if (Read.Z() < 10)
+            {
+                sb.Append("0");
+            }
+            sb.Append(Convert.ToString(Read.Z()));
+            sb.Append(".map");
+            fileName.Text = sb.ToString();
+            Image1.Source = loadBitmap(MapReading.getMapFile(sb.ToString()));
+            Image2.Source = loadBitmap(MapReading.getMapSpeedFile(sb.ToString()));
         }
 
         public static BitmapSource loadBitmap(System.Drawing.Bitmap source)
@@ -240,9 +251,8 @@ namespace TestProgram
             }
             sb.Append(Convert.ToString(Read.Z()));
             sb.Append(".map");
-            MessageBox.Show(sb.ToString());
             listBox1.Items.Clear();
-            Objects.MiniMapTile[] MapTiles = MapReading.getMapTiles(fileName.Text);
+            Objects.MiniMapTile[] MapTiles = MapReading.getMapTiles(sb.ToString());
             foreach (Objects.MiniMapTile tile in MapTiles)
             {
                 listBox1.Items.Add(Convert.ToString(tile.speed) + ", " + Convert.ToString(tile.color) + " | Pos: " + Convert.ToString(tile.x) + ", " + Convert.ToString(tile.y) + ", " + Convert.ToString(tile.z) + ".");
