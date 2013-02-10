@@ -71,61 +71,77 @@ namespace JAPI
             }
             return buffer;
         }
+
+        public static bool fileExists(string filePath)
+        {
+            if (File.Exists(Environment.ExpandEnvironmentVariables(filePath)))
+            {
+                return true;
+            }
+            return false;
+        }
+
         public static Bitmap getMapFile(string fileName)
         {
-            fillColourList();
-            Bitmap bmp = new Bitmap(256, 256, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            byte[] fileContents = ReadFile(Environment.ExpandEnvironmentVariables(fileName));
-            int index = 0;
-            Rectangle rect = new Rectangle();
-            rect.Height = 256;
-            rect.Width = 256;
-            rect.X = 0;
-            rect.Y = 0;
-            Objects.Colour color = new Objects.Colour();
-            color = colourlist[0];
-            Graphics.FromImage(bmp).FillRectangle(new SolidBrush(Color.FromArgb(color.r, color.g, color.b)), rect);
-            for (int x = 0; x < 256; x++)
+            Bitmap bmp = new Bitmap(256, 256, System.Drawing.Imaging.PixelFormat.Format32bppArgb);;
+            if (fileExists(fileName))
             {
-                for (int y = 0; y < 256; y++)
+                fillColourList();
+                byte[] fileContents = ReadFile(Environment.ExpandEnvironmentVariables(fileName));
+                int index = 0;
+                Rectangle rect = new Rectangle();
+                rect.Height = 256;
+                rect.Width = 256;
+                rect.X = 0;
+                rect.Y = 0;
+                Objects.Colour color = new Objects.Colour();
+                color = colourlist[0];
+                Graphics.FromImage(bmp).FillRectangle(new SolidBrush(Color.FromArgb(color.r, color.g, color.b)), rect);
+                for (int x = 0; x < 256; x++)
                 {
-                    Objects.Colour clr;
-                    clr = MapReading.colourlist[fileContents[index]];
-                    if (!(clr.r == color.r && clr.g == color.g && clr.b == color.b))
+                    for (int y = 0; y < 256; y++)
                     {
-                        bmp.SetPixel(x, y, System.Drawing.Color.FromArgb((byte)255, (byte)clr.r, (byte)clr.g, (byte)clr.b));
+                        Objects.Colour clr;
+                        clr = MapReading.colourlist[fileContents[index]];
+                        if (!(clr.r == color.r && clr.g == color.g && clr.b == color.b))
+                        {
+                            bmp.SetPixel(x, y, System.Drawing.Color.FromArgb((byte)255, (byte)clr.r, (byte)clr.g, (byte)clr.b));
+                        }
+                        index++;
                     }
-                    index++;
                 }
             }
             return bmp;
         }
 
         public static Bitmap getMapSpeedFile(string fileName)
-        {
-            fillSpeedColourList();
-            Bitmap bmp = new Bitmap(256, 256, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            byte[] fileContents = ReadFile(Environment.ExpandEnvironmentVariables(fileName));
-            int index = 256 * 256;
-            Rectangle rect = new Rectangle();
-            rect.Height = 256;
-            rect.Width = 256;
-            rect.X = 0;
-            rect.Y = 0;
-            Objects.Colour color = new Objects.Colour();
-            color = colourlist[0];
-            Graphics.FromImage(bmp).FillRectangle(new SolidBrush(Color.FromArgb(color.r, color.g, color.b)), rect);
-            for (int x = 0; x < 256; x++)
+        { 
+            Bitmap bmp = new Bitmap(256, 256, System.Drawing.Imaging.PixelFormat.Format32bppArgb);;
+            if (fileExists(fileName))
             {
-                for (int y = 0; y < 256; y++)
+                fillSpeedColourList();
+                byte[] fileContents = ReadFile(Environment.ExpandEnvironmentVariables(fileName));
+                int index = 256 * 256;
+                Rectangle rect = new Rectangle();
+                rect.Height = 256;
+                rect.Width = 256;
+                rect.X = 0;
+                rect.Y = 0;
+                Objects.Colour color = new Objects.Colour();
+                color = colourlist[0];
+                Graphics.FromImage(bmp).FillRectangle(new SolidBrush(Color.FromArgb(color.r, color.g, color.b)), rect);
+                for (int x = 0; x < 256; x++)
                 {
-                    Objects.Colour clr;
-                    clr = speedcolourlist[fileContents[index]];
-                    if (!(clr.r == color.r && clr.g == color.g && clr.b == color.b))
+                    for (int y = 0; y < 256; y++)
                     {
-                        bmp.SetPixel(x, y, System.Drawing.Color.FromArgb((byte)255, (byte)clr.r, (byte)clr.g, (byte)clr.b));
+                        Objects.Colour clr;
+                        clr = speedcolourlist[fileContents[index]];
+                        if (!(clr.r == color.r && clr.g == color.g && clr.b == color.b))
+                        {
+                            bmp.SetPixel(x, y, System.Drawing.Color.FromArgb((byte)255, (byte)clr.r, (byte)clr.g, (byte)clr.b));
+                        }
+                        index++;
                     }
-                    index++;
                 }
             }
             return bmp;
@@ -133,57 +149,71 @@ namespace JAPI
 
         public static Objects.Location getFileCoordinates(string fileName)
         {
-            Objects.Location pos = new Objects.Location();
-            string[] PathSplit = fileName.Split('\\');
-            string fName = PathSplit[PathSplit.Length - 1];
-            char[] NameInChar = fName.ToCharArray();
-            StringBuilder sb = new StringBuilder();
-            sb.Append(NameInChar[0]);
-            sb.Append(NameInChar[1]);
-            sb.Append(NameInChar[2]);
-            pos.x = Convert.ToInt32(sb.ToString()) * 256;
-            sb.Clear();
-            sb.Append(NameInChar[3]);
-            sb.Append(NameInChar[4]);
-            sb.Append(NameInChar[5]);
-            pos.y = Convert.ToInt32(sb.ToString()) * 256; // LOL SPOTY!
-            sb.Clear();
-            sb.Append(NameInChar[6]);
-            sb.Append(NameInChar[7]);
-            pos.z = Convert.ToInt32(sb.ToString()); // LOL SPOTZ!
-            sb.Clear();
-            return pos;
+            if (fileExists(fileName))
+            {
+                Objects.Location pos = new Objects.Location();
+                string[] PathSplit = fileName.Split('\\');
+                string fName = PathSplit[PathSplit.Length - 1];
+                char[] NameInChar = fName.ToCharArray();
+                StringBuilder sb = new StringBuilder();
+                sb.Append(NameInChar[0]);
+                sb.Append(NameInChar[1]);
+                sb.Append(NameInChar[2]);
+                pos.x = Convert.ToInt32(sb.ToString()) * 256;
+                sb.Clear();
+                sb.Append(NameInChar[3]);
+                sb.Append(NameInChar[4]);
+                sb.Append(NameInChar[5]);
+                pos.y = Convert.ToInt32(sb.ToString()) * 256; // LOL SPOTY!
+                sb.Clear();
+                sb.Append(NameInChar[6]);
+                sb.Append(NameInChar[7]);
+                pos.z = Convert.ToInt32(sb.ToString()); // LOL SPOTZ!
+                sb.Clear();
+                return pos;
+            }
+            else
+            {
+                return new Objects.Location();
+            }
         }
 
         public static Objects.MiniMapTile[] getMapTiles(string fileName)
         {
-            Objects.Location pos = getFileCoordinates(fileName);
-            byte[] fileContents = ReadFile(Environment.ExpandEnvironmentVariables(fileName));
-            int index = 0;
-            Objects.MiniMapTile[] Tiles = new Objects.MiniMapTile[65536];
-            for (int x = 0; x < 256; x++)
+            if (fileExists(fileName))
             {
-                for (int y = 0; y < 256; y++)
+                Objects.Location pos = getFileCoordinates(fileName);
+                byte[] fileContents = ReadFile(Environment.ExpandEnvironmentVariables(fileName));
+                int index = 0;
+                Objects.MiniMapTile[] Tiles = new Objects.MiniMapTile[65536];
+                for (int x = 0; x < 256; x++)
                 {
-                    Tiles[index].color = fileContents[index];
-                    Tiles[index].speed = fileContents[index + 65536];
-                    Tiles[index].x = pos.x + x;
-                    Tiles[index].y = pos.y + y;
-                    Tiles[index].z = pos.z;
-                    Tiles[index].walkable = false;
-                    if (fileContents[index + 65536] != 255)
+                    for (int y = 0; y < 256; y++)
                     {
-                        Tiles[index].walkable = true;
+                        Tiles[index].color = fileContents[index];
+                        Tiles[index].speed = fileContents[index + 65536];
+                        Tiles[index].x = pos.x + x;
+                        Tiles[index].y = pos.y + y;
+                        Tiles[index].z = pos.z;
+                        Tiles[index].walkable = false;
+                        if (fileContents[index + 65536] != 255)
+                        {
+                            Tiles[index].walkable = true;
+                        }
+                        Tiles[index].fishable = false;
+                        if (fileContents[index] == 40)
+                        {
+                            Tiles[index].fishable = true;
+                        }
+                        index++;
                     }
-                    Tiles[index].fishable = false;
-                    if (fileContents[index] == 40)
-                    {
-                        Tiles[index].fishable = true;
-                    }
-                    index++;
                 }
+                return Tiles;
             }
-            return Tiles;
+            else
+            {
+                return new Objects.MiniMapTile[0];
+            }
         }
     }
 }
