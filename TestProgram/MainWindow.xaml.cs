@@ -53,10 +53,37 @@ namespace TestProgram
             if (Read.getClients().Length >= 1)
             {
                 Util.Tibia = Read.getFirstClient();
-                UpdateStatus();
                 Updater = new Thread(UpdateTick);
                 Updater.IsBackground = true;
                 Updater.Start();
+            }
+            else
+            {
+                foreach (string dir in Directory.GetDirectories(Environment.ExpandEnvironmentVariables("%PROGRAMFILES%")))
+                {
+                    if (dir.Contains("Tibia") && File.Exists(dir + "\\Tibia.exe"))
+                    {
+                        if (Util.getFileVersion(Environment.ExpandEnvironmentVariables(dir + "\\Tibia.exe")) == Constants.ClientVersion)
+                        {
+                            System.Diagnostics.ProcessStartInfo PSI = new System.Diagnostics.ProcessStartInfo();
+                            PSI.FileName = dir + "\\Tibia.exe";
+                            PSI.WorkingDirectory = dir;
+                            System.Diagnostics.Process.Start(PSI);
+                            bool launched = false;
+                            while (!launched)
+                            {
+                                if (Read.getClients().Length >= 1)
+                                {
+                                    Util.Tibia = Read.getFirstClient();
+                                    Updater = new Thread(UpdateTick);
+                                    Updater.IsBackground = true;
+                                    Updater.Start();
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -69,8 +96,32 @@ namespace TestProgram
         {
             while (true)
             {
-                UpdateStatus();
-                Thread.Sleep(1000);
+                if (Util.Tibia.HasExited == true)
+                {
+
+                    this.Dispatcher.Invoke(delegate
+                    {
+                        this.Close();
+                    });
+                }
+                else
+                {
+                    if (Read.Connected() == true)
+                    {
+                        UpdateStatus();
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        this.Dispatcher.Invoke(delegate
+                        {
+                            this.Title = "Disconnected";
+                            XpDisplay.Content = "Xp: 0";
+                            HpDisplay.Content = "Hp: 0";
+                            MpDisplay.Content = "Mp: 0";
+                        });
+                    }
+                }
             }
         }
 
@@ -257,6 +308,21 @@ namespace TestProgram
             {
                 listBox1.Items.Add(Convert.ToString(tile.speed) + ", " + Convert.ToString(tile.color) + " | Pos: " + Convert.ToString(tile.x) + ", " + Convert.ToString(tile.y) + ", " + Convert.ToString(tile.z) + ".");
             }
+        }
+
+        private void readLargeMapFile(object sender, RoutedEventArgs e)
+        {            
+            Objects.Location loc = new Objects.Location();
+            loc.x = Read.X();
+            loc.y = Read.Y();
+            loc.z = Read.Z();
+            LargeImage1.Source = loadBitmap(MapReading.getMapFileAroundMe(loc));
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            Image1.Source = loadBitmap(MapReading.getMapFile(fileName.Text));
+            Image2.Source = loadBitmap(MapReading.getMapSpeedFile(fileName.Text));
         }
     }
 }

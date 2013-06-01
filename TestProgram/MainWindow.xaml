@@ -21,8 +21,25 @@
                     <Button Content="Update" Margin="0,0,561,0" Click="ReadMap" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75"/>
                     <Button x:Name="readMapFile" Content="Read" Margin="0,0,481,0" Click="ReadMapImage" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75"/>
                     <TextBox x:Name="fileName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="%AppData%\Tibia\Automap\12612807.map" VerticalAlignment="Top" Width="466" Margin="170,275,0,0"></TextBox>
-                    <Image x:Name="Image1" HorizontalAlignment="Left" Height="256" VerticalAlignment="Top" Width="256" Margin="90,10,0,0"/>
-                    <Image x:Name="Image2" HorizontalAlignment="Left" Height="256" VerticalAlignment="Top" Width="256" Margin="351,10,-25,0"/>
+                    <ScrollViewer Width="256" Height="256" Margin="90,10,300,42">
+                        <Image x:Name="Image1" HorizontalAlignment="Left" Height="256" VerticalAlignment="Top" Width="256"/>
+                    </ScrollViewer>
+                    <ScrollViewer Width="256" Height="256" Margin="351,10,39,42">
+                        <Image x:Name="Image2" HorizontalAlignment="Left" Height="256" VerticalAlignment="Top" Width="256"/>
+                    </ScrollViewer>
+                    <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="90,266,0,0" Height="15" Click="Button_Click_6"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Large Map Graphical">
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="readLargeMapFile1" Content="Read" Margin="0,0,481,0" Click="readLargeMapFile" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75"/>
+                    <TextBox x:Name="fileLargeName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="%AppData%\Tibia\Automap\12612807.map" VerticalAlignment="Top" Width="466" Margin="170,275,0,0"></TextBox>
+                    <ScrollViewer Width="256" Height="256" Margin="90,10,300,42" HorizontalScrollBarVisibility="Auto">
+                        <Image x:Name="LargeImage1" HorizontalAlignment="Left" Height="768" VerticalAlignment="Top" Width="768"/>
+                    </ScrollViewer>
+                    <ScrollViewer Width="256" Height="256" Margin="351,10,39,42" HorizontalScrollBarVisibility="Auto">
+                        <Image x:Name="LargeImage2" HorizontalAlignment="Left" Height="768" VerticalAlignment="Top" Width="768"/>
+                    </ScrollViewer>
                 </Grid>
             </TabItem>
             <TabItem Header="Map Data">

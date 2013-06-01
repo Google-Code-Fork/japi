@@ -33,5 +33,10 @@ namespace JAPI
             get { return _Handle; }
             set { _Handle = value; }
         }
+
+        public static string getFileVersion(string filePath)
+        {
+            return FileVersionInfo.GetVersionInfo(Environment.ExpandEnvironmentVariables(filePath)).FileVersion;
+        }
     }
 }

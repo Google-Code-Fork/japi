@@ -21,7 +21,7 @@ namespace JAPI
             colourlist[0] = MapReading.getClr(0, 0, 0); // Undiscovered / tar / void / inner cave walls
             colourlist[12] = MapReading.getClr(0, 102, 0); // tree / bush
             colourlist[24] = MapReading.getClr(0, 204, 0); // grass or stone ground
-            colourlist[30] = MapReading.getClr(0, 255, 0); // swamp
+            colourlist[30] = MapReading.getClr(0, 255, 0); // old swamp
             colourlist[40] = MapReading.getClr(51, 0, 204); // water
             colourlist[86] = MapReading.getClr(102, 102, 102); // mountain / rock
             colourlist[114] = MapReading.getClr(153, 51, 0); // cave wall
@@ -34,6 +34,7 @@ namespace JAPI
             colourlist[210] = MapReading.getClr(255, 255, 0); // portal (or stairs etc)
             colourlist[215] = MapReading.getClr(255, 255, 255); // snow
             colourlist[255] = MapReading.getClr(150, 0, 255); // unknown but appeared once apparently
+            colourlist[140] = MapReading.getClr(153, 255, 102); // some noob retard fag claimed this was changed from swamp color
         }
 
         public static void fillSpeedColourList()
@@ -111,12 +112,25 @@ namespace JAPI
                     }
                 }
             }
+            else
+            {
+                Rectangle rect = new Rectangle();
+                rect.Height = 256;
+                rect.Width = 256;
+                rect.X = 0;
+                rect.Y = 0;
+                Objects.Colour color = new Objects.Colour();
+                color.r = 255;
+                color.g = 255;
+                color.b = 0;
+                Graphics.FromImage(bmp).FillRectangle(new SolidBrush(Color.FromArgb(color.r, color.g, color.b)), rect);
+            }
             return bmp;
         }
 
         public static Bitmap getMapSpeedFile(string fileName)
         { 
-            Bitmap bmp = new Bitmap(256, 256, System.Drawing.Imaging.PixelFormat.Format32bppArgb);;
+            Bitmap bmp = new Bitmap(256, 256, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             if (fileExists(fileName))
             {
                 fillSpeedColourList();
@@ -144,6 +158,128 @@ namespace JAPI
                     }
                 }
             }
+            return bmp;
+        }
+
+        public static StringBuilder[] getFileAroundMeNames(Objects.Location location)
+        {
+            // Format will be up, upri, ri, rido, do, dole, le, leup, self
+            StringBuilder[] sbuild = new StringBuilder[9];
+            StringBuilder sb = new StringBuilder();
+            sb.Append("%APPDATA%\\Tibia\\Automap\\");
+
+            for (int i = 0; i < 9; i++)
+            {
+                sbuild[i] = new StringBuilder();
+            }
+
+            // Up
+            sb.Append(Convert.ToString(location.x / 256)); sb.Append(Convert.ToString(location.y / 256 + 1)); // Set x + Y
+            if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
+            sb.Append(".map"); sbuild[0].Append(sb.ToString());
+            sb.Clear(); // add extension, assign to array, clear
+            sb.Append("%APPDATA%\\Tibia\\Automap\\"); // Refresh sb for next string
+
+            // UpRight
+            sb.Append(Convert.ToString(location.x / 256 + 1)); sb.Append(Convert.ToString(location.y / 256 + 1)); // Set x + Y
+            if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
+            sb.Append(".map"); sbuild[1].Append(sb.ToString());
+            sb.Clear(); // add extension, assign to array, clear
+            sb.Append("%APPDATA%\\Tibia\\Automap\\"); // Refresh sb for next string
+
+            //Right
+            sb.Append(Convert.ToString(location.x / 256 + 1)); sb.Append(Convert.ToString(location.y / 256)); // Set x + Y
+            if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
+            sb.Append(".map"); sbuild[2].Append(sb.ToString());
+            sb.Clear(); // add extension, assign to array, clear
+            sb.Append("%APPDATA%\\Tibia\\Automap\\"); // Refresh sb for next string
+
+            // Right Down
+            sb.Append(Convert.ToString(location.x / 256 - 1)); sb.Append(Convert.ToString(location.y / 256 + 1)); // Set x + Y
+            if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
+            sb.Append(".map"); sbuild[3].Append(sb.ToString());
+            sb.Clear(); // add extension, assign to array, clear
+            sb.Append("%APPDATA%\\Tibia\\Automap\\"); // Refresh sb for next string
+
+            // Down
+            sb.Append(Convert.ToString(location.x / 256)); sb.Append(Convert.ToString(location.y / 256 + 1)); // Set x + Y
+            if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
+            sb.Append(".map"); sbuild[4].Append(sb.ToString());
+            sb.Clear(); // add extension, assign to array, clear
+            sb.Append("%APPDATA%\\Tibia\\Automap\\"); // Refresh sb for next string
+
+            // Down left
+            sb.Append(Convert.ToString(location.x / 256 - 1)); sb.Append(Convert.ToString(location.y / 256 - 1)); // Set x + Y
+            if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
+            sb.Append(".map"); sbuild[5].Append(sb.ToString());
+            sb.Clear(); // add extension, assign to array, clear
+            sb.Append("%APPDATA%\\Tibia\\Automap\\"); // Refresh sb for next string
+
+            // Left
+            sb.Append(Convert.ToString(location.x / 256 - 1)); sb.Append(Convert.ToString(location.y / 256)); // Set x + Y
+            if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
+            sb.Append(".map"); sbuild[6].Append(sb.ToString());
+            sb.Clear(); // add extension, assign to array, clear
+            sb.Append("%APPDATA%\\Tibia\\Automap\\"); // Refresh sb for next string
+
+            // Left up
+            sb.Append(Convert.ToString(location.x / 256 - 1)); sb.Append(Convert.ToString(location.y / 256 + 1)); // Set x + Y
+            if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
+            sb.Append(".map"); sbuild[7].Append(sb.ToString());
+            sb.Clear(); // add extension, assign to array, clear
+            sb.Append("%APPDATA%\\Tibia\\Automap\\"); // Refresh sb for next string
+
+            // self
+            sb.Append(Convert.ToString(location.x / 256)); sb.Append(Convert.ToString(location.y / 256)); // Set x + Y
+            if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
+            sb.Append(".map"); sbuild[8].Append(sb.ToString());
+            sb.Clear(); // add extension, assign to array, clear
+
+
+            return sbuild;
+        }
+
+        public static Bitmap getMapFileAroundMe(Objects.Location location)
+        {
+            fillColourList();
+            // Format is up, upri, ri, rido, do, dole, le, leup, self
+            StringBuilder[] sb = new StringBuilder[9];
+            sb = getFileAroundMeNames(location);
+            Bitmap[] bmpList = new Bitmap[9];
+            Bitmap bmp = new Bitmap(256 * 3, 256 * 3, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            Rectangle rect = new Rectangle();
+            rect.Height = 256;
+            rect.Width = 256;
+            rect.X = 0;
+            rect.Y = 0;
+            Objects.Colour color = new Objects.Colour();
+            color = colourlist[0];
+            Graphics.FromImage(bmp).FillRectangle(new SolidBrush(Color.FromArgb(color.r, color.g, color.b)), rect);
+            for (int i = 0; i < 9; i++)
+            {
+                string mapFileName = sb[i].ToString();
+                bmpList[i] = getMapFile(mapFileName);
+            }
+
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                // Format is up, upri, ri, rido, do, dole, le, leup, self
+                g.DrawImage(bmpList[0], 256, 512, 256, 256); // Bottom Middle
+                g.DrawImage(bmpList[1], 512, 512, 256, 256); // Bottom right
+                g.DrawImage(bmpList[2], 512, 256, 256, 256); // Middle right
+                g.DrawImage(bmpList[3], 512, 256, 256, 256);
+                g.DrawImage(bmpList[4], 0, 256, 256, 256); // Left Middle
+                g.DrawImage(bmpList[5], 0, 0, 256, 256); // Top Left
+                g.DrawImage(bmpList[6], 256, 0, 256, 256);
+                g.DrawImage(bmpList[7], 512, 0, 256, 256);
+                g.DrawImage(bmpList[8], 256, 256, 256, 256); // Middle
+            }
+            for (int i = 0; i < 9; i++)
+            {
+                string fileToSave = "C:\\Users\\Owner\\Documents\\MapFiles\\MapFile" + Convert.ToString(i) + ".bmp";
+                //bmpList[i].Save(fileToSave);
+            }
+
             return bmp;
         }
 

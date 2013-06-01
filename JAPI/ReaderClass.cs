@@ -26,9 +26,9 @@ namespace JAPI
         {
             return ReadBytes(Util.Tibia.Handle, Address, 1)[0];
         }
-        public int ReadBool(Int64 Address)
+        public string ReadBool(Int64 Address, uint length)
         {
-            return ReadBytes(Util.Tibia.Handle, Address, 1)[0];
+            return BitConverter.ToString(ReadBytes(Util.Tibia.Handle, Address, length), 0);
         }
         public int ReadInt32(long Address, uint length = 4)
         {
@@ -142,6 +142,16 @@ namespace JAPI
             return "";
         }
 
+        public bool? Connected()
+        {
+            if (ReadBool(Addresses.IsConnected + Util.Base, 1) == "0A")
+                return true;
+            else if (ReadBool(Addresses.IsConnected + Util.Base, 1) == "00") 
+                return false;
+            else
+                return null;
+        }
+
         // Reading array info
         public Objects.BList[] BlGet(bool idname = false, bool returnall = true)
         {
@@ -227,7 +237,7 @@ namespace JAPI
                     con.Id = ReadInt32(ContainerAddresses.IdOffset + ThisReadOffset);
                     con.Volume = ReadInt32(ContainerAddresses.VolumeOffset + ThisReadOffset);
                     con.Name = ReadString(ContainerAddresses.NameOffset + ThisReadOffset);
-                    con.IsOpen = ReadBool(ContainerAddresses.IsOpenOffset + ThisReadOffset);
+                    con.IsOpen = ReadBool(ContainerAddresses.IsOpenOffset + ThisReadOffset, 1);
                     con.Items = getItems(con.Volume, ThisReadOffset + ContainerAddresses.ItemsOffset);
                     cont[i] = con;
                     totcons++;

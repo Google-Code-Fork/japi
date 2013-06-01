@@ -22,6 +22,12 @@ namespace JAPI
             public int i;
         }*/
 
+        public struct Hotkey
+        {
+            public string Key;
+            public string Value;
+        }
+
         public struct MiniMapFile
         {
            //MiniMapTile[] Tiles = new MiniMapTile[256 * 256];
@@ -67,7 +73,7 @@ namespace JAPI
             public int Id; // the Id of the container itself
             public string Name; // The name as a string, terminated by \0
             public int Amount; // The amount of times this container is open? IDFK.
-            public int IsOpen; // Is the container open
+            public string IsOpen; // Is the container open
             public int Volume; // The volume of it (amount of slots, for the lesser informed)
             public Item[] Items; // The array of items, as a list of the above, this is maximum of 36.
         }

@@ -8,22 +8,23 @@ namespace JAPI
 {
     class Addresses
     {
-        public static UInt32 Cid = 0x583EA4;
-        public static UInt32 Xor = 0x3b6ef0;
-        public static UInt32 Hp = 0x54c000;
-        public static UInt32 MaxHp = 0x583e9c;
-        public static UInt32 Mp = 0x3b6f44;
-        public static UInt32 MaxMp = 0x3b6ef4;
-        public static UInt32 Soul = 0x3b6f30;
-        public static UInt32 XPos = 0x583ea8;
-        public static UInt32 YPos = 0x583eac;
-        public static UInt32 ZPos = 0x583eb0;
-        public static UInt32 Exp = 0x3B6F00;
+        public static UInt32 Cid = 0x58AEA4; //
+        public static UInt32 Xor = 0x3BF1F0; //
+        public static UInt32 Hp = 0x553000; //
+        public static UInt32 MaxHp = 0x58AE9C; //
+        public static UInt32 Mp = 0x3BF244; //
+        public static UInt32 MaxMp = 0x3BF1F4; //
+        public static UInt32 Soul = 0x3BF230; //
+        public static UInt32 XPos = 0x58AEA8; //
+        public static UInt32 YPos = 0x58AEAC; //
+        public static UInt32 ZPos = 0x58AEB0; //
+        public static UInt32 Exp = 0x3BF200;//
+        public static UInt32 IsConnected = 0x3C8FF8;//
     }
 
     class BListAdresses
     {
-        public static UInt32 Start = 0x54C008;
+        public static UInt32 Start = 0x553008;
         public static UInt32 Step = 0xB0;
         public static int Max = 1300;
         public static UInt32 IdOffset = 0x0;
@@ -69,7 +70,7 @@ namespace JAPI
 
     class MapAddresses
     {
-        public static UInt32 MapStart = 0x5DA5C4;
+        public static UInt32 MapStart = 0x5E1B54;
         public static UInt32 MaxTiles = 0x7E0;
         public static UInt32 Step = 0xA8;
 
