@@ -101,6 +101,13 @@
                     <ListBox x:Name="ItemList" HorizontalAlignment="Left" Height="261" VerticalAlignment="Top" Width="75" Margin="497,10,0,0"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="Hotkeys">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox x:Name="HKLB" HorizontalAlignment="Left" Height="291" Margin="10,10,0,0" VerticalAlignment="Top" Width="550"/>
+                    <Button Content="Update" HorizontalAlignment="Left" Margin="565,10,0,0" VerticalAlignment="Top" Width="75" Click="UpdateHK"/>
+
+                </Grid>
+            </TabItem>
         </TabControl>
         <StatusBar Height="30" VerticalAlignment="Bottom" >
             <StatusBarItem Content="HP: 0/0" Name="HpDisplay" />

@@ -87,10 +87,6 @@ namespace TestProgram
                     }
                 }
             }
-            getHotkeys();
-
-            //MessageBox.Show(Read.ReadString(Util.Base + 0x3C6998)); 
-            //MessageBox.Show(Convert.ToString(Util.Base + 0x3C6998));
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -331,15 +327,13 @@ namespace TestProgram
             Image2.Source = loadBitmap(MapReading.getMapSpeedFile(fileName.Text));
         }
 
-        public void getHotkeys()
+        public void UpdateHK(object sender, RoutedEventArgs e)
         {
             HKS = Read.getHotkeys();
-            string str = "Hotkeys:\n";
-            for (int i = 0; i < 36; i++)
+            foreach (Objects.Hotkey hk in HKS)
             {
-                str = str + HKS[i].Key + ": " + HKS[i].Value + "\n";
+                HKLB.Items.Add(hk.Key + ": " + hk.Value);
             }
-            MessageBox.Show(str, "Hotkeys");
         }
     }
 }

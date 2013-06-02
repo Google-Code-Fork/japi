@@ -309,7 +309,7 @@ namespace JAPI
                 {
                     hks[i].Key = "Ctrl + F" + Convert.ToString(i - 23);
                 }
-                hks[i].Value = ReadString(ThisReadOffset, 32);
+                hks[i].Value = ReadString(ThisReadOffset, 256);
                 if (hks[i].Value == "")
                 {
                     hks[i].Value = Convert.ToString(ReadInt32(Util.Base + Hotkeys.HKItemStart + (uint)(i * (int)Hotkeys.HKItemStep)));
