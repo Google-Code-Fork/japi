@@ -31,6 +31,8 @@ namespace TestProgram
         Thread Updater;
         Thread Healer;
         Objects.HealRule[] rulelist;
+        Objects.Hotkey[] HKS;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -85,6 +87,10 @@ namespace TestProgram
                     }
                 }
             }
+            getHotkeys();
+
+            //MessageBox.Show(Read.ReadString(Util.Base + 0x3C6998)); 
+            //MessageBox.Show(Convert.ToString(Util.Base + 0x3C6998));
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -323,6 +329,17 @@ namespace TestProgram
         {
             Image1.Source = loadBitmap(MapReading.getMapFile(fileName.Text));
             Image2.Source = loadBitmap(MapReading.getMapSpeedFile(fileName.Text));
+        }
+
+        public void getHotkeys()
+        {
+            HKS = Read.getHotkeys();
+            string str = "Hotkeys:\n";
+            for (int i = 0; i < 36; i++)
+            {
+                str = str + HKS[i].Key + ": " + HKS[i].Value + "\n";
+            }
+            MessageBox.Show(str, "Hotkeys");
         }
     }
 }

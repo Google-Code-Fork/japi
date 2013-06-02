@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JAPI", "JAPI\JAPI.csproj", "{D9177C50-A7D1-48F4-B175-6B3C81036E69}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProgram", "TestProgram\TestProgram.csproj", "{23004614-642E-48C9-A624-13AA47E0381F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AS", "AS\AS.csproj", "{60C4FAD6-C680-49E2-AC9B-2992BBF80A7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +21,10 @@ Global
 		{23004614-642E-48C9-A624-13AA47E0381F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23004614-642E-48C9-A624-13AA47E0381F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23004614-642E-48C9-A624-13AA47E0381F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60C4FAD6-C680-49E2-AC9B-2992BBF80A7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60C4FAD6-C680-49E2-AC9B-2992BBF80A7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60C4FAD6-C680-49E2-AC9B-2992BBF80A7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60C4FAD6-C680-49E2-AC9B-2992BBF80A7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

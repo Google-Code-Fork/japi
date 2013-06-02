@@ -42,9 +42,9 @@ namespace JAPI
         {
             return BitConverter.ToDouble(ReadBytes(Util.Tibia.Handle, Address, 8), 0);
         }
-        public string ReadString(long Address)
+        public string ReadString(long Address, uint length = 32)
         {
-            string temp3 = ASCIIEncoding.Default.GetString(ReadBytes(Util.Tibia.Handle, Address, 32));
+            string temp3 = ASCIIEncoding.Default.GetString(ReadBytes(Util.Tibia.Handle, Address, length));
             string[] temp3str = temp3.Split('\0');
             return temp3str[0];
         }
@@ -289,5 +289,33 @@ namespace JAPI
             return Tiles;
         }
 
+        public Objects.Hotkey[] getHotkeys()
+        {
+            Objects.Hotkey[] hks = new Objects.Hotkey[36]; 
+            for (int i = 0; i < 36; i++)
+            {
+                UInt32 ThisReadOffset = (Util.Base + Hotkeys.HKStart) + (uint)(i * (int)Hotkeys.HKStep); // MessageBox.Show(Read.ReadString(Util.Base + 0x3C6B98)); 
+                 
+                // Add list order here wait~~~~~~
+                if (i < 12)
+                {
+                    hks[i].Key = "F" + Convert.ToString(i + 1);
+                }
+                else if (11 < i && i < 25)
+                {
+                    hks[i].Key = "Shift + F" + Convert.ToString(i - 12);
+                }
+                else if (24 < i && i < 36)
+                {
+                    hks[i].Key = "Ctrl + F" + Convert.ToString(i - 23);
+                }
+                hks[i].Value = ReadString(ThisReadOffset, 32);
+                if (hks[i].Value == "")
+                {
+                    hks[i].Value = Convert.ToString(ReadInt32(Util.Base + Hotkeys.HKItemStart + (uint)(i * (int)Hotkeys.HKItemStep)));
+                }
+            }
+            return hks;
+        }
     }
 }

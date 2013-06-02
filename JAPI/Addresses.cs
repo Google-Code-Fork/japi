@@ -22,6 +22,22 @@ namespace JAPI
         public static UInt32 IsConnected = 0x3C8FF8;//
     }
 
+    class Hotkeys
+    {
+        public static UInt32 HKStart = 0x3C6998;
+        public static UInt32 HKStep = 0x100;
+        public static UInt32 HKMax = 24;
+
+        public static UInt32 HKSendStart = 0x3C6970;
+        public static UInt32 HKSendStep = 0x1;
+
+        public static UInt32 HKItemStart = 0x3C8F30; //
+        public static UInt32 HKItemStep = 0x4;
+
+        public static UInt32 HKItemUseTypeStart = 0x3C67C0;
+        public static UInt32 HKItemUseTypeStep = 0x4;
+    }
+
     class BListAdresses
     {
         public static UInt32 Start = 0x553008;
