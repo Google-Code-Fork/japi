@@ -22,31 +22,43 @@ namespace JAPI
             ReadProcessMemory(Handle, new IntPtr(Address), buffer, BytesToRead, out ptrBytesRead);
             return buffer;
         }
-        public byte ReadByte(Int64 Address)
+        public byte ReadByte(Int64 Address, IntPtr? Handle = null)
         {
-            return ReadBytes(Util.Tibia.Handle, Address, 1)[0];
+            return ReadBytes(getIntPtr(Handle), Address, 1)[0];
         }
-        public string ReadBool(Int64 Address, uint length)
+        public string ReadBool(Int64 Address, uint length, IntPtr? Handle = null)
         {
-            return BitConverter.ToString(ReadBytes(Util.Tibia.Handle, Address, length), 0);
+            return BitConverter.ToString(ReadBytes(getIntPtr(Handle), Address, length), 0);
         }
-        public int ReadInt32(long Address, uint length = 4)
+        public int ReadInt32(long Address, uint length = 4, IntPtr? Handle = null)
         {
-            return BitConverter.ToInt32(ReadBytes(Util.Tibia.Handle, Address, length), 0);
+            return BitConverter.ToInt32(ReadBytes(getIntPtr(Handle), Address, length), 0);
         }
-        public ushort ReadInt16(long Address)
+        public ushort ReadInt16(long Address, IntPtr? Handle = null)
         {
-            return BitConverter.ToUInt16(ReadBytes(Util.Tibia.Handle, Address, 2), 0);
+            return BitConverter.ToUInt16(ReadBytes(getIntPtr(Handle), Address, 2), 0);
         }
-        public double ReadDouble(long Address)
+        public double ReadDouble(long Address, IntPtr? Handle = null)
         {
-            return BitConverter.ToDouble(ReadBytes(Util.Tibia.Handle, Address, 8), 0);
+            return BitConverter.ToDouble(ReadBytes(getIntPtr(Handle), Address, 8), 0);
         }
-        public string ReadString(long Address, uint length = 32)
+        public string ReadString(long Address, uint length = 32, IntPtr? Handle = null)
         {
-            string temp3 = ASCIIEncoding.Default.GetString(ReadBytes(Util.Tibia.Handle, Address, length));
+            string temp3 = ASCIIEncoding.Default.GetString(ReadBytes(getIntPtr(Handle), Address, length));
             string[] temp3str = temp3.Split('\0');
             return temp3str[0];
+        }
+        public IntPtr getIntPtr(IntPtr? Handle)
+        {
+            if (Handle == null)
+            {
+                return Util.Tibia.Handle;
+            }
+            else
+            {
+                return (IntPtr)Handle;
+            }
+            
         }
 
         // Getting client functions
@@ -66,19 +78,17 @@ namespace JAPI
 
         public Objects.Client[] getClientsWithNames()
         {
-            int i = 0;
             List<Objects.Client> cls = new List<Objects.Client>();
             Process[] procs = Process.GetProcessesByName("Tibia");
             foreach (Process p in procs)
             {
                 Objects.Client cl = new Objects.Client();
-                cl.Process = p;
-                cl.Name = getNameConnectedToClient(p);
                 if (Util.getFileVersion(p.MainModule.FileName) == Constants.ClientVersion)
                 {
+                    cl.Process = p;
+                    cl.Name = getNameConnectedToClient(p);
                     cls.Add(cl);
                 }
-                i++;
             }
             return cls.ToArray();
         }
@@ -142,13 +152,13 @@ namespace JAPI
         {
             return ReadInt32(Addresses.Cid + Util.Base);
         }
-        public int ClientCid(UInt32 BaseAddress = 0x0)
+        public int ClientCid(UInt32 BaseAddress = 0x0, IntPtr? Handle = null)
         {
             if (BaseAddress == 0x0)
             {
                 BaseAddress = Util.Base;
             }
-            return ReadInt32(Addresses.Cid + BaseAddress);
+            return ReadInt32(Addresses.Cid + BaseAddress, 4, getIntPtr(Handle));
         }
         public int Exp()
         {
@@ -183,12 +193,13 @@ namespace JAPI
             return "Not logged in.";
         }
 
-        public string getNameConnectedToClient(Process Client)
+        public string getNameConnectedToClient(Process clt)
         {
-            Objects.BList[] batt = BlGet(true, true, (UInt32)Client.MainModule.BaseAddress.ToInt32());
+            //return clt.MainModule.BaseAddress.ToString();
+            Objects.BList[] batt = BlGet(true, true, (UInt32)clt.MainModule.BaseAddress.ToInt32(), clt.Handle);
             foreach (Objects.BList crit in batt)
             {
-                if (crit.Id == ClientCid((UInt32)Client.MainModule.BaseAddress.ToInt32()))
+                if (crit.Id == ClientCid((UInt32)clt.MainModule.BaseAddress.ToInt32(), clt.Handle))
                 {
                     return crit.Name;
                 }
@@ -207,7 +218,7 @@ namespace JAPI
         }
 
         // Reading array info
-        public Objects.BList[] BlGet(bool idname = false, bool returnall = true, UInt32 BaseAddress = 0x0)
+        public Objects.BList[] BlGet(bool idname = false, bool returnall = true, UInt32 BaseAddress = 0x0, IntPtr? Handle = null)
         {
             if (BaseAddress == 0x0)
             {
@@ -223,37 +234,37 @@ namespace JAPI
                 UInt32 CreatureOffset = Convert.ToUInt32(i) * BListAdresses.Step;
                 Objects.BList batt = new Objects.BList();
                 batt.Addr = i;
-                batt.Id = ReadInt32(BListAdresses.Start + BListAdresses.IdOffset + CreatureOffset + BaseAddress);
+                batt.Id = ReadInt32(BListAdresses.Start + BListAdresses.IdOffset + CreatureOffset + BaseAddress, 4, getIntPtr(Handle));
                 if (batt.Id != 0 && idname != true)
                 {
                     UInt32 currentMem = BListAdresses.Start + CreatureOffset + BaseAddress;
-                    batt.Type = ReadByte(BListAdresses.TypeOffset + currentMem);
-                    batt.Name = ReadString(BListAdresses.NameOffset + currentMem);
-                    batt.Z = ReadInt32(BListAdresses.ZOffset + currentMem);
-                    batt.Y = ReadInt32(BListAdresses.YOffset + currentMem);
-                    batt.X = ReadInt32(BListAdresses.XOffset + currentMem);
-                    batt.TimeLastMoved = ReadInt32(BListAdresses.TimeLastMovedOffset + currentMem);
-                    batt.Walking = ReadInt32(BListAdresses.WalkingOffset + currentMem);
-                    batt.Direction = ReadInt32(BListAdresses.DirectionOffset + currentMem);
-                    batt.Previous = ReadInt32(BListAdresses.PreviousOffset + currentMem);
-                    batt.Next = ReadInt32(BListAdresses.NextOffset + currentMem);
-                    batt.Outfit = ReadInt32(BListAdresses.OutfitOffset + currentMem);
-                    batt.MountId = ReadInt32(BListAdresses.MountIdOffset + currentMem);
+                    batt.Type = ReadByte(BListAdresses.TypeOffset + currentMem, getIntPtr(Handle));
+                    batt.Name = ReadString(BListAdresses.NameOffset + currentMem, 32, getIntPtr(Handle));
+                    batt.Z = ReadInt32(BListAdresses.ZOffset + currentMem, 4, getIntPtr(Handle));
+                    batt.Y = ReadInt32(BListAdresses.YOffset + currentMem, 4, getIntPtr(Handle));
+                    batt.X = ReadInt32(BListAdresses.XOffset + currentMem, 4, getIntPtr(Handle));
+                    batt.TimeLastMoved = ReadInt32(BListAdresses.TimeLastMovedOffset + currentMem, 4, getIntPtr(Handle));
+                    batt.Walking = ReadInt32(BListAdresses.WalkingOffset + currentMem, 4, getIntPtr(Handle));
+                    batt.Direction = ReadInt32(BListAdresses.DirectionOffset + currentMem, 4, getIntPtr(Handle));
+                    batt.Previous = ReadInt32(BListAdresses.PreviousOffset + currentMem, 4, getIntPtr(Handle));
+                    batt.Next = ReadInt32(BListAdresses.NextOffset + currentMem, 4, getIntPtr(Handle));
+                    batt.Outfit = ReadInt32(BListAdresses.OutfitOffset + currentMem, 4, getIntPtr(Handle));
+                    batt.MountId = ReadInt32(BListAdresses.MountIdOffset + currentMem, 4, getIntPtr(Handle));
 
-                    batt.BlackSquare = ReadInt32(BListAdresses.BlackSquareOffset + currentMem); // This address might have been removed - needs testing.
-                    batt.Hppc = ReadInt32(BListAdresses.HppcOffset + currentMem);
-                    batt.Speed = ReadInt32(BListAdresses.SpeedOffset + currentMem);
+                    batt.BlackSquare = ReadInt32(BListAdresses.BlackSquareOffset + currentMem); // This address might have been removed - needs testin, getIntPtr(Handle)g.
+                    batt.Hppc = ReadInt32(BListAdresses.HppcOffset + currentMem, 4, getIntPtr(Handle));
+                    batt.Speed = ReadInt32(BListAdresses.SpeedOffset + currentMem, 4, getIntPtr(Handle));
 
-                    batt.SkullType = ReadInt32(BListAdresses.SkullOffset + currentMem);
-                    batt.Party = ReadInt32(BListAdresses.PartyOffset + currentMem);
-                    batt.WarIcon = ReadInt32(BListAdresses.WarOffset + currentMem);
-                    batt.Visible = ReadByte(BListAdresses.VisibleOffset + currentMem);
+                    batt.SkullType = ReadInt32(BListAdresses.SkullOffset + currentMem, 4, getIntPtr(Handle));
+                    batt.Party = ReadInt32(BListAdresses.PartyOffset + currentMem, 4, getIntPtr(Handle));
+                    batt.WarIcon = ReadInt32(BListAdresses.WarOffset + currentMem, 4, getIntPtr(Handle));
+                    batt.Visible = ReadByte(BListAdresses.VisibleOffset + currentMem, getIntPtr(Handle));
                     bat[i] = batt;
                 }
                 else if (batt.Id != 0 && idname == true)
                 {
-                    batt.Id = ReadInt32(BListAdresses.Start + BListAdresses.IdOffset + CreatureOffset + BaseAddress);
-                    batt.Name = ReadString(BListAdresses.Start + BListAdresses.NameOffset + CreatureOffset + BaseAddress);
+                    batt.Id = ReadInt32(BListAdresses.Start + BListAdresses.IdOffset + CreatureOffset + BaseAddress, 4, getIntPtr(Handle));
+                    batt.Name = ReadString(BListAdresses.Start + BListAdresses.NameOffset + CreatureOffset + BaseAddress, 32, getIntPtr(Handle));
                     bat[i] = batt;
                 }
             }

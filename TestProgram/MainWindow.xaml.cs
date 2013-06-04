@@ -44,6 +44,7 @@ namespace TestProgram
 
         private void UpdateStatus()
         {
+            updateClients();
             this.Dispatcher.Invoke(delegate {
                 this.Title = Read.getMyName();
                 XpDisplay.Content = "Xp: " + Read.Exp();
@@ -60,7 +61,7 @@ namespace TestProgram
                 Util.Tibia = Read.getFirstClient();
                 Updater = new Thread(UpdateTick);
                 Updater.IsBackground = true;
-                //Updater.Start();
+                Updater.Start();
             }
             else
             {
@@ -99,11 +100,41 @@ namespace TestProgram
 
         private void updateClientList(object sender, RoutedEventArgs e)
         {
-            clientList.Items.Clear();
-            ActiveClients = Read.getClientsWithNames();
-            foreach (Objects.Client cl in ActiveClients)
+            updateClients();
+        }
+
+        private void updateClients()
+        {
+            this.Dispatcher.Invoke(delegate
             {
-                clientList.Items.Add(cl.Name);
+                clientList.Items.Clear();
+                ActiveClients = Read.getClientsWithNames();
+                foreach (Objects.Client cl in ActiveClients)
+                {
+                    clientList.Items.Add(Read.getNameConnectedToClient(cl.Process));
+                }
+            });
+        }
+
+        private void selectClient(object sender, RoutedEventArgs e)
+        {
+            if (clientList.Items.Count < 1)
+            {
+                MessageBox.Show("No clients found.");
+            }
+            else if (clientList.SelectedItem == null)
+            {
+                MessageBox.Show("No client selected.");
+            }
+            else
+            {
+                foreach (Objects.Client cl in ActiveClients)
+                {
+                    if (cl.Name == clientList.SelectedItem.ToString())
+                    {
+                        Util.Tibia = cl.Process;
+                    }
+                }
             }
         }
 
@@ -113,7 +144,6 @@ namespace TestProgram
             {
                 if (Util.Tibia.HasExited == true)
                 {
-
                     this.Dispatcher.Invoke(delegate
                     {
                         this.Close();

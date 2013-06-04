@@ -7,8 +7,8 @@
             <TabItem Header="Clients">
                 <Grid Background="#FFE5E5E5">
                     <ListBox x:Name="clientList" Margin="10,10,577,8"/>
-                    <Button x:Name="btnRefresh" Content="Refresh" Width="75" Margin="143,10,497,275" Click="updateClientList"/>
-                    <Button x:Name="btnSelect" Content="Select" Width="75" Margin="143,41,497,244"/>
+                    <Button x:Name="btnRefresh" Content="Refresh" Margin="143,10,486,270" Click="updateClientList"/>
+                    <Button x:Name="btnSelect" Content="Select" Margin="143,41,486,239" Click="selectClient"/>
                 </Grid>
             </TabItem>
             <TabItem Header="General">
