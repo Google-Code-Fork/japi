@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,12 @@ namespace JAPI
         {
             public int i;
         }*/
+
+        public struct Client
+        {
+            public Process Process;
+            public string Name;
+        }
 
         public struct Hotkey
         {

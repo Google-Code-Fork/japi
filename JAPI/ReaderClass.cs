@@ -52,21 +52,54 @@ namespace JAPI
         // Getting client functions
         public Process[] getClients()
         {
-            return Process.GetProcessesByName("Tibia");
+            List<Process> accepted = new List<Process>();
+            Process[] procs = Process.GetProcessesByName("Tibia");
+            foreach (Process p in procs)
+            {
+                if (Util.getFileVersion(p.MainModule.FileName) == Constants.ClientVersion)
+                {
+                    accepted.Add(p);
+                }
+            }
+            return accepted.ToArray();
         }
+
+        public Objects.Client[] getClientsWithNames()
+        {
+            int i = 0;
+            List<Objects.Client> cls = new List<Objects.Client>();
+            Process[] procs = Process.GetProcessesByName("Tibia");
+            foreach (Process p in procs)
+            {
+                Objects.Client cl = new Objects.Client();
+                cl.Process = p;
+                cl.Name = getNameConnectedToClient(p);
+                if (Util.getFileVersion(p.MainModule.FileName) == Constants.ClientVersion)
+                {
+                    cls.Add(cl);
+                }
+                i++;
+            }
+            return cls.ToArray();
+        }
+
         public Process getFirstClient()
         {
             Process[] ProcList = getClients();
             return ProcList[0];
         }
+
         public Process getClientById(int id)
         {
             Process[] ProcList = getClients();
             foreach (Process p in ProcList)
             {
-                if (p.Id == id)
+                if (Util.getFileVersion(p.MainModule.FileName) == Constants.ClientVersion)
                 {
-                    return p;
+                    if (p.Id == id)
+                    {
+                        return p;
+                    }
                 }
             }
             return null;
@@ -109,6 +142,14 @@ namespace JAPI
         {
             return ReadInt32(Addresses.Cid + Util.Base);
         }
+        public int ClientCid(UInt32 BaseAddress = 0x0)
+        {
+            if (BaseAddress == 0x0)
+            {
+                BaseAddress = Util.Base;
+            }
+            return ReadInt32(Addresses.Cid + BaseAddress);
+        }
         public int Exp()
         {
             return ReadInt32(Addresses.Exp + Util.Base);
@@ -139,7 +180,20 @@ namespace JAPI
                     return crit.Name;
                 }
             }
-            return "";
+            return "Not logged in.";
+        }
+
+        public string getNameConnectedToClient(Process Client)
+        {
+            Objects.BList[] batt = BlGet(true, true, (UInt32)Client.MainModule.BaseAddress.ToInt32());
+            foreach (Objects.BList crit in batt)
+            {
+                if (crit.Id == ClientCid((UInt32)Client.MainModule.BaseAddress.ToInt32()))
+                {
+                    return crit.Name;
+                }
+            }
+            return "Not logged in.";
         }
 
         public bool? Connected()
@@ -153,8 +207,15 @@ namespace JAPI
         }
 
         // Reading array info
-        public Objects.BList[] BlGet(bool idname = false, bool returnall = true)
+        public Objects.BList[] BlGet(bool idname = false, bool returnall = true, UInt32 BaseAddress = 0x0)
         {
+            if (BaseAddress == 0x0)
+            {
+                BaseAddress = Util.Base;
+                if (!returnall)
+                    BaseAddress = Util.Base;
+            }
+
             int max = Convert.ToInt32(BListAdresses.Step) * BListAdresses.Max;
             Objects.BList[] bat = new Objects.BList[BListAdresses.Max];
             for (int i = 0; i < BListAdresses.Max; i++)
@@ -162,10 +223,10 @@ namespace JAPI
                 UInt32 CreatureOffset = Convert.ToUInt32(i) * BListAdresses.Step;
                 Objects.BList batt = new Objects.BList();
                 batt.Addr = i;
-                batt.Id = ReadInt32(BListAdresses.Start + BListAdresses.IdOffset + CreatureOffset + Util.Base);
+                batt.Id = ReadInt32(BListAdresses.Start + BListAdresses.IdOffset + CreatureOffset + BaseAddress);
                 if (batt.Id != 0 && idname != true)
                 {
-                    UInt32 currentMem = BListAdresses.Start + CreatureOffset + Util.Base;
+                    UInt32 currentMem = BListAdresses.Start + CreatureOffset + BaseAddress;
                     batt.Type = ReadByte(BListAdresses.TypeOffset + currentMem);
                     batt.Name = ReadString(BListAdresses.NameOffset + currentMem);
                     batt.Z = ReadInt32(BListAdresses.ZOffset + currentMem);
@@ -191,8 +252,8 @@ namespace JAPI
                 }
                 else if (batt.Id != 0 && idname == true)
                 {
-                    batt.Id = ReadInt32(BListAdresses.Start + BListAdresses.IdOffset + CreatureOffset + Util.Base);
-                    batt.Name = ReadString(BListAdresses.Start + BListAdresses.NameOffset + CreatureOffset + Util.Base);
+                    batt.Id = ReadInt32(BListAdresses.Start + BListAdresses.IdOffset + CreatureOffset + BaseAddress);
+                    batt.Name = ReadString(BListAdresses.Start + BListAdresses.NameOffset + CreatureOffset + BaseAddress);
                     bat[i] = batt;
                 }
             }
@@ -204,7 +265,7 @@ namespace JAPI
                 {
                     if (crit.Id != 0 && crit.Visible != 0)
                     {
-                        validcount ++;
+                        validcount++;
                     }
                 }
                 Objects.BList[] batt = new Objects.BList[validcount];
@@ -296,7 +357,7 @@ namespace JAPI
             {
                 UInt32 ThisReadOffset = (Util.Base + Hotkeys.HKStart) + (uint)(i * (int)Hotkeys.HKStep); // MessageBox.Show(Read.ReadString(Util.Base + 0x3C6B98)); 
                  
-                // Add list order here wait~~~~~~
+                // Add list order here 
                 if (i < 12)
                 {
                     hks[i].Key = "F" + Convert.ToString(i + 1);

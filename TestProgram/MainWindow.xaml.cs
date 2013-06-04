@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,8 @@ namespace TestProgram
         Thread Healer;
         Objects.HealRule[] rulelist;
         Objects.Hotkey[] HKS;
+        Objects.Client[] ActiveClients;
+        
 
         public MainWindow()
         {
@@ -57,7 +60,7 @@ namespace TestProgram
                 Util.Tibia = Read.getFirstClient();
                 Updater = new Thread(UpdateTick);
                 Updater.IsBackground = true;
-                Updater.Start();
+                //Updater.Start();
             }
             else
             {
@@ -92,6 +95,16 @@ namespace TestProgram
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Updater.Abort();
+        }
+
+        private void updateClientList(object sender, RoutedEventArgs e)
+        {
+            clientList.Items.Clear();
+            ActiveClients = Read.getClientsWithNames();
+            foreach (Objects.Client cl in ActiveClients)
+            {
+                clientList.Items.Add(cl.Name);
+            }
         }
 
         private void UpdateTick()

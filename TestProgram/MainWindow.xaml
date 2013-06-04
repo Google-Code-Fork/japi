@@ -1,9 +1,16 @@
 ﻿<Window x:Class="TestProgram.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="400" Width="664" Loaded="Startup" Closing="Window_Closing">
+        Title="MainWindow" Height="400" Width="729" Loaded="Startup" Closing="Window_Closing">
     <Grid>
         <TabControl Margin="0,0,0,30">
+            <TabItem Header="Clients">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox x:Name="clientList" Margin="10,10,577,8"/>
+                    <Button x:Name="btnRefresh" Content="Refresh" Width="75" Margin="143,10,497,275" Click="updateClientList"/>
+                    <Button x:Name="btnSelect" Content="Select" Width="75" Margin="143,41,497,244"/>
+                </Grid>
+            </TabItem>
             <TabItem Header="General">
                 <Grid Background="#FFE5E5E5">
                     
