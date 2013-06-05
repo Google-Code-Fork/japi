@@ -49,12 +49,6 @@
     <Compile Include="Addresses.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Control.cs" />
-    <Compile Include="ClientChooser.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ClientChooser.Designer.cs">
-      <DependentUpon>ClientChooser.cs</DependentUpon>
-    </Compile>
     <Compile Include="MapReading.cs" />
     <Compile Include="Objects.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,9 +61,6 @@
     <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ClientChooser.resx">
-      <DependentUpon>ClientChooser.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
