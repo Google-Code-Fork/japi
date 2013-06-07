@@ -10,19 +10,11 @@ namespace JAPI
 {
     public class Objects
     {
-        /*public struct World
+        public struct Error
         {
-            public Objects.BList BList;
-            public Objects.Player Player;
-            public Objects.Minimap Minimap;
-            public Objects.GUI GUI;
+            public string Message;
+            public int type; // Type can be 1-5, depending on the urgency of errors selected.
         }
-
-        public struct GUI
-        {
-            public int i;
-        }*/
-
         public struct Client
         {
             public Process Process;
@@ -111,6 +103,8 @@ namespace JAPI
             public int Party; // Party type (leader, invited, member)
             public int WarIcon; // War icon (friendly, enemy, not part of your war so stay the fuck out of shit you ain't involved in).
             public int Visible; // CAN YOU SEE ME MOTHERFUCKER?
+
+            // 20 entries total.
         }
 
         public struct Player

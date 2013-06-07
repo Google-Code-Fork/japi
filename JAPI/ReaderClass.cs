@@ -14,6 +14,22 @@ namespace JAPI
         public static extern Int32 ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress,
             [In, Out] byte[] buffer, UInt32 size, out IntPtr lpNumberOfBytesRead);
 
+        [DllImport("user32.dll", EntryPoint = "FindWindow")]
+        public static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string lclassName, string windowTitle);
+
+        private static bool IsWin32(Process process)
+        {
+                try
+                {
+                    string fileName = process.MainModule.FileName;
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+        }
+
         // Reading Memory Functions
         public byte[] ReadBytes(IntPtr Handle, Int64 Address, uint BytesToRead)
         {
@@ -48,6 +64,7 @@ namespace JAPI
             string[] temp3str = temp3.Split('\0');
             return temp3str[0];
         }
+
         public IntPtr getIntPtr(IntPtr? Handle)
         {
             if (Handle == null)
@@ -64,16 +81,26 @@ namespace JAPI
         // Getting client functions
         public Process[] getClients()
         {
-            List<Process> accepted = new List<Process>();
-            Process[] procs = Process.GetProcessesByName("Tibia");
-            foreach (Process p in procs)
+
+            List<Process> lp = new List<Process>();
+            Process[] lpa = Process.GetProcesses();
+            foreach (Process p in lpa)
             {
-                if (Util.getFileVersion(p.MainModule.FileName) == Constants.ClientVersion)
+                try
                 {
-                    accepted.Add(p);
+                    if (p.MainModule.FileName.Contains("Tibia"))
+                    {
+                        lp.Add(p);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Util.lastError.Message = "Process is inaccessible, cannot be read because : " + ex.Message;
+                    Util.lastError.type = 0;
+                    Util.Errors.Add(Util.lastError);
                 }
             }
-            return accepted.ToArray();
+            return lp.ToArray();
         }
 
         public Objects.Client[] getClientsWithNames()
@@ -95,8 +122,14 @@ namespace JAPI
 
         public Process getFirstClient()
         {
-            Process[] ProcList = getClients();
-            return ProcList[0];
+            if (getClients().Length != 0)
+            {
+                return getClients()[0];
+            }
+            else
+            {
+                return new Process();
+            }
         }
 
         public Process getClientById(int id)
@@ -104,12 +137,9 @@ namespace JAPI
             Process[] ProcList = getClients();
             foreach (Process p in ProcList)
             {
-                if (Util.getFileVersion(p.MainModule.FileName) == Constants.ClientVersion)
+                if (p.Id == id)
                 {
-                    if (p.Id == id)
-                    {
-                        return p;
-                    }
+                    return p;
                 }
             }
             return null;
@@ -274,7 +304,7 @@ namespace JAPI
                 int validcount = 0;
                 foreach (Objects.BList crit in bat)
                 {
-                    if (crit.Id != 0 && crit.Visible != 0)
+                    if (crit.Id != 0) //  && crit.Visible != 0 If you wanna check visible, which doesn't seem to work ATM.
                     {
                         validcount++;
                     }
@@ -283,7 +313,7 @@ namespace JAPI
                 int index = 0;
                 foreach (Objects.BList crit in bat)
                 {
-                    if (crit.Id != 0 && crit.Visible != 0)
+                    if (crit.Id != 0) //  && crit.Visible != 0 If you wanna check visible, which doesn't seem to work ATM.
                     {
                         batt[index] = crit;
                         index++;
@@ -291,7 +321,7 @@ namespace JAPI
                 }
                 return batt;
             }
-
+            
             return bat;
         }
 
@@ -375,11 +405,11 @@ namespace JAPI
                 }
                 else if (11 < i && i < 25)
                 {
-                    hks[i].Key = "Shift + F" + Convert.ToString(i - 12);
+                    hks[i].Key = "Shift+F" + Convert.ToString(i - 12);
                 }
                 else if (24 < i && i < 36)
                 {
-                    hks[i].Key = "Ctrl + F" + Convert.ToString(i - 23);
+                    hks[i].Key = "Ctrl+F" + Convert.ToString(i - 23);
                 }
                 hks[i].Value = ReadString(ThisReadOffset, 256);
                 if (hks[i].Value == "")
@@ -389,5 +419,27 @@ namespace JAPI
             }
             return hks;
         }
+
+        public static string FindHotkey(string spellName)
+        {
+            foreach (Objects.Hotkey hk in Util.Hotkeys)
+            {
+                if (hk.Value == spellName)
+                {
+                    return hk.Key;
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+            throw new NotImplementedException();
+        }
+    }
+    internal static class NativeMethods
+    {
+        [DllImport("kernel32.dll", SetLastError = true, CallingConvention = CallingConvention.Winapi)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool IsWow64Process([In] IntPtr process, [Out] out bool wow64Process);
     }
 }

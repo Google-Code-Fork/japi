@@ -31,6 +31,7 @@ namespace TestProgram
         ControlWindow Ctrl = new ControlWindow();
         Thread Updater;
         Thread Healer;
+        Thread GUIThr;
         Objects.HealRule[] rulelist;
         Objects.Hotkey[] HKS;
         Objects.Client[] ActiveClients;
@@ -50,17 +51,33 @@ namespace TestProgram
                 XpDisplay.Content = "Xp: " + Read.Exp();
                 HpDisplay.Content = "Hp: " + Read.Hp();
                 MpDisplay.Content = "Mp: " + Read.Mp();
+                Util.Hotkeys = Read.getHotkeys();
             });
 
         }
 
+        private void ErrorCheckChanged(object sender, RoutedEventArgs e)
+        {
+            if (chbErrors.IsChecked == true)
+            {
+                GUIThr = new Thread(GUIThrTick);
+                GUIThr.IsBackground = true;
+                GUIThr.Start();
+            }
+            else
+            {
+                GUIThr.Abort();
+            }
+        }
+
         private void Startup(object sender, RoutedEventArgs e)
         {
+            Util.Tibia = Read.getFirstClient();
+            Updater = new Thread(UpdateTick);
+            Updater.IsBackground = true;
             if (Read.getClients().Length >= 1)
             {
                 Util.Tibia = Read.getFirstClient();
-                Updater = new Thread(UpdateTick);
-                Updater.IsBackground = true;
                 Updater.Start();
             }
             else
@@ -93,9 +110,29 @@ namespace TestProgram
             }
         }
 
+        private void GUIThrTick(object obj)
+        {
+            while (true)
+            {
+                this.Dispatcher.Invoke(delegate
+                {
+                    ErrorList.Items.Clear();
+                    foreach (Objects.Error error in Util.Errors)
+                    {
+                        if (error.type >= lstErrorDisplay.SelectedIndex)
+                        {
+                            ErrorList.Items.Add(error.Message);
+                        }
+                    }
+                });
+                Thread.Sleep(2000);
+            }
+        }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Updater.Abort();
+            if (Updater.ThreadState == System.Threading.ThreadState.Running)
+                Updater.Abort();
         }
 
         private void updateClientList(object sender, RoutedEventArgs e)
@@ -165,6 +202,7 @@ namespace TestProgram
                             HpDisplay.Content = "Hp: 0";
                             MpDisplay.Content = "Mp: 0";
                         });
+                        Thread.Sleep(2000);
                     }
                 }
             }
@@ -252,11 +290,31 @@ namespace TestProgram
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            StringBuilder SB = new StringBuilder();
             BListView.Items.Clear();
             Objects.BList[] Battles = Read.BlGet(false, false);
             foreach (Objects.BList Battle in Battles)
             {
-                BListView.Items.Add("Name: " + Battle.Name + ". CID: " + Battle.Id + ". Pos: " + Convert.ToString(Battle.X) + ", " + Convert.ToString(Battle.Y) + ", " + Convert.ToString(Battle.Z));
+                BListView.Items.Add("Name: " + Battle.Name +
+                    ". CID: " + Battle.Id +
+                    ". Pos: " + Convert.ToString(Battle.X) +
+                    ", " + Convert.ToString(Battle.Y) +
+                    ", " + Convert.ToString(Battle.Z) +
+                    ". TimeLastMoved: " + Convert.ToString(Battle.TimeLastMoved) + 
+                    ". Walking: " + Convert.ToString(Battle.Walking) + 
+                    ". Direction: " + Convert.ToString(Battle.Direction) + 
+                    ". Previous: " + Convert.ToString(Battle.Previous) +
+                    ". Next: " + Convert.ToString(Battle.Next) + 
+                    ". Outfit: " + Convert.ToString(Battle.Outfit) +
+                    ". Mount: " + Convert.ToString(Battle.MountId) +
+                    ". BlackSquare: " + Convert.ToString(Battle.BlackSquare) +
+                    ". HPPC: " + Convert.ToString(Battle.Hppc) + 
+                    ". Speed: " + Convert.ToString(Battle.Speed) +
+                    ". Skull: " + Convert.ToString(Battle.SkullType) + 
+                    ". Party: " + Convert.ToString(Battle.Party) +
+                    ". War: " + Convert.ToString(Battle.WarIcon) + 
+                    ". Visible: " + Convert.ToString(Battle.Visible)
+                    );
             }
         }
 

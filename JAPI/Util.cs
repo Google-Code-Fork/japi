@@ -9,9 +9,18 @@ namespace JAPI
 {
     public static class Util
     {
+        public static List<Objects.Error> Errors = new List<Objects.Error>();
+        public static Objects.Error lastError;
         public static Process _Tibia = Process.GetCurrentProcess();
         public static UInt32 _BaseAddress;
         public static IntPtr _Handle;
+        public static Objects.Hotkey[] _Hotkeys;
+
+        public static Objects.Hotkey[] Hotkeys
+        {
+            get { return _Hotkeys; }
+            set { _Hotkeys = value; }
+        }
 
         public static Process Tibia
         {
@@ -37,6 +46,11 @@ namespace JAPI
         public static string getFileVersion(string filePath)
         {
             return FileVersionInfo.GetVersionInfo(Environment.ExpandEnvironmentVariables(filePath)).FileVersion;
+        }
+
+        public static string getProcessName(Process proc)
+        {
+            return proc.MainWindowTitle;
         }
     }
 }

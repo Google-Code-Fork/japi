@@ -13,7 +13,16 @@
             </TabItem>
             <TabItem Header="General">
                 <Grid Background="#FFE5E5E5">
-                    
+                    <CheckBox Name="chbErrors" Content="Update Error Log" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="ErrorCheckChanged"/>
+                    <ComboBox Name="lstErrorDisplay" HorizontalAlignment="Left" Margin="82,26,0,0" VerticalAlignment="Top" Width="43" Height="26" Text="1" SelectedIndex="1">
+                        <ComboBoxItem Content="0" />
+                        <ComboBoxItem Content="1" IsSelected="True" />
+                        <ComboBoxItem Content="2" />
+                        <ComboBoxItem Content="3" />
+                        <ComboBoxItem Content="4" />
+                    </ComboBox>
+                    <Label Content="Error Level" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="72"/>
+
                 </Grid>
             </TabItem>
             <TabItem Header="BattleList">
@@ -113,6 +122,11 @@
                     <ListBox x:Name="HKLB" HorizontalAlignment="Left" Height="291" Margin="10,10,0,0" VerticalAlignment="Top" Width="550"/>
                     <Button Content="Update" HorizontalAlignment="Left" Margin="565,10,0,0" VerticalAlignment="Top" Width="75" Click="UpdateHK"/>
 
+                </Grid>
+            </TabItem>
+            <TabItem Header="Errors">
+                <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
+                    <ListBox Name="ErrorList" HorizontalAlignment="Left" Height="311" VerticalAlignment="Top" Width="715"/>
                 </Grid>
             </TabItem>
         </TabControl>

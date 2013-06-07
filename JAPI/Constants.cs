@@ -43,7 +43,17 @@ namespace JAPI
             left = 0x25,
             up = 0x26,
             right = 0x27,
-            down = 0x28
+            down = 0x28,
+            ctrl = 0x11,
+            shift = 0x10
+        }
+        public enum ErrorTypes : int
+        {
+            WARN = 0,
+            ERR1 = 1,
+            ERR2 = 2,
+            ERR3 = 3,
+            FATAL = 4,
         }
 
         public const Int32 WM_CHAR = 0x0102;

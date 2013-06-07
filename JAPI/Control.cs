@@ -60,13 +60,46 @@ namespace JAPI
                 IntPtr val = new IntPtr((Int32)c);
                 SendMessage(Util.Handle, Constants.WM_CHAR, val, new IntPtr(0));
             }
+            IntPtr rtn = new IntPtr((Int32)'\0');
+            SendMessage(Util.Handle, Constants.WM_CHAR, rtn, new IntPtr(0));
         }
 
-        public void SendButton(string Key)
+        public void SendButton(string Key, string CtrlShift = "")
         {
             IntPtr wParam = new IntPtr(getKeyCode(Key));
-            SendMessage(Util.Handle, Constants.WM_KEYDOWN, wParam, new IntPtr(0));
-            SendMessage(Util.Handle, Constants.WM_KEYUP, wParam, new IntPtr(0));
+            if (CtrlShift == "")
+            {
+                SendMessage(Util.Handle, Constants.WM_KEYDOWN, (IntPtr)getKeyCode(Key), new IntPtr(0));
+                SendMessage(Util.Handle, Constants.WM_KEYUP, (IntPtr)getKeyCode(Key), new IntPtr(0));
+            }
+            else
+            {
+                SendMessage(Util.Handle, Constants.WM_KEYDOWN, (IntPtr)getKeyCode(CtrlShift), new IntPtr(0));
+                SendMessage(Util.Handle, Constants.WM_KEYUP, (IntPtr)getKeyCode(Key), new IntPtr(0));
+                SendMessage(Util.Handle, Constants.WM_KEYDOWN, (IntPtr)getKeyCode(Key), new IntPtr(0));
+                SendMessage(Util.Handle, Constants.WM_KEYUP, (IntPtr)getKeyCode(CtrlShift), new IntPtr(0));
+            }
         }
+
+        public void CastSpell(string spellName)
+        {
+            string key = ReaderClass.FindHotkey(spellName);
+            if (key == string.Empty)
+            {
+                SendKeys(spellName);
+            }
+            else if (key.Contains("+"))
+            {
+                string[] splitstrings = key.Split('+');
+                SendButton(splitstrings[1], splitstrings[0]);
+            }
+            else
+            {
+                SendButton(key);
+            }
+
+        }
+
+        
     }
 }

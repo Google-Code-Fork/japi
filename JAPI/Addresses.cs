@@ -9,22 +9,22 @@ namespace JAPI
     class Addresses
     {
         public static UInt32 Cid = 0x58AEA4; //
-        public static UInt32 Xor = 0x3BF1F0; //
-        public static UInt32 Hp = 0x553000; //
-        public static UInt32 MaxHp = 0x58AE9C; //
-        public static UInt32 Mp = 0x3BF244; //
-        public static UInt32 MaxMp = 0x3BF1F4; //
-        public static UInt32 Soul = 0x3BF230; //
-        public static UInt32 XPos = 0x58AEA8; //
-        public static UInt32 YPos = 0x58AEAC; //
-        public static UInt32 ZPos = 0x58AEB0; //
-        public static UInt32 Exp = 0x3BF200;//
-        public static UInt32 IsConnected = 0x3C8FF8;//
+        public static UInt32 Xor = 0x3BE1D0; // 10.0
+        public static UInt32 Hp = 0x553000; // 10.0
+        public static UInt32 MaxHp = 0x55302C; // 10.0
+        public static UInt32 Mp = 0x3BE224; // 10.0
+        public static UInt32 MaxMp = 0x3BE1D4; // 10.0
+        public static UInt32 Soul = 0x3BE210; // 10.0
+        public static UInt32 XPos = 0x553038; // 10.0
+        public static UInt32 YPos = 0x55303C; // 10.0
+        public static UInt32 ZPos = 0x553040; // 10.0
+        public static UInt32 Exp = 0x3BF200; //
+        public static UInt32 IsConnected = 0x3C7FE0; // 10.0
     }
 
     class Hotkeys
     {
-        public static UInt32 HKStart = 0x3C6998;
+        public static UInt32 HKStart = 0x3C5980;
         public static UInt32 HKStep = 0x100;
         public static UInt32 HKMax = 24;
 
@@ -40,8 +40,8 @@ namespace JAPI
 
     class BListAdresses
     {
-        public static UInt32 Start = 0x553008;
-        public static UInt32 Step = 0xB0;
+        public static UInt32 Start = 0x5A9510;
+        public static UInt32 Step = 0xC0;
         public static int Max = 1300;
         public static UInt32 IdOffset = 0x0;
         public static UInt32 TypeOffset = 0x3;
