@@ -8,7 +8,7 @@ namespace JAPI
 {
     class Addresses
     {
-        public static UInt32 Cid = 0x58AEA4; //
+        public static UInt32 Cid = 0x553034; // 10.0
         public static UInt32 Xor = 0x3BE1D0; // 10.0
         public static UInt32 Hp = 0x553000; // 10.0
         public static UInt32 MaxHp = 0x55302C; // 10.0
@@ -18,46 +18,48 @@ namespace JAPI
         public static UInt32 XPos = 0x553038; // 10.0
         public static UInt32 YPos = 0x55303C; // 10.0
         public static UInt32 ZPos = 0x553040; // 10.0
-        public static UInt32 Exp = 0x3BF200; //
+        public static UInt32 Exp = 0x3BE1E0; // 10.0
         public static UInt32 IsConnected = 0x3C7FE0; // 10.0
+        public static UInt32 Level = 0x3BE20C; // 10.0
+        public static UInt32 LastClicked = 0x54F5B8; // 10.0
     }
 
     class Hotkeys
     {
-        public static UInt32 HKStart = 0x3C5980;
-        public static UInt32 HKStep = 0x100;
-        public static UInt32 HKMax = 24;
+        public static UInt32 HKStart = 0x3C5980; // 10.0
+        public static UInt32 HKStep = 0x100; // 10.0
+        public static UInt32 HKMax = 24; // Constant
 
         public static UInt32 HKSendStart = 0x3C6970; // Unsure
-        public static UInt32 HKSendStep = 0x1;
+        public static UInt32 HKSendStep = 0x1; // Unsure
 
-        public static UInt32 HKItemStart = 0x3C8F30;
-        public static UInt32 HKItemStep = 0x4;
+        public static UInt32 HKItemStart = 0x3C8F30; // Unsure
+        public static UInt32 HKItemStep = 0x4; // 10.0
 
         public static UInt32 HKItemUseTypeStart = 0x3C67C0; // Unsure
-        public static UInt32 HKItemUseTypeStep = 0x4;
+        public static UInt32 HKItemUseTypeStep = 0x4; // Unsure
     }
 
     class BListAdresses
     {
-        public static UInt32 Start = 0x5A9510;
-        public static UInt32 Step = 0xC0;
-        public static int Max = 1300;
-        public static UInt32 IdOffset = 0x0;
-        public static UInt32 TypeOffset = 0x3;
-        public static UInt32 NameOffset = 0x4;
-        public static UInt32 ZOffset = 0x24;
-        public static UInt32 YOffset = 0x28;
-        public static UInt32 XOffset = 0x2C;
-        public static UInt32 TimeLastMovedOffset = 0x3C;
-        public static UInt32 WalkingOffset = 0x50;
-        public static UInt32 DirectionOffset = 0x38;
-        public static UInt32 PreviousOffset = 0x58;
-        public static UInt32 NextOffset = 0x5C;
-        public static UInt32 OutfitOffset = 0x60;
-        public static UInt32 MountIdOffset = 0x78;
+        public static UInt32 Start = 0x5A9510; // 10.0
+        public static UInt32 Step = 0xC0; // 10.0
+        public static int Max = 1300; // Static
+        public static UInt32 IdOffset = 0x0; // 10.0
+        public static UInt32 TypeOffset = 0x3; // 10.0
+        public static UInt32 NameOffset = 0x4; // 10.0
+        public static UInt32 ZOffset = 0x24; // 10.0
+        public static UInt32 YOffset = 0x28; // 10.0
+        public static UInt32 XOffset = 0x2C; // 10.0
+        public static UInt32 TimeLastMovedOffset = 0x3C; // 10.0
+        public static UInt32 WalkingOffset = 0x50; // 10.0
+        public static UInt32 DirectionOffset = 0x38; // 10.0
+        public static UInt32 PreviousOffset = 0x58; // 10.0
+        public static UInt32 NextOffset = 0x5C; // 10.0
+        public static UInt32 OutfitOffset = 0x60; // 10.0
+        public static UInt32 MountIdOffset = 0x78; // 10.0
         public static UInt32 BlackSquareOffset = 0x88;
-        public static UInt32 HppcOffset = 0x8C;
+        public static UInt32 HppcOffset = 0x8C; // 10.0
         public static UInt32 SpeedOffset = 0x90;
         public static UInt32 SkullOffset = 0x98;
         public static UInt32 PartyOffset = 0x9C;

@@ -95,9 +95,7 @@ namespace JAPI
                 }
                 catch (Exception ex)
                 {
-                    Util.lastError.Message = "Process is inaccessible, cannot be read because : " + ex.Message;
-                    Util.lastError.type = 0;
-                    Util.Errors.Add(Util.lastError);
+                    Util.LogError("Invalid Process : " + ex.Message, 0);
                 }
             }
             return lp.ToArray();
@@ -146,6 +144,10 @@ namespace JAPI
         }
 
         // Reading self info
+        public int Level()
+        {
+            return ReadInt32(Addresses.Level + Util.Base);
+        }
         public int Hp()
         {
             return ReadInt32(Addresses.Hp + Util.Base) ^ ReadInt32(Addresses.Xor + Util.Base);
@@ -182,6 +184,10 @@ namespace JAPI
         {
             return ReadInt32(Addresses.Cid + Util.Base);
         }
+        public int LastUsed()
+        {
+            return ReadInt32(Addresses.LastClicked + Util.Base);
+        }
         public int ClientCid(UInt32 BaseAddress = 0x0, IntPtr? Handle = null)
         {
             if (BaseAddress == 0x0)
@@ -194,19 +200,32 @@ namespace JAPI
         {
             return ReadInt32(Addresses.Exp + Util.Base);
         }
+        public int XpNextLevel()
+        {
+            int res = (50 * Level() * Level() * Level() - 150 * Level() * Level() + 400 * Level()) / 3;
+            return res - Exp();
+        }
         public Objects.Player GetPlayerInfo()
         {
             Objects.Player p = new Objects.Player();
-            p.Hp = Hp();
-            p.HpMax = MaxHp();
-            p.Mp = Mp();
-            p.MpMax = MaxMp();
-            p.Soul = Soul();
-            p.X = X();
-            p.Y = Y();
-            p.Z = Z();
-            p.Cid = Cid();
-            p.Exp = Exp();
+            try
+            {
+                p.Hp = Hp();
+                p.HpMax = MaxHp();
+                p.Mp = Mp();
+                p.MpMax = MaxMp();
+                p.Soul = Soul();
+                p.X = X();
+                p.Y = Y();
+                p.Z = Z();
+                p.Cid = Cid();
+                p.Exp = Exp();
+                Util.LogError("GetPlayerInfo Called : Success!", 0);
+            }
+            catch (Exception ex)
+            {
+                Util.LogError("GetPlayerInfo Called : Returned null entry, failure : " + ex.Message, 2);
+            }
             return p;
         }
         public string getMyName()

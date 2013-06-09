@@ -22,9 +22,6 @@ using System.IO;
 
 namespace TestProgram
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         ReaderClass Read = new ReaderClass();
@@ -32,6 +29,7 @@ namespace TestProgram
         Thread Updater;
         Thread Healer;
         Thread GUIThr;
+        Thread ClientUp;
         Objects.HealRule[] rulelist;
         Objects.Hotkey[] HKS;
         Objects.Client[] ActiveClients;
@@ -45,12 +43,15 @@ namespace TestProgram
 
         private void UpdateStatus()
         {
-            updateClients();
+            Objects.Player p = Read.GetPlayerInfo();
+            //updateClients();
             this.Dispatcher.Invoke(delegate {
                 this.Title = Read.getMyName();
-                XpDisplay.Content = "Xp: " + Read.Exp();
-                HpDisplay.Content = "Hp: " + Read.Hp();
-                MpDisplay.Content = "Mp: " + Read.Mp();
+                XpDisplay.Content = "Xp: " + Read.XpNextLevel() + " / " + Read.Exp();
+                HpDisplay.Content = "Hp: " + p.Hp + " / " + Read.MaxHp();
+                MpDisplay.Content = "Mp: " + p.Mp + " / " + Read.MaxMp();
+                Level.Content = "Level: " + Read.Level();
+                LastUsedDisplay.Content = "Last Used: " + Read.LastUsed();
                 Util.Hotkeys = Read.getHotkeys();
             });
 
@@ -70,9 +71,17 @@ namespace TestProgram
             }
         }
 
+        private void ClientUpd()
+        {
+            ActiveClients = Read.getClientsWithNames();
+            Thread.Sleep(2500); // Sleep for 2.5s to prevent extra CPU usage.
+        }
+
         private void Startup(object sender, RoutedEventArgs e)
         {
-            Util.Tibia = Read.getFirstClient();
+            ClientUp = new Thread(ClientUpd);
+            ClientUp.IsBackground = true;
+            ClientUp.Start();
             Updater = new Thread(UpdateTick);
             Updater.IsBackground = true;
             if (Read.getClients().Length >= 1)
@@ -198,9 +207,11 @@ namespace TestProgram
                         this.Dispatcher.Invoke(delegate
                         {
                             this.Title = "Disconnected";
-                            XpDisplay.Content = "Xp: 0";
-                            HpDisplay.Content = "Hp: 0";
-                            MpDisplay.Content = "Mp: 0";
+                            XpDisplay.Content = "Xp: 0 / 0";
+                            HpDisplay.Content = "Hp: 0 / 0";
+                            MpDisplay.Content = "Mp: 0 / 0";
+                            Level.Content = "Level: 0";
+                            LastUsedDisplay.Content = "Last Used: 0";
                         });
                         Thread.Sleep(2000);
                     }
@@ -297,6 +308,7 @@ namespace TestProgram
             {
                 BListView.Items.Add("Name: " + Battle.Name +
                     ". CID: " + Battle.Id +
+                    ". Type: " + Battle.Type +
                     ". Pos: " + Convert.ToString(Battle.X) +
                     ", " + Convert.ToString(Battle.Y) +
                     ", " + Convert.ToString(Battle.Z) +

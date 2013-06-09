@@ -22,6 +22,13 @@ namespace JAPI
             set { _Hotkeys = value; }
         }
 
+        public static void LogError(string Message, int Type) // Type is 0-4, (5 options) 5 = fatal.
+        {
+            Util.lastError.Message = Message;
+            Util.lastError.type = Type;
+            Util.Errors.Add(Util.lastError);
+        }
+
         public static Process Tibia
         {
             get { return _Tibia; }
