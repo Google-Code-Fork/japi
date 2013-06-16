@@ -42,7 +42,7 @@ namespace JAPI
 
     class BListAdresses
     {
-        public static UInt32 Start = 0x5A9510; // 10.0
+        public static UInt32 Start = 0x5A9530; // 10.0
         public static UInt32 Step = 0xC0; // 10.0
         public static int Max = 1300; // Static
         public static UInt32 IdOffset = 0x0; // 10.0

@@ -173,64 +173,64 @@ namespace JAPI
                 sbuild[i] = new StringBuilder();
             }
 
-            // Up
-            sb.Append(Convert.ToString(location.x / 256)); sb.Append(Convert.ToString(location.y / 256 + 1)); // Set x + Y
+            // TL
+            sb.Append(Convert.ToString(location.x / 256 -1)); sb.Append(Convert.ToString(location.y / 256 - 1)); // Set x + Y
             if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
             sb.Append(".map"); sbuild[0].Append(sb.ToString());
             sb.Clear(); // add extension, assign to array, clear
             sb.Append("%APPDATA%\\Tibia\\Automap\\"); // Refresh sb for next string
 
-            // UpRight
-            sb.Append(Convert.ToString(location.x / 256 + 1)); sb.Append(Convert.ToString(location.y / 256 + 1)); // Set x + Y
+            // TM
+            sb.Append(Convert.ToString(location.x / 256)); sb.Append(Convert.ToString(location.y / 256 - 1)); // Set x + Y
             if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
             sb.Append(".map"); sbuild[1].Append(sb.ToString());
             sb.Clear(); // add extension, assign to array, clear
             sb.Append("%APPDATA%\\Tibia\\Automap\\"); // Refresh sb for next string
 
-            //Right
-            sb.Append(Convert.ToString(location.x / 256 + 1)); sb.Append(Convert.ToString(location.y / 256)); // Set x + Y
+            //TR
+            sb.Append(Convert.ToString(location.x / 256 + 1)); sb.Append(Convert.ToString(location.y / 256 - 1)); // Set x + Y
             if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
             sb.Append(".map"); sbuild[2].Append(sb.ToString());
             sb.Clear(); // add extension, assign to array, clear
             sb.Append("%APPDATA%\\Tibia\\Automap\\"); // Refresh sb for next string
 
-            // Right Down
-            sb.Append(Convert.ToString(location.x / 256 - 1)); sb.Append(Convert.ToString(location.y / 256 + 1)); // Set x + Y
+            // ML
+            sb.Append(Convert.ToString(location.x / 256 - 1)); sb.Append(Convert.ToString(location.y / 256)); // Set x + Y
             if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
             sb.Append(".map"); sbuild[3].Append(sb.ToString());
             sb.Clear(); // add extension, assign to array, clear
             sb.Append("%APPDATA%\\Tibia\\Automap\\"); // Refresh sb for next string
 
-            // Down
-            sb.Append(Convert.ToString(location.x / 256)); sb.Append(Convert.ToString(location.y / 256 + 1)); // Set x + Y
+            // MM
+            sb.Append(Convert.ToString(location.x / 256)); sb.Append(Convert.ToString(location.y / 256)); // Set x + Y
             if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
             sb.Append(".map"); sbuild[4].Append(sb.ToString());
             sb.Clear(); // add extension, assign to array, clear
             sb.Append("%APPDATA%\\Tibia\\Automap\\"); // Refresh sb for next string
 
-            // Down left
-            sb.Append(Convert.ToString(location.x / 256 - 1)); sb.Append(Convert.ToString(location.y / 256 - 1)); // Set x + Y
+            // MR
+            sb.Append(Convert.ToString(location.x / 256 + 1)); sb.Append(Convert.ToString(location.y / 256)); // Set x + Y
             if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
             sb.Append(".map"); sbuild[5].Append(sb.ToString());
             sb.Clear(); // add extension, assign to array, clear
             sb.Append("%APPDATA%\\Tibia\\Automap\\"); // Refresh sb for next string
 
-            // Left
-            sb.Append(Convert.ToString(location.x / 256 - 1)); sb.Append(Convert.ToString(location.y / 256)); // Set x + Y
+            // BL
+            sb.Append(Convert.ToString(location.x / 256 - 1)); sb.Append(Convert.ToString(location.y / 256 + 1)); // Set x + Y
             if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
             sb.Append(".map"); sbuild[6].Append(sb.ToString());
             sb.Clear(); // add extension, assign to array, clear
             sb.Append("%APPDATA%\\Tibia\\Automap\\"); // Refresh sb for next string
 
-            // Left up
-            sb.Append(Convert.ToString(location.x / 256 - 1)); sb.Append(Convert.ToString(location.y / 256 + 1)); // Set x + Y
+            // BM
+            sb.Append(Convert.ToString(location.x / 256)); sb.Append(Convert.ToString(location.y / 256 + 1)); // Set x + Y
             if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
             sb.Append(".map"); sbuild[7].Append(sb.ToString());
             sb.Clear(); // add extension, assign to array, clear
             sb.Append("%APPDATA%\\Tibia\\Automap\\"); // Refresh sb for next string
 
-            // self
-            sb.Append(Convert.ToString(location.x / 256)); sb.Append(Convert.ToString(location.y / 256)); // Set x + Y
+            // BR
+            sb.Append(Convert.ToString(location.x / 256 + 1)); sb.Append(Convert.ToString(location.y / 256 + 1)); // Set x + Y
             if (location.z < 10) { sb.Append("0"); } sb.Append(Convert.ToString(location.z)); // Set Z
             sb.Append(".map"); sbuild[8].Append(sb.ToString());
             sb.Clear(); // add extension, assign to array, clear
@@ -263,16 +263,15 @@ namespace JAPI
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                // Format is up, upri, ri, rido, do, dole, le, leup, self
-                g.DrawImage(bmpList[0], 256, 512, 256, 256); // Bottom Middle
-                g.DrawImage(bmpList[1], 512, 512, 256, 256); // Bottom right
-                g.DrawImage(bmpList[2], 512, 256, 256, 256); // Middle right
-                g.DrawImage(bmpList[3], 512, 256, 256, 256);
-                g.DrawImage(bmpList[4], 0, 256, 256, 256); // Left Middle
-                g.DrawImage(bmpList[5], 0, 0, 256, 256); // Top Left
-                g.DrawImage(bmpList[6], 256, 0, 256, 256);
-                g.DrawImage(bmpList[7], 512, 0, 256, 256);
-                g.DrawImage(bmpList[8], 256, 256, 256, 256); // Middle
+                g.DrawImage(bmpList[0], 0, 0, 256, 256); // TL
+                g.DrawImage(bmpList[1], 256, 0, 256, 256); // TM
+                g.DrawImage(bmpList[2], 512, 0, 256, 256); // TR
+                g.DrawImage(bmpList[3], 0, 256, 256, 256); // ML
+                g.DrawImage(bmpList[4], 256, 256, 256, 256); // MM
+                g.DrawImage(bmpList[5], 512, 256, 256, 256); // MR
+                g.DrawImage(bmpList[6], 0, 512, 256, 256); // BL
+                g.DrawImage(bmpList[7], 256, 512, 256, 256); // BM
+                g.DrawImage(bmpList[8], 512, 512, 256, 256); // BR
             }
             for (int i = 0; i < 9; i++)
             {

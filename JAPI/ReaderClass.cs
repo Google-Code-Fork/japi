@@ -17,19 +17,6 @@ namespace JAPI
         [DllImport("user32.dll", EntryPoint = "FindWindow")]
         public static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string lclassName, string windowTitle);
 
-        private static bool IsWin32(Process process)
-        {
-                try
-                {
-                    string fileName = process.MainModule.FileName;
-                    return true;
-                }
-                catch
-                {
-                    return false;
-                }
-        }
-
         // Reading Memory Functions
         public byte[] ReadBytes(IntPtr Handle, Int64 Address, uint BytesToRead)
         {
@@ -81,24 +68,16 @@ namespace JAPI
         // Getting client functions
         public Process[] getClients()
         {
-
-            List<Process> lp = new List<Process>();
-            Process[] lpa = Process.GetProcesses();
-            foreach (Process p in lpa)
+            Process[] procs = Process.GetProcessesByName("Tibia");
+            List<Process> prcs = new List<Process>();
+            foreach (Process proc in procs)
             {
-                try
+                if (Util.getFileVersion(proc.MainModule.FileName) == Constants.ClientVersion)
                 {
-                    if (p.MainModule.FileName.Contains("Tibia"))
-                    {
-                        lp.Add(p);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Util.LogError("Invalid Process : " + ex.Message, 0);
+                    prcs.Add(proc);
                 }
             }
-            return lp.ToArray();
+            return prcs.ToArray();
         }
 
         public Objects.Client[] getClientsWithNames()
@@ -202,7 +181,8 @@ namespace JAPI
         }
         public int XpNextLevel()
         {
-            int res = (50 * Level() * Level() * Level() - 150 * Level() * Level() + 400 * Level()) / 3;
+            int lvl = Level();
+            int res = (50 * lvl * lvl * lvl - 150 * lvl * lvl + 400 * lvl) / 3;
             return res - Exp();
         }
         public Objects.Player GetPlayerInfo()
@@ -244,7 +224,6 @@ namespace JAPI
 
         public string getNameConnectedToClient(Process clt)
         {
-            //return clt.MainModule.BaseAddress.ToString();
             Objects.BList[] batt = BlGet(true, true, (UInt32)clt.MainModule.BaseAddress.ToInt32(), clt.Handle);
             foreach (Objects.BList crit in batt)
             {
@@ -454,11 +433,5 @@ namespace JAPI
             }
             throw new NotImplementedException();
         }
-    }
-    internal static class NativeMethods
-    {
-        [DllImport("kernel32.dll", SetLastError = true, CallingConvention = CallingConvention.Winapi)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool IsWow64Process([In] IntPtr process, [Out] out bool wow64Process);
     }
 }
