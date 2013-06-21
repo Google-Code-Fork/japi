@@ -54,7 +54,6 @@ namespace TestProgram
                 LastUsedDisplay.Content = "Last Used: " + Read.LastUsed();
                 Util.Hotkeys = Read.getHotkeys();
             });
-
         }
 
         private void ErrorCheckChanged(object sender, RoutedEventArgs e)
@@ -432,6 +431,9 @@ namespace TestProgram
             loc.y = Read.Y();
             loc.z = Read.Z();
             LargeImage1.Source = loadBitmap(MapReading.getMapFileAroundMe(loc));
+            LargeImage2.Source = loadBitmap(MapReading.getMapSpeedFileAroundMe(loc));
+            MapReading.getMapSpeedFileAroundMe(loc).Save("SpeedFile.bmp");
+            MapReading.getMapFileAroundMe(loc).Save("ColourFile.bmp");
         }
 
         private void Button_Click_6(object sender, RoutedEventArgs e)
@@ -447,6 +449,21 @@ namespace TestProgram
             {
                 HKLB.Items.Add(hk.Key + ": " + hk.Value);
             }
+        }
+
+        public void UpdateCurrentMessageDisplay(object sender, RoutedEventArgs e)
+        {
+            CurrentMessageDisplay.Content = Read.ReadTypedMessage();
+        }
+        public void UpdateSize(object sender, RoutedEventArgs e)
+        {
+            Objects.RECT WindowSize = Read.GetTibiaSize();
+            SzBottom.Content = Convert.ToString(WindowSize.Bottom);
+            SzTop.Content = Convert.ToString(WindowSize.Top);
+            SzLeft.Content = Convert.ToString(WindowSize.Left);
+            SzRight.Content = Convert.ToString(WindowSize.Right);
+            System.Drawing.Point pt = Read.GetWindowTopLeft();
+            SzTopLeft.Content = pt.X.ToString() + ", " + pt.Y.ToString();
         }
     }
 }

@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace JAPI
 {
+    class GUIAddresses
+    {
+        public static UInt32 TypedMessagePtr = 0x3BE800; // 10.1
+        public static UInt32[] TypedMessageOffsets = new UInt32[] { 0x40, 0x44, 0x2C };
+    }
     class Addresses
     {
         public static UInt32 Cid = 0x553034; // 10.0

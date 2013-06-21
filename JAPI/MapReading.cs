@@ -282,6 +282,49 @@ namespace JAPI
             return bmp;
         }
 
+        public static Bitmap getMapSpeedFileAroundMe(Objects.Location location)
+        {
+            fillColourList();
+            // Format is up, upri, ri, rido, do, dole, le, leup, self
+            StringBuilder[] sb = new StringBuilder[9];
+            sb = getFileAroundMeNames(location);
+            Bitmap[] bmpList = new Bitmap[9];
+            Bitmap bmp = new Bitmap(256 * 3, 256 * 3, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            Rectangle rect = new Rectangle();
+            rect.Height = 256;
+            rect.Width = 256;
+            rect.X = 0;
+            rect.Y = 0;
+            Objects.Colour color = new Objects.Colour();
+            color = colourlist[0];
+            Graphics.FromImage(bmp).FillRectangle(new SolidBrush(Color.FromArgb(color.r, color.g, color.b)), rect);
+            for (int i = 0; i < 9; i++)
+            {
+                string mapFileName = sb[i].ToString();
+                bmpList[i] = getMapSpeedFile(mapFileName);
+            }
+
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.DrawImage(bmpList[0], 0, 0, 256, 256); // TL
+                g.DrawImage(bmpList[1], 256, 0, 256, 256); // TM
+                g.DrawImage(bmpList[2], 512, 0, 256, 256); // TR
+                g.DrawImage(bmpList[3], 0, 256, 256, 256); // ML
+                g.DrawImage(bmpList[4], 256, 256, 256, 256); // MM
+                g.DrawImage(bmpList[5], 512, 256, 256, 256); // MR
+                g.DrawImage(bmpList[6], 0, 512, 256, 256); // BL
+                g.DrawImage(bmpList[7], 256, 512, 256, 256); // BM
+                g.DrawImage(bmpList[8], 512, 512, 256, 256); // BR
+            }
+            for (int i = 0; i < 9; i++)
+            {
+                string fileToSave = "C:\\Users\\Owner\\Documents\\MapFiles\\MapFile" + Convert.ToString(i) + ".bmp";
+                //bmpList[i].Save(fileToSave);
+            }
+
+            return bmp;
+        }
+
         public static Objects.Location getFileCoordinates(string fileName)
         {
             if (fileExists(fileName))

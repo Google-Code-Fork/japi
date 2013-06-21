@@ -17,7 +17,29 @@ namespace JAPI
         [DllImport("user32.dll", EntryPoint = "FindWindow")]
         public static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string lclassName, string windowTitle);
 
-        // Reading Memory Functions
+        [DllImport("user32.dll", EntryPoint = "GetClientRect")]
+        public static extern bool GetClientRect(HandleRef hwnd, out Objects.RECT lpRect);
+
+        [DllImport("user32.dll", EntryPoint = "GetWindowRect")]
+        public static extern bool GetWindowRect(HandleRef hwnd, out Objects.RECT lpRect);
+
+        [DllImport("user32.dll", EntryPoint = "ClientToScreen")]
+        public static extern bool ClientToScreen(HandleRef hwnd, out System.Drawing.Point lpRect);
+
+        public Objects.RECT GetTibiaSize()
+        {
+            Objects.RECT output;
+            GetClientRect(new HandleRef(Util.Tibia, Util.Handle), out output);
+            return output;
+        }
+
+        public System.Drawing.Point GetWindowTopLeft()
+        {
+            System.Drawing.Point output;
+            ClientToScreen(new HandleRef(Util.Tibia, Util.Handle), out output);
+            return output;
+        }
+
         public byte[] ReadBytes(IntPtr Handle, Int64 Address, uint BytesToRead)
         {
             IntPtr ptrBytesRead;
@@ -50,6 +72,26 @@ namespace JAPI
             string temp3 = ASCIIEncoding.Default.GetString(ReadBytes(getIntPtr(Handle), Address, length));
             string[] temp3str = temp3.Split('\0');
             return temp3str[0];
+        }
+        public UInt32 ReadPtr(long Address, UInt32[] offsets, uint length = 32, IntPtr? Handle = null)
+        {
+            UInt32 Addr = (UInt32)ReadInt32(Address + Util.Base);
+            UInt32 NewAddr = Addr;
+            int i = 0;
+
+            foreach (UInt32 offset in offsets)
+            {
+                if (i != offsets.Length)
+                {
+                    NewAddr = (UInt32)ReadInt32(NewAddr + offset);
+                }
+                else
+                {
+                    return NewAddr + offset;
+                }
+                i++;
+            }
+            return NewAddr;
         }
 
         public IntPtr getIntPtr(IntPtr? Handle)
@@ -122,6 +164,17 @@ namespace JAPI
             return null;
         }
 
+        // Reading GUI info
+        public UInt32 GetGUIAddress(UInt32 Ptr)
+        {
+            return (UInt32)ReadInt32(Ptr + Util.Base);
+        }
+
+        public string ReadTypedMessage()
+        {
+            return ReadString(ReadPtr(GUIAddresses.TypedMessagePtr, GUIAddresses.TypedMessageOffsets), 256);
+        }
+        
         // Reading self info
         public int Level()
         {
