@@ -459,11 +459,12 @@ namespace TestProgram
         {
             Objects.RECT WindowSize = Read.GetTibiaSize();
             SzBottom.Content = Convert.ToString(WindowSize.Bottom);
-            SzTop.Content = Convert.ToString(WindowSize.Top);
-            SzLeft.Content = Convert.ToString(WindowSize.Left);
             SzRight.Content = Convert.ToString(WindowSize.Right);
             System.Drawing.Point pt = Read.GetWindowTopLeft();
-            SzTopLeft.Content = pt.X.ToString() + ", " + pt.Y.ToString();
+            SzX.Content = Convert.ToString(pt.X);
+            SzY.Content = Convert.ToString(pt.Y);
+            SzWidth.Content = Convert.ToString(Read.ReadWorldWinWidth());
+            SzHeight.Content = Convert.ToString(Read.ReadWorldWinHeight());
         }
     }
 }

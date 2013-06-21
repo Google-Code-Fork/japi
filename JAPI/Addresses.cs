@@ -8,8 +8,10 @@ namespace JAPI
 {
     class GUIAddresses
     {
-        public static UInt32 TypedMessagePtr = 0x3BE800; // 10.1
-        public static UInt32[] TypedMessageOffsets = new UInt32[] { 0x40, 0x44, 0x2C };
+        public static UInt32 GUIStart = 0x3BE800; // 10.1
+        public static UInt32[] TypedMessageOffsets = new UInt32[] { 0x40, 0x44, 0x2C }; // 10.1
+        public static UInt32[] WorldWinWidthOffsets = new UInt32[] { 0x30, 0x2C, 0x1C }; // 10.1
+        public static UInt32[] WorldWinHeightOffsets = new UInt32[] { 0x30, 0x2C, 0x20 }; // 10.1
     }
     class Addresses
     {

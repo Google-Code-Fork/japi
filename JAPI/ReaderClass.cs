@@ -78,10 +78,9 @@ namespace JAPI
             UInt32 Addr = (UInt32)ReadInt32(Address + Util.Base);
             UInt32 NewAddr = Addr;
             int i = 0;
-
             foreach (UInt32 offset in offsets)
             {
-                if (i != offsets.Length)
+                if (i != offsets.Length - 1)
                 {
                     NewAddr = (UInt32)ReadInt32(NewAddr + offset);
                 }
@@ -92,6 +91,21 @@ namespace JAPI
                 i++;
             }
             return NewAddr;
+        }
+        public string ReadStringPtr(long Address, UInt32[] offsets, uint length = 32, IntPtr? Handle = null)
+        {
+            UInt32 Addr = (UInt32)ReadInt32(Address + Util.Base);
+            UInt32 NewAddr = Addr;
+            int i = 0;
+            foreach (UInt32 offset in offsets)
+            {
+                if (i != offsets.Length)
+                {
+                    NewAddr = (UInt32)ReadInt32(NewAddr + offset);
+                }
+                i++;
+            }
+            return ReadString(NewAddr, 255);
         }
 
         public IntPtr getIntPtr(IntPtr? Handle)
@@ -165,14 +179,17 @@ namespace JAPI
         }
 
         // Reading GUI info
-        public UInt32 GetGUIAddress(UInt32 Ptr)
+        public int ReadWorldWinWidth()
         {
-            return (UInt32)ReadInt32(Ptr + Util.Base);
+            return ReadInt32(ReadPtr(GUIAddresses.GUIStart, GUIAddresses.WorldWinWidthOffsets));
         }
-
+        public int ReadWorldWinHeight()
+        {
+            return ReadInt32(ReadPtr(GUIAddresses.GUIStart, GUIAddresses.WorldWinHeightOffsets));
+        }
         public string ReadTypedMessage()
         {
-            return ReadString(ReadPtr(GUIAddresses.TypedMessagePtr, GUIAddresses.TypedMessageOffsets), 256);
+            return ReadStringPtr(GUIAddresses.GUIStart, GUIAddresses.TypedMessageOffsets);
         }
         
         // Reading self info

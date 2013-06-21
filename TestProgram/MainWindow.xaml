@@ -130,14 +130,23 @@
             </TabItem>
             <TabItem Header="GUI" Margin="0,0,0,0">
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
-                    <Label Name="CurrentMessageDisplay"  Margin="10,49,10,231"></Label>
                     <Button Name="BtnUpdateCurrentMessage" Content="ReadCurrentMessage" Click="UpdateCurrentMessageDisplay" Margin="10,10,619,270"></Button>
-                    <Label Name="SzTop" Content="Label" HorizontalAlignment="Left" Margin="433,44,0,0" VerticalAlignment="Top"/>
-                    <Label Name="SzLeft" Content="Label" HorizontalAlignment="Left" Margin="395,70,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.816,-0.269"/>
-                    <Label Name="SzRight" Content="Label" HorizontalAlignment="Left" Margin="471,70,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.289,0.077"/>
-                    <Label Name="SzBottom" Content="Label" HorizontalAlignment="Left" Margin="433,96,0,0" VerticalAlignment="Top"/>
-                    <Button Click="UpdateSize" Content="Button" HorizontalAlignment="Left" Margin="538,107,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Label Name="SzTopLeft" Content="Label" HorizontalAlignment="Left" Margin="395,23,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Current Message" Name="CurrentMessageDisplay" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top"/>
+                    <Grid HorizontalAlignment="Left" Height="233" Margin="401,10,0,0" VerticalAlignment="Top" Width="360">
+                        <Label Content="Width:" HorizontalAlignment="Left" Margin="6,7,0,0" VerticalAlignment="Top"/>
+                        <Label Content="Height:" HorizontalAlignment="Left" Margin="6,33,0,0" VerticalAlignment="Top"/>
+                        <Label Content="000" x:Name="SzWidth" HorizontalAlignment="Left" Margin="84,7,0,0" VerticalAlignment="Top"/>
+                        <Label Content="000" x:Name="SzHeight" HorizontalAlignment="Left" Margin="84,33,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="SzRight" Content="Label" HorizontalAlignment="Left" Margin="84,114,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.289,0.077"/>
+                        <Label x:Name="SzBottom" Content="Label" HorizontalAlignment="Left" Margin="84,140,0,0" VerticalAlignment="Top"/>
+                        <Button Click="UpdateSize" Content="Button" HorizontalAlignment="Left" Margin="272,98,0,0" VerticalAlignment="Top" Width="75"/>
+                        <Label x:Name="SzX" Content="Label" HorizontalAlignment="Left" Margin="84,62,0,0" VerticalAlignment="Top"/>
+                        <Label Content="PosX:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+                        <Label Content="PosY:" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
+                        <Label Content="WinWidth:" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
+                        <Label Content="WinHeight:" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="SzY" Content="Label" HorizontalAlignment="Left" Margin="84,88,0,0" VerticalAlignment="Top"/>
+                    </Grid>
                 </Grid>
             </TabItem>
         </TabControl>
