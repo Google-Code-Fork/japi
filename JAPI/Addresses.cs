@@ -12,6 +12,8 @@ namespace JAPI
         public static UInt32[] TypedMessageOffsets = new UInt32[] { 0x40, 0x44, 0x2C }; // 10.1
         public static UInt32[] WorldWinWidthOffsets = new UInt32[] { 0x30, 0x2C, 0x1C }; // 10.1
         public static UInt32[] WorldWinHeightOffsets = new UInt32[] { 0x30, 0x2C, 0x20 }; // 10.1
+        public static UInt32[] WorldWinFromEdge = new UInt32[] { 0x30, 0x34 }; // 10.1
+        public static UInt32[] WorldWinFromOppositeEdge = new UInt32[] { 0x44, 0x10, 0x34 }; // 10.1
     }
     class Addresses
     {

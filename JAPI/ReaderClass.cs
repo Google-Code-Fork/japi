@@ -179,6 +179,10 @@ namespace JAPI
         }
 
         // Reading GUI info
+        public int ReadWorldFromLeft()
+        {
+            return ReadInt32(ReadPtr(GUIAddresses.GUIStart, GUIAddresses.WorldWinFromEdge));
+        }
         public int ReadWorldWinWidth()
         {
             return ReadInt32(ReadPtr(GUIAddresses.GUIStart, GUIAddresses.WorldWinWidthOffsets));

@@ -146,6 +146,8 @@
                         <Label Content="WinWidth:" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
                         <Label Content="WinHeight:" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
                         <Label x:Name="SzY" Content="Label" HorizontalAlignment="Left" Margin="84,88,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="FromLeft" Content="Label" HorizontalAlignment="Left" Margin="84,166,0,0" VerticalAlignment="Top"/>
+                        <Label Content="FromLeft:" HorizontalAlignment="Left" Margin="10,166,0,0" VerticalAlignment="Top"/>
                     </Grid>
                 </Grid>
             </TabItem>

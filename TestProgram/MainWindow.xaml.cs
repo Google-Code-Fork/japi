@@ -465,6 +465,7 @@ namespace TestProgram
             SzY.Content = Convert.ToString(pt.Y);
             SzWidth.Content = Convert.ToString(Read.ReadWorldWinWidth());
             SzHeight.Content = Convert.ToString(Read.ReadWorldWinHeight());
+            FromLeft.Content = Convert.ToString(Read.ReadWorldFromLeft());
         }
     }
 }
