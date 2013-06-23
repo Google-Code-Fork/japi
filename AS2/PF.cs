@@ -20,7 +20,7 @@ namespace AS2
             openList.Add(currentTile);
             while (!pathFound)
             {
-                int lowestH = 65535;
+                float lowestH = 65535;
                 // When we don't have a path, find the lowest H value in our openList
                 foreach (Structs.Node nd in openList)
                 {
@@ -61,7 +61,7 @@ namespace AS2
                             }
                             catch (Exception ex)
                             {
-
+                                
                             }
                         }
                     }

@@ -16,7 +16,7 @@ namespace AS2
         private int _cols;
         private int _tilesize;
         int[,] _mapMatrix;
-        PF pathFinder = new PF();
+        PF2 pathFinder = new PF2();
 
         int startX, startY, endX, endY;
         #endregion
@@ -44,34 +44,39 @@ namespace AS2
         private void DrawMap(Graphics g)
         {
             // For the X & Y coords of each tile in our map array (_rows, _cols), draw the outline of the tile
-            for (int i = 0; i < _rows; i++)
+            for (int x = 0; x < _rows; x++)
             {
-                for (int j = 0; j < _cols; j++)
+                for (int y = 0; y < _cols; y++)
                 {
                     // Draw the rectangle.
-                    g.DrawRectangle(new Pen(Brushes.Black), j * _tilesize, i * _tilesize, _tilesize, _tilesize);
+                    g.DrawRectangle(new Pen(Brushes.Black), y * _tilesize, x * _tilesize, _tilesize, _tilesize);
                     // Switch the tiles value in the _mapMatrix and if it is a value which we believe to be a wall, start, finish, or map node, fill it
                     // Also once the tile is filled, we will mark it with the coordinates for the tile so it is easier to determine which is which
-                    switch (_mapMatrix[i,j])
+                    switch (_mapMatrix[x,y])
                     {
                         case 0:
-                            g.DrawString(Convert.ToString(i) + "," + Convert.ToString(j), new Font(FontFamily.GenericSansSerif, _tilesize / 3),
-                                Brushes.Black, new Point(i * _tilesize + 0, j * _tilesize + 0));
+                            g.DrawString(Convert.ToString(x) + "," + Convert.ToString(y), new Font(FontFamily.GenericSansSerif, _tilesize / 3),
+                                Brushes.Black, new Point(x * _tilesize + 0, y * _tilesize + 0));
                             break;
                         case 1:
-                            g.FillRectangle(Brushes.Green, j * _tilesize + 1, i * _tilesize + 1, _tilesize - 1, _tilesize - 1);
-                            g.DrawString(Convert.ToString(i) + "," + Convert.ToString(j), new Font(FontFamily.GenericSansSerif, _tilesize / 3),
-                            Brushes.Black, new Point(i * _tilesize + 0, j * _tilesize + 0));
+                            g.FillRectangle(Brushes.Green, y * _tilesize + 1, x * _tilesize + 1, _tilesize - 1, _tilesize - 1);
+                            g.DrawString(Convert.ToString(x) + "," + Convert.ToString(y), new Font(FontFamily.GenericSansSerif, _tilesize / 3),
+                            Brushes.Black, new Point(x * _tilesize + 0, y * _tilesize + 0));
                             break;
                         case 2:
-                            g.FillRectangle(Brushes.Aquamarine, j * _tilesize + 1, i * _tilesize + 1, _tilesize - 1, _tilesize - 1);
-                            g.DrawString(Convert.ToString(i) + "," + Convert.ToString(j), new Font(FontFamily.GenericSansSerif, _tilesize / 3),
-                            Brushes.Black, new Point(i * _tilesize + 0, j * _tilesize + 0));
+                            g.FillRectangle(Brushes.Aquamarine, y * _tilesize + 1, x * _tilesize + 1, _tilesize - 1, _tilesize - 1);
+                            g.DrawString(Convert.ToString(x) + "," + Convert.ToString(y), new Font(FontFamily.GenericSansSerif, _tilesize / 3),
+                            Brushes.Black, new Point(x * _tilesize + 0, y * _tilesize + 0));
                             break;
                         case 3:
-                            g.FillRectangle(Brushes.Red, j * _tilesize + 1, i * _tilesize + 1, _tilesize - 1, _tilesize - 1);
-                            g.DrawString(Convert.ToString(i) + "," + Convert.ToString(j), new Font(FontFamily.GenericSansSerif, _tilesize / 3),
-                            Brushes.Black, new Point(i * _tilesize + 0, j * _tilesize + 0));
+                            g.FillRectangle(Brushes.Red, y * _tilesize + 1, x * _tilesize + 1, _tilesize - 1, _tilesize - 1);
+                            g.DrawString(Convert.ToString(x) + "," + Convert.ToString(y), new Font(FontFamily.GenericSansSerif, _tilesize / 3),
+                            Brushes.Black, new Point(x * _tilesize + 0, y * _tilesize + 0));
+                            break;
+                        case 5:
+                            g.FillRectangle(Brushes.DarkViolet, y * _tilesize + 1, x * _tilesize + 1, _tilesize - 1, _tilesize - 1);
+                            g.DrawString(Convert.ToString(x) + "," + Convert.ToString(y), new Font(FontFamily.GenericSansSerif, _tilesize / 3),
+                            Brushes.White, new Point(x * _tilesize + 0, y * _tilesize + 0));
                             break;
                     }
                 }
@@ -91,10 +96,10 @@ namespace AS2
                 {
                     for (int j = 0; j < _cols; j++)
                     {
-                        if (_mapMatrix[i, j] == 1 || _mapMatrix[i, j] == 2)
-                        {
+                        //if (_mapMatrix[i, j] == 1 || _mapMatrix[i, j] == 2)
+                        //{
                             _mapMatrix[i, j] = 0;
-                        }
+                        //}
                     }
                 }
 
@@ -138,9 +143,25 @@ namespace AS2
 
         private void button4_Click(object sender, EventArgs e)
         {
-            foreach (Structs.Node nd in pathFinder.findPath(startX, startY, endX, endY, _mapMatrix))
+            Structs.Node Start = new Structs.Node();
+            Start.X = startX;
+            Start.Y = startY;
+            Structs.Node End = new Structs.Node();
+            End.X = endX;
+            End.Y = endY;
+            List<Structs.Node> ClosedList = pathFinder.FindPath(Start, End, _mapMatrix);
+            List<Structs.Node> Path = pathFinder.ReconstructPath(ClosedList, End, Start);
+            pathList.Items.Add("Path:");
+            foreach (Structs.Node nd in Path)
             {
-                pathList.Items.Add(Convert.ToString(nd.X) + ", " + Convert.ToString(nd.Y) + ". H: " + Convert.ToString(nd.heuristic));
+                _mapMatrix[nd.X, nd.Y] = 5;
+                this.Refresh();
+                pathList.Items.Add(Convert.ToString(nd.ID) + ". Pos: " + Convert.ToString(nd.X) + ", " + Convert.ToString(nd.Y) + ". H: " + Convert.ToString(nd.heuristic) + ". PID: " + Convert.ToString(nd.parentID));
+            }
+            pathList.Items.Add("OpenList:");
+            foreach (Structs.Node nd in ClosedList)
+            {
+                pathList.Items.Add(Convert.ToString(nd.ID) + ". Pos: " + Convert.ToString(nd.X) + ", " + Convert.ToString(nd.Y) + ". H: " + Convert.ToString(nd.heuristic) + ". PID: " + Convert.ToString(nd.parentID));
             }
         }
     }

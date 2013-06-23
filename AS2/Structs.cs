@@ -14,6 +14,8 @@ namespace AS2
             public int Y;
             public int speed;
             public int heuristic;
+            public int G;
+            public int F;
             public int parentID;
             public bool walkable;
         }

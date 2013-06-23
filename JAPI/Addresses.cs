@@ -95,6 +95,13 @@ namespace JAPI
         public static UInt32 ItemsOffset = 0x38 + 0xC;
     }
 
+    class NewContainers
+    {
+        public static UInt32 ContainerStart = 0x3BDF68; // 10.1
+        public static UInt32[] ContainerUnknown = new UInt32[] { 0x634, 0x540 }; // This gets the position of a container, I can't work out which though.
+        public static UInt32 Step4 = 0x4ADAB; // 10.1
+    }
+
     class MapAddresses
     {
         public static UInt32 MapStart = 0x5E1B54;
