@@ -11,7 +11,7 @@ namespace AS2
 
         public Structs.Node GetLowestF(List<Structs.Node> nList)
         {
-            int currentLowest = 65535;
+            float currentLowest = 65535;
             Structs.Node currentNode = nList[0];
             foreach (Structs.Node node in nList)
             {
@@ -58,6 +58,7 @@ namespace AS2
         {
             // A counter to check progress when debugging:
             int index = 0;
+            float hMult;
             bool Finished = false;
 
             // Declare Open and Closed sets, Current Node
@@ -65,26 +66,18 @@ namespace AS2
             List<Structs.Node> ClosedSet = new List<Structs.Node>();
             Structs.Node CurrentNode = Start;
             int i = 0;
-
-            // Set CurrentNode X and Y to their correct values:
+            
+            //Configure the current node X, Y, G, H, F, and ID
             CurrentNode.X = Start.X;
             CurrentNode.Y = Start.Y;
-
-            // Set G to 0
-            CurrentNode.G = 0;
-
-            // Set Heuristic to the estimated heuristic
-            CurrentNode.heuristic = Math.Abs((CurrentNode.X - End.X) + (CurrentNode.Y - End.Y));
-
-            // Set the F to the Heuristic + the G score.
+            CurrentNode.G = MapMatrix[Start.X, Start.Y]; // The G cost of each tile is the speed of that tile, as it costs that value to move to the next one.
+            CurrentNode.heuristic = (Math.Abs(CurrentNode.X - End.X) + Math.Abs(CurrentNode.Y - End.Y)); // The heuristic of the starting tile will always be fixed
             CurrentNode.F = CurrentNode.G + CurrentNode.heuristic;
-
-            // Set the current nodes ID
             CurrentNode.ID = i;
-            OpenSet.Add(CurrentNode);
-            ClosedSet.Add(CurrentNode);
 
-            // Add the current node to the OpenSet for consideration.
+            // Add the current node (Starting Node) to the OpenSet for consideration.
+            OpenSet.Add(CurrentNode);
+
 
             // While the open set contains nodes
             while (Finished == false)
@@ -97,7 +90,8 @@ namespace AS2
                 if (CurrentNode.X == End.X && CurrentNode.Y == End.Y)
                 {
                     // TODO : Add ReconstructPath to this return method.
-                    return OpenSet;
+                    ClosedSet.Add(CurrentNode);
+                    return ClosedSet;
                 }
 
                 // Remove the current tile from the open set, but retain it in current tile var
@@ -116,6 +110,11 @@ namespace AS2
                             break;
                         }
 
+                        if ((x == 1 && y == 1) || (x == -1 && y == -1) || (x == 1 && y == -1) || (x == -1 && y == 1))
+                            hMult = 1.4f;
+                        else
+                            hMult = 1f;
+
                         index++;
                         // Create a neighbor node for investigation
                         Structs.Node neighbor = new Structs.Node();
@@ -130,18 +129,15 @@ namespace AS2
                         }
 
                         // Set Heuristic to the estimated heuristic
-                        if (!(x == 0 || y == 0)) // If the X and Y are not both +1 or -1
-                        {
-                            neighbor.heuristic = Math.Abs((neighbor.X - End.X) + (neighbor.Y - End.Y));// +1; // Increase the heuristic if we are walking diagonally.
-                        }
-                        else
-                        {
-                            neighbor.heuristic = Math.Abs((neighbor.X - End.X) + (neighbor.Y - End.Y));
-                        }
+                        neighbor.heuristic = hMult * (Math.Abs(neighbor.X - End.X) + Math.Abs(neighbor.Y - End.Y));
 
                         // Set G score of neighbor to current G score + cost of moving from current to neighbor
                         neighbor.G = CurrentNode.G + MapMatrix[neighbor.X, neighbor.Y];
-                        neighbor.parentID = CurrentNode.ID;
+
+                        // TODO Modify this to set the parent to the best one for the node
+                        neighbor.parentID = CurrentNode.ID; 
+
+
                         neighbor.G = CurrentNode.G + MapMatrix[neighbor.X, neighbor.Y];
                         neighbor.F = neighbor.G + neighbor.heuristic;
 

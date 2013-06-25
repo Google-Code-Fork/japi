@@ -16,6 +16,7 @@ namespace AS2
         private int _cols;
         private int _tilesize;
         int[,] _mapMatrix;
+        int[,] _mapMatrixPF;
         PF2 pathFinder = new PF2();
 
         int startX, startY, endX, endY;
@@ -23,7 +24,7 @@ namespace AS2
         public Form1()
         {
             InitializeComponent();
-
+            InitialisePFMatrix();
             InitialiseMap();
         }
 
@@ -34,11 +35,23 @@ namespace AS2
             _cols = 9;
             _tilesize = 30; // The tile size is a pixel multiplier to determine the width of each tile
             _mapMatrix = new int[_rows, _cols]; // 1 = start, 2 = finish, 3 = wall, 4 = considered, 5 = path node
+            _mapMatrixPF = new int[_rows, _cols]; // 1 = standard node, 2 = high cost node, 3 = higher, and so on
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             DrawMap(e.Graphics);
+        }
+
+        private void InitialisePFMatrix()
+        {
+            for (int x = 0; x < _cols; x++)
+            {
+                for (int y = 0; y < _rows; y++)
+                {
+                    _mapMatrixPF[x, y] = 1;
+                }
+            }
         }
 
         private void DrawMap(Graphics g)
@@ -137,6 +150,7 @@ namespace AS2
             {
                 string[] coords = st.Split(',');
                 _mapMatrix[Convert.ToInt32(coords[0]), Convert.ToInt32(coords[1])] = 3;
+                _mapMatrixPF[Convert.ToInt32(coords[0]), Convert.ToInt32(coords[1])] = 100;
                 this.Refresh();
             }
         }
@@ -149,19 +163,19 @@ namespace AS2
             Structs.Node End = new Structs.Node();
             End.X = endX;
             End.Y = endY;
-            List<Structs.Node> ClosedList = pathFinder.FindPath(Start, End, _mapMatrix);
+            List<Structs.Node> ClosedList = pathFinder.FindPath(Start, End, _mapMatrixPF);
             List<Structs.Node> Path = pathFinder.ReconstructPath(ClosedList, End, Start);
             pathList.Items.Add("Path:");
             foreach (Structs.Node nd in Path)
             {
                 _mapMatrix[nd.X, nd.Y] = 5;
                 this.Refresh();
-                pathList.Items.Add(Convert.ToString(nd.ID) + ". Pos: " + Convert.ToString(nd.X) + ", " + Convert.ToString(nd.Y) + ". H: " + Convert.ToString(nd.heuristic) + ". PID: " + Convert.ToString(nd.parentID));
+                pathList.Items.Add(Convert.ToString(nd.ID) + ". Pos: " + Convert.ToString(nd.X) + ", " + Convert.ToString(nd.Y) + ". F: " + Convert.ToString(nd.F) + ". PID: " + Convert.ToString(nd.parentID));
             }
             pathList.Items.Add("OpenList:");
             foreach (Structs.Node nd in ClosedList)
             {
-                pathList.Items.Add(Convert.ToString(nd.ID) + ". Pos: " + Convert.ToString(nd.X) + ", " + Convert.ToString(nd.Y) + ". H: " + Convert.ToString(nd.heuristic) + ". PID: " + Convert.ToString(nd.parentID));
+                pathList.Items.Add(Convert.ToString(nd.ID) + ". Pos: " + Convert.ToString(nd.X) + ", " + Convert.ToString(nd.Y) + ". F: " + Convert.ToString(nd.F) + ". PID: " + Convert.ToString(nd.parentID));
             }
         }
     }
