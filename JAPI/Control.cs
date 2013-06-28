@@ -22,12 +22,11 @@ namespace JAPI
         static extern void mouse_event(Constants.MouseEventFlag flags, int dx, int dy, uint data, UIntPtr extraInfo);
 
         // Mouse Tricks
-        public bool LeftClick(int dx, int dy)
+        public void LeftClick(System.Drawing.Point pt)
         {
-            SetCursorPos(dx, dy);
-            mouse_event(Constants.MouseEventFlag.LeftDown, dx, dy, 0, UIntPtr.Zero);
-            mouse_event(Constants.MouseEventFlag.LeftUp, dx, dy, 0, UIntPtr.Zero);
-            return true;
+            int coords = pt.X | (pt.Y << 16);
+            SendMessage(Util.Handle, (int)Constants.KeyboardControls.lbtndn, (IntPtr)0x1, (IntPtr)coords);
+            SendMessage(Util.Handle, (int)Constants.KeyboardControls.lbtnup, (IntPtr)0x1, (IntPtr)coords);
         }
         public bool RightClick(int dx, int dy)
         {
@@ -69,15 +68,15 @@ namespace JAPI
             IntPtr wParam = new IntPtr(getKeyCode(Key));
             if (CtrlShift == "")
             {
-                SendMessage(Util.Handle, Constants.WM_KEYDOWN, (IntPtr)getKeyCode(Key), new IntPtr(0));
-                SendMessage(Util.Handle, Constants.WM_KEYUP, (IntPtr)getKeyCode(Key), new IntPtr(0));
+                SendMessage(Util.Handle, Constants.WM_SYSKEYDOWN, (IntPtr)getKeyCode(Key), new IntPtr(0));
+                SendMessage(Util.Handle, Constants.WM_SYSKEYUP, (IntPtr)getKeyCode(Key), new IntPtr(0));
             }
             else
             {
-                SendMessage(Util.Handle, Constants.WM_KEYDOWN, (IntPtr)getKeyCode(CtrlShift), new IntPtr(0));
-                SendMessage(Util.Handle, Constants.WM_KEYUP, (IntPtr)getKeyCode(Key), new IntPtr(0));
-                SendMessage(Util.Handle, Constants.WM_KEYDOWN, (IntPtr)getKeyCode(Key), new IntPtr(0));
-                SendMessage(Util.Handle, Constants.WM_KEYUP, (IntPtr)getKeyCode(CtrlShift), new IntPtr(0));
+                SendMessage(Util.Handle, Constants.WM_SYSKEYDOWN, (IntPtr)getKeyCode(CtrlShift), new IntPtr(0));
+                SendMessage(Util.Handle, Constants.WM_SYSKEYUP, (IntPtr)getKeyCode(Key), new IntPtr(0));
+                SendMessage(Util.Handle, Constants.WM_SYSKEYDOWN, (IntPtr)getKeyCode(Key), new IntPtr(0));
+                SendMessage(Util.Handle, Constants.WM_SYSKEYUP, (IntPtr)getKeyCode(CtrlShift), new IntPtr(0));
             }
         }
 

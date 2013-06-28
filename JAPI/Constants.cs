@@ -45,7 +45,10 @@ namespace JAPI
             right = 0x27,
             down = 0x28,
             ctrl = 0x11,
-            shift = 0x10
+            shift = 0x10,
+            lbtndn = 0x0201,
+            lbtnup = 0x0202
+
         }
         public enum ErrorTypes : int
         {
@@ -60,5 +63,8 @@ namespace JAPI
         public const Int32 WM_KEYDOWN = 0x0100;
         public const Int32 WM_KEYUP = 0x0101;
         public const Int32 VK_RETURN = 0x0D;
+        public const Int32 WM_SYSKEYDOWN = 0x0104;
+        public const Int32 WM_SYSKEYUP = 0x0105;
+        
     }
 }

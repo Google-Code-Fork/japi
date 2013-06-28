@@ -467,5 +467,20 @@ namespace TestProgram
             SzHeight.Content = Convert.ToString(Read.ReadWorldWinHeight());
             FromLeft.Content = Convert.ToString(Read.ReadWorldFromLeft());
         }
+
+        private void SendClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                System.Drawing.Point pt = new System.Drawing.Point();
+                pt.X = Convert.ToInt32(XClick.Text);
+                pt.Y = Convert.ToInt32(YClick.Text);
+                Ctrl.LeftClick(pt);
+            }
+            catch (Exception ex)
+            {
+                Util.LogError("Error sending click : " + ex.Message, 3);
+            }
+        }
     }
 }

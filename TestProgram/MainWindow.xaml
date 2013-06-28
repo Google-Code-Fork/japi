@@ -107,6 +107,11 @@
                     <Button Content="→" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Margin="132,64,0,0" Click="RightBtnClick"/>
                     <Button Content="←" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Margin="72,64,0,0" Click="LeftBtnClick"/>
                     <Button Content="↓" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Margin="102,91,0,0" Click="DownBtnClick"/>
+                    <TextBox Name="XClick" HorizontalAlignment="Left" Height="23" Margin="712,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="60"/>
+                    <TextBox Name="YClick" HorizontalAlignment="Left" Height="23" Margin="712,38,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="60"/>
+                    <Label Content="X" HorizontalAlignment="Left" Margin="690,7,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Y" HorizontalAlignment="Left" Margin="690,35,0,0" VerticalAlignment="Top"/>
+                    <Button Click="SendClick" Content="Click" HorizontalAlignment="Left" Margin="697,66,0,0" VerticalAlignment="Top" Width="75"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Info">
