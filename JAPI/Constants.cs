@@ -8,7 +8,7 @@ namespace JAPI
 {
     public class Constants
     {
-        public static string ClientVersion = "10.0.1.0";
+        public static string ClientVersion = "10.0.2.0";
         // Key code preparation.
         [Flags]
         public enum MouseEventFlag : uint
